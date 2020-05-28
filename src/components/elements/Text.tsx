@@ -1,16 +1,16 @@
 import React from 'react';
 import { Typography } from '@material-ui/core';
+import { COLORS, TextColorType } from "../../utils/const";
 
 export interface Props {
     variant: "h2" | "h4" | "subtitle1",
-    color?: "#fcfcfc" | "black"
+    color?: TextColorType
     children: string
 }
 
 const getTextStyle = (color?: string): any => {
     return {
-        color: color ? color : "#fcfcfc",
-        display: "inline"
+        color: color ? color : COLORS.white,
     }
 }
 

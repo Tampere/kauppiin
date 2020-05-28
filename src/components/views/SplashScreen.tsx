@@ -1,9 +1,10 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import { Grid } from '@material-ui/core';
 import Text from "../elements/Text";
+import Transition from "../elements/Transition";
 
-function InstructionsView() {
-    return (
+function SplashScreen() {
+    return (         
         <Grid 
             container 
             justify="center"
@@ -21,4 +22,4 @@ function InstructionsView() {
     );
 }
 
-export default InstructionsView;
+export default SplashScreen;

@@ -1,11 +1,18 @@
 import React from 'react';
 import Container from "./components/elements/Container"
-import InstructionsView from "./components/views/InstructionsView";
+import SplashScreen from "./components/views/SplashScreen";
+import Instructions from './components/views/Instructions';
+import { COLORS } from "./utils/const";
+
+// TODO: Stepper swipe
+// TODO: Transition
+
 
 function App() {
   return (
-    <Container backgroundColor="#62d9b7">
-      <InstructionsView />
+    <Container backgroundColor={COLORS.green} >
+      {/* <SplashScreen /> */}
+      <Instructions />
     </Container>
   );
 }
