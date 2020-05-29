@@ -1,13 +1,15 @@
-import React, {useEffect, useState} from 'react';
+import React, { useState } from 'react';
 import { Grid } from '@material-ui/core';
 import Text from "../elements/Text";
 import DotStepper from '../elements/Stepper';
 import { COLORS, Instruction } from "../../utils/const";
-
+import SplashScreen from "./SplashScreen";
+import Transition from "../elements/Transition";
 
 function Instructions() {
     const [activeStep, setActiveStep] = useState(0);
-    const [steps, setStepCount] = useState(Instruction.length);
+    const [steps] = useState(Instruction.length);
+    const [visible, setVisibility] = useState(true);
 
     const handleNext = () => {
         setActiveStep((prevActiveStep) => prevActiveStep + 1);
@@ -16,8 +18,17 @@ function Instructions() {
       const handleSkip = () => {
         setActiveStep(3);
       };
-    
-    return (
+
+    return (     
+      visible ?
+        <Transition 
+          type="fade" 
+          timeout={3000} 
+          autoHide={3000} 
+          onExited={() => setVisibility(false)} >
+            <SplashScreen />
+        </Transition>
+        :
         <Grid 
           container
           justify="center"
@@ -31,7 +42,7 @@ function Instructions() {
                     <br />
                     {
                       Instruction[activeStep].paragraph.map((item: any, index: number) => 
-                        <div>
+                        <div key={index}>
                           <Text key={index} variant="subtitle1">{item}</Text> <br/>
                         </div>                 
                       )
@@ -43,14 +54,14 @@ function Instructions() {
                       position="static" 
                       handleNext={handleNext}
                       handleSkip={handleSkip}
-                      nextButtonText="Seuraava" 
+                      nextButtonText={activeStep < steps - 1 ? "Seuraava" : "Aloitetaan"} 
                       skipButtonText="Ohita"
                       fullWidth />
                   </Grid>
                 :
                 <p>Done</p>
             }
-        </Grid>
+        </Grid>  
     );
 }
 

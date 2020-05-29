@@ -2,34 +2,31 @@ import React, {useState, useEffect } from 'react';
 import { Fade } from '@material-ui/core';
 
 export interface Props {
-    type: "slide" | "fade",
-    children: any
+    type: "fade",
+    autoHide?: number,
+    timeout: number,
+    children: any,
+    onExited?: any
 }
 
-// TODO: Finish this
-
 const Transition = (props: Props) => {
-    const [visible, setVisible] = useState(true);
-
-    const handleChange = () => {
-        setVisible(false);
-      };
+    const [visible, setVisibility] = useState(true);
 
     useEffect(() => {
-        const timer = setTimeout(() => {
-            handleChange();
-        }, 4000);
-        return () => clearTimeout(timer);
+        if(props.autoHide !== undefined){
+            const timer = setTimeout(() => {
+                setVisibility(false);
+            }, props.autoHide);
+            return () => clearTimeout(timer);
+        }
     })
 
     return (
-        props.type === "slide" ? 
-        <div>
-            {/* <Slide in={visible}></Slide> */}
-        </div>
-        :   
-        <Fade in={visible} timeout={3000}>
-            <div>{props.children}</div>
+        <Fade 
+            onExited={props.onExited ? props.onExited : null} 
+            in={visible} 
+            timeout={props.timeout}>
+                <div>{props.children}</div>
         </Fade>
        
     )

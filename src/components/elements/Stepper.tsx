@@ -26,7 +26,6 @@ const useStyles = makeStyles({
     }
 });
 
-
 const useStepStyles = makeStyles({
     root: {
       color: COLORS.disabled,
@@ -48,7 +47,6 @@ const useStepStyles = makeStyles({
   function QontoStepIcon(props: StepIconProps) {
     const classes = useStepStyles();
     const { active } = props;
-  
     return (
       <div
         className={clsx(classes.root, {
@@ -97,7 +95,6 @@ const DotStepper = (props: Props) => {
                     </Btn> 
                     : null
             } 
-
         </div>
     )
 }

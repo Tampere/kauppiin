@@ -1,5 +1,5 @@
 import React from 'react';
-import { COLORS, BackgroundColorType } from "../../utils/const";
+import { BackgroundColorType } from "../../utils/const";
 
 export interface Props {
     backgroundColor?: BackgroundColorType,

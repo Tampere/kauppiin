@@ -1,7 +1,6 @@
-import React, {useEffect, useState} from 'react';
+import React from 'react';
 import { Grid } from '@material-ui/core';
 import Text from "../elements/Text";
-import Transition from "../elements/Transition";
 
 function SplashScreen() {
     return (         
