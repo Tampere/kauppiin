@@ -40,7 +40,7 @@ function Instructions() {
             {
                 activeStep !== steps?
                   <Grid item style={{textAlign:"center", width: "inherit"}}>
-                    <Text variant="h4">{Instruction[activeStep].header}</Text>
+                    <Text variant="h5">{Instruction[activeStep].header}</Text>
                     <br />
                     {
                       Instruction[activeStep].paragraph.map((item: any, index: number) => 

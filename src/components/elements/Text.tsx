@@ -3,7 +3,7 @@ import { Typography } from '@material-ui/core';
 import { COLORS, TextColorType } from "../../utils/const";
 
 export interface Props {
-    variant: "h2" | "h4" | "subtitle1",
+    variant: "h3" | "h5" | "subtitle1",
     color?: TextColorType
     children: string
 }
