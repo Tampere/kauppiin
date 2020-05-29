@@ -3,21 +3,22 @@ import { Button } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import { COLORS } from "../../utils/const";
 
-export interface Props {
-    children: string,
-    variant: "text" | "contained",
+export interface ButtonProps {
     onClick: any,
+    children?: string,
+    variant?: "text" | "contained",
+    icon?: any,
     fullWidth?: boolean
 }
 
 const useStyles = makeStyles({
     buttonStyle: {
-        backgroundColor: (props: Props) => props.variant === "contained" ? COLORS.white : COLORS.green,
-        color: (props: Props) => props.variant === "contained" ? COLORS.green : COLORS.white
+        backgroundColor: (props: ButtonProps) => props.variant === "contained" ? COLORS.white : COLORS.green,
+        color: (props: ButtonProps) => props.variant === "contained" ? COLORS.green : COLORS.white
     }
 });
 
-const Btn = (props: Props) => {
+export const Btn = (props: ButtonProps) => {
     const classes = useStyles(props);
 
     return (
@@ -26,11 +27,11 @@ const Btn = (props: Props) => {
                 className={classes["buttonStyle"]}
                 fullWidth={props.fullWidth}
                 onClick={props.onClick}
-                variant={props.variant}>
+                variant={props.variant ? props.variant : "contained"}
+                endIcon={props.icon}
+                >
                     {props.children}
             </Button>           
         </div>
     )
 }
-
-export default Btn;

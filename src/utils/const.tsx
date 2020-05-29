@@ -16,7 +16,7 @@ export const Instruction = [
         paragraph: [ "Kauppi appi auttaa sinua helposti löytämään sijaintisi ja haluamasi kohteen kartalta." ]
     },
     {
-        header: "Työmatkalainen tai menossas tapahtumaan, Kauppi on sinua varten.",
+        header: "Työmatkalainen tai menossa tapahtumaan, Kauppi on sinua varten.",
         paragraph: [ "Etkö ole koskaan käynyt Kaupissa? Ei hätää, se on helppoa. Voit suunnitella reitin ja kulkuvälineet etukäteen." ]
     },
     {

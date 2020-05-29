@@ -1,23 +1,17 @@
 import React from 'react';
 import { Stepper, Step, StepIconProps, StepLabel } from '@material-ui/core';
-import Btn from './Button';
+import { Btn, ButtonProps } from './Button';
 import { makeStyles } from '@material-ui/core/styles';
 import clsx from 'clsx';
 import { COLORS } from '../../utils/const';
 
-export interface Props extends ButtonProps {
+export interface Props {
+    nextButton: any,
+    skipButton?: any,
     activeStep: number,
     steps: number,
     position: "static" | "bottom" | "top",
     backgroundColor?: string
-}
-
-export interface ButtonProps {
-    fullWidth?: boolean
-    nextButtonText: string,
-    handleNext: any,
-    skipButtonText?: string,
-    handleSkip?: any,
 }
 
 const useStyles = makeStyles({
@@ -78,23 +72,14 @@ const DotStepper = (props: Props) => {
                   )
               }
             </Stepper>
+              
+            {props.nextButton}
 
-            <Btn 
-                onClick={props.handleNext} 
-                fullWidth={props.fullWidth}
-                variant="contained">
-                    {props.nextButtonText}
-            </Btn>
-            
             {
-                props.skipButtonText !== undefined ? 
-                    <Btn 
-                        onClick={props.handleSkip}
-                        fullWidth={props.fullWidth}
-                        variant="text">{props.skipButtonText}
-                    </Btn> 
-                    : null
-            } 
+              props.skipButton !== undefined ? 
+                props.skipButton
+                : null
+            }
         </div>
     )
 }

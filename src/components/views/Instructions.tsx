@@ -5,6 +5,8 @@ import DotStepper from '../elements/Stepper';
 import { COLORS, Instruction } from "../../utils/const";
 import SplashScreen from "./SplashScreen";
 import Transition from "../elements/Transition";
+import { Btn } from "../elements/Button";
+import ArrowForwardIcon from '@material-ui/icons/ArrowForward';
 
 function Instructions() {
     const [activeStep, setActiveStep] = useState(0);
@@ -47,16 +49,30 @@ function Instructions() {
                         </div>                 
                       )
                     }
+
                     <DotStepper 
                       activeStep={activeStep}
                       backgroundColor={COLORS.green}
                       steps={steps} 
-                      position="static" 
-                      handleNext={handleNext}
-                      handleSkip={handleSkip}
-                      nextButtonText={activeStep < steps - 1 ? "Seuraava" : "Aloitetaan"} 
-                      skipButtonText="Ohita"
-                      fullWidth />
+                      position="static"   
+                      nextButton = {
+                        <Btn 
+                          onClick={handleNext} 
+                          fullWidth
+                          variant="contained"
+                          icon={ activeStep < steps -1 ? <ArrowForwardIcon /> : null}>
+                              {activeStep < steps - 1 ? "Seuraava" : "Aloitetaan"}
+                        </Btn>
+                      }
+                      skipButton = {
+                        <Btn 
+                          onClick={handleSkip}
+                          fullWidth
+                          variant="text">
+                            Ohita
+                        </Btn> 
+                      }
+                      />
                   </Grid>
                 :
                 <p>Done</p>
