@@ -14,7 +14,7 @@ function DestinationView(props: Props ) {
             justify="center"
             direction="column" 
             alignItems="center"
-            style={{minHeight: "100vh", }}>
+            style={{minHeight: "100vh" }}>
             {
                 props.destination !== null ? 
                 Object.entries(props.destination).map((item: any, index: number) => (              
