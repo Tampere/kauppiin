@@ -26,5 +26,44 @@ export const Instruction = [
                 "Me autamme sinua vähentämään hiilipäästöjä valitsemalla sopivimman  tavan siirtyä paikasta A paikkaan B, juuri sinun tarpeesi huomioon ottaen.",
                 "Vaihtoehtojen miettiminen tarkoittaa, että olet oikealla polulla."
             ],
-        }
-    ]
+    }
+]
+
+export const DestinationData = {
+    TAYS: {
+        header: "TAYS Pääovi",
+        description: "Lorem ipsum",
+        image: "../../images/testImg.jpeg",
+    },
+    Ensihoito: {
+        header: "Ensihoito",
+        description: "Lorem ipsum",
+        image: "../../images/testImg.jpeg",
+    },
+    MEDI1: {
+        header: "Finmedi 1",
+        description: "Lorem ipsum",
+        image: "../../images/testImg.jpeg",
+    },
+    MEDI2: {
+        header: "Finmedi 5",
+        description: "Lorem ipsum",
+        image: "../../images/testImg.jpeg",
+    },
+    POTILASHOTELLI: {
+        header: "Potilashotelli",
+        description: "Lorem ipsum",
+        image: "../../images/testImg.jpeg",
+    },
+    ARVO: {
+        header: "Arvo (TUNI)",
+        description: "Lorem ipsum",
+        image: "../../images/testImg.jpeg",
+    },
+    TAMK: {
+        header: "TAMK",
+        description: "Lorem ipsum",
+        image: "../../images/testImg.jpeg",
+    },
+
+}

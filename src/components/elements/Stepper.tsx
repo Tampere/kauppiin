@@ -1,6 +1,5 @@
 import React from 'react';
 import { Stepper, Step, StepIconProps, StepLabel } from '@material-ui/core';
-import { Btn, ButtonProps } from './Button';
 import { makeStyles } from '@material-ui/core/styles';
 import clsx from 'clsx';
 import { COLORS } from '../../utils/const';
