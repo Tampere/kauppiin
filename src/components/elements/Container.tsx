@@ -14,7 +14,7 @@ const getStyle = (props: Props): any => {
     return {
         backgroundColor: props.backgroundColor ? props.backgroundColor : "",
         margin: props.margin ? props.margin : "0",
-        padding: props.padding ? props.padding : "0 55px 0 55px",
+        padding: props.padding ? props.padding : "0 30px 0 30px",
     }
 }
 

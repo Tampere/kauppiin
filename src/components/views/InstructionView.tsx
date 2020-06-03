@@ -8,7 +8,9 @@ import Transition from "../elements/Transition";
 import { Btn } from "../elements/Button";
 import ArrowForwardIcon from '@material-ui/icons/ArrowForward';
 
-function Instructions() {
+// TODO: Set Instructions to state
+
+function InstructionView() {
     const [activeStep, setActiveStep] = useState(0);
     const [steps] = useState(Instruction.length);
     const [visible, setVisibility] = useState(true);
@@ -28,7 +30,7 @@ function Instructions() {
           timeout={3000} 
           autoHide={3000} 
           onExited={() => setVisibility(false)} >
-            <SplashScreen />
+            <SplashScreen /> 
         </Transition>
         :
         <Grid 
@@ -81,4 +83,4 @@ function Instructions() {
     );
 }
 
-export default Instructions;
+export default InstructionView;
