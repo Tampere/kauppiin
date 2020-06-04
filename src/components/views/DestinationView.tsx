@@ -7,6 +7,7 @@ export interface Props {
     handleClick: any,
     destination: any
 }
+
 function DestinationView(props: Props ) {
     return (
         <Grid 
@@ -14,41 +15,47 @@ function DestinationView(props: Props ) {
             justify="center"
             direction="column" 
             alignItems="center"
-            style={{minHeight: "100vh" }}>
+            style={{minHeight: "100vh"}}>
             {
                 props.destination !== null ? 
-                Object.entries(props.destination).map((item: any, index: number) => (              
-                    <Box key={index} width={1} >
+                Object.entries(props.destination).map((item: any, index: number) => (
+                    <Box key={index} width={1}>
                         <Card raised>
                             <CardActionArea name={item[0]} onClick={props.handleClick}>
-                                <CardContent>
-                                    <Grid container direction="row" alignItems="center" >
-                                        <Grid item xs={4} style={{textAlign: "center"}}>
-                                            <Text variant="subtitle1" color="black">
-                                                {item[1].header}
-                                            </Text>
+                                <CardContent style={{margin: 0, padding: 0}}>
+                                    <Grid container direction="row">
+                                        <Grid item style={{width: "70%", padding: "20px 0px 20px 10px"}}>
+                                            <Grid container direction="column">
+                                                <Grid item>
+                                                    <Text variant="subtitle1" color="black">
+                                                        {item[1].header}
+                                                    </Text>
+                                                </Grid>
+
+                                                <Grid item>
+                                                    <Text variant="subtitle2" color="black">
+                                                        {item[1].description}
+                                                    </Text>
+                                                </Grid> 
+                                            </Grid>  
                                         </Grid>
-                                        <Grid item xs={4} style={{textAlign: "center"}}>
-                                            {item[1].description}
+                                       <Grid item style={{width: "30%"}}>
+                                            <Grid container justify="flex-end">
+                                                <Grid item>
+                                                    <CardMedia 
+                                                        component="img" 
+                                                        alt="testImage" 
+                                                        src={item[1].image} />
+                                                </Grid>
+                                            </Grid>
                                         </Grid>
-                                        <Grid item xs={4} style={{textAlign: "center"}}> 
-                                            <CardMedia 
-                                                style={{borderRadius: "50%", 
-                                                maxWidth: "25%", 
-                                                minWidth: "40px", 
-                                                marginRight: "30%", 
-                                                marginLeft:"30%"}} 
-                                                component="img" 
-                                                alt="testImage" 
-                                                src={item[1].image} />
-                                        </Grid>
-                                    </Grid>                   
+                                    </Grid>
                                 </CardContent>
                             </CardActionArea>
                         </Card>
                         <Space lines={2} />
                     </Box>
-                    ))                
+                    ))
                     : null
                 }
         </Grid>

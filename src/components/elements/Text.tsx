@@ -4,10 +4,10 @@ import { COLORS, TextColorType, BackgroundColorType } from "../../utils/const";
 import { makeStyles } from '@material-ui/core/styles';
 
 export interface Props {
-    variant: "h3" | "h5" | "subtitle1",
-    color?: TextColorType,
-    backgroundColor?: BackgroundColorType,
-    children: string
+    variant: "h3" | "h5" | "subtitle1" | "subtitle2",
+    color?: TextColorType
+    children: string,
+    backgroundColor?: BackgroundColorType
 }
 
 const useStyles = makeStyles({
@@ -23,7 +23,7 @@ const Text = (props: Props) => {
         <div className={classes.general}>
             <Typography variant={props.variant}>
                 {props.children}
-            </Typography>         
+            </Typography>
         </div>
     )
 }
