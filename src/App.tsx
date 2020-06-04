@@ -19,11 +19,13 @@ function App() {
 
   return (
     <div>
-      <Navbar />
+      <Navbar>Minne mennään?</Navbar>
       <Container backgroundColor={COLORS.green}>
         {/* <InstructionView /> */}
         {/* <Main /> */}
-        <DestinationView handleClick={handleClick} destination={destination}/>
+        <DestinationView 
+          handleClick={handleClick} 
+          destination={destination}/>
       </Container>
     </div>
   );

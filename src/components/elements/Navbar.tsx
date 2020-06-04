@@ -1,6 +1,5 @@
 import React from 'react';
-import { Button, Paper } from '@material-ui/core';
-import { makeStyles } from '@material-ui/core/styles';
+import { Box } from '@material-ui/core';
 import { COLORS } from "../../utils/const";
 import AppBar from '@material-ui/core/AppBar';
 import { Space } from "../elements/Space";
@@ -8,33 +7,27 @@ import Text from "../elements/Text";
 import { Btn } from './Button';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 
-export interface ButtonProps {
+export interface Props {
     onClick?: any,
-    children?: string,
+    children: string,
     variant?: "text" | "contained",
     icon?: any,
     fullWidth?: boolean
 }
 
-const useStyles = makeStyles({
-  
-});
-
-export const Navbar = (props: ButtonProps) => {
-    const classes = useStyles(props);
-
+export const Navbar = (props: Props) => {
     return (
         <div>  
             <AppBar position="static">
-                <Paper style={{ backgroundColor: COLORS.green, padding: "30px"}}>
+                <Box bgcolor={COLORS.green} style={{ padding: "10px 30px 20px 30px"}}>
                     <Btn 
                         onClick={() => alert("moi")} 
-                        icon={<ArrowBackIcon /> } />
-                        <Space lines={2} />
-                    <Text variant="h5" color={COLORS.white} backgroundColor={COLORS.green}>Mihin mennään?</Text>
-                </Paper>
+                        variant="text"
+                        iconButton={<ArrowBackIcon />}/>
+                        <Text variant="h5" color={COLORS.white} backgroundColor={COLORS.green}>{props.children}</Text>
+                </Box>
             </AppBar>     
-            <Space lines={4} backgroundColor={COLORS.green}/>
+            <Space lines={3} backgroundColor={COLORS.green}/>
         </div>
     )
 }

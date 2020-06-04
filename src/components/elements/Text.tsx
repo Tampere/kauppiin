@@ -13,7 +13,7 @@ export interface Props {
 const useStyles = makeStyles({
     general: {
         backgroundColor: (props: Props) => props.backgroundColor,
-        color: (props: Props) => props.color ? props.color : COLORS.black
+        color: (props: Props) => props.color ? props.color : COLORS.white
     }
 });
 
