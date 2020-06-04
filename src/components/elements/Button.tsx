@@ -33,7 +33,7 @@ export const Btn = (props: ButtonProps) => {
         <div className={classes.root}> 
             {
                 props.iconButton ? 
-                    <IconButton 
+                    <IconButton
                         edge="start"
                         className={classes.iconButton} >
                             {props.iconButton}
