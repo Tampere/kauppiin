@@ -3,7 +3,7 @@ import { Typography } from '@material-ui/core';
 import { COLORS, TextColorType } from "../../utils/const";
 
 export interface Props {
-    variant: "h3" | "h5" | "subtitle1",
+    variant: "h3" | "h5" | "subtitle1" | "subtitle2",
     color?: TextColorType
     children: string
 }
@@ -19,7 +19,7 @@ const Text = (props: Props) => {
         <div style={getTextStyle(props.color)}>
             <Typography variant={props.variant}>
                 {props.children}
-            </Typography>         
+            </Typography>
         </div>
     )
 }
