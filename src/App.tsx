@@ -1,9 +1,10 @@
 import React, {useEffect, useState, MouseEvent} from 'react';
-import Container from "./components/elements/Container"
+import Container from "./components/elements/Container";
 import InstructionView from './components/views/InstructionView';
 import DestinationView from './components/views/DestinationView';
 import Main from './components/views/Main';
 import { COLORS, DestinationData } from "./utils/const";
+import { Navbar } from "./components/elements/Navbar";
 
 function App() {
   const [destination, getDestinations] = useState({});
@@ -17,11 +18,16 @@ function App() {
   }
 
   return (
-    <Container backgroundColor={COLORS.green}>
-      {/* <InstructionView /> */}
-      {/* <Main /> */}
-      <DestinationView handleClick={handleClick} destination={destination}/>
-    </Container>
+    <div>
+      <Navbar>Minne mennään?</Navbar>
+      <Container backgroundColor={COLORS.green}>
+        {/* <InstructionView /> */}
+        {/* <Main /> */}
+        <DestinationView 
+          handleClick={handleClick} 
+          destination={destination}/>
+      </Container>
+    </div>
   );
 }
 
