@@ -1,17 +1,20 @@
 import React, {useEffect, useState, MouseEvent} from 'react';
+import { BrowserRouter as Router, Switch, Route, Redirect } from "react-router-dom";
 import Container from "./components/elements/Container";
 import InstructionView from './components/views/InstructionView';
 import DestinationView from './components/views/DestinationView';
 import Main from './components/views/Main';
-import { COLORS, DestinationData } from "./utils/const";
+import { COLORS, ROUTES } from "./utils/const";
+import { InstructionData, DestinationData} from "./utils/data";
 import { Navbar } from "./components/elements/Navbar";
+import SplashScreen from "./components/views/SplashScreen";
 
 function App() {
-  const [destination, getDestinations] = useState({});
+  const [data, setData] = useState(InstructionData);
 
   useEffect(() => {
-      getDestinations(DestinationData);
-  }, [destination]);
+     setData(InstructionData)
+  }, []);
 
   function handleClick(e: MouseEvent<HTMLButtonElement>) {
       alert(e.currentTarget.name)
@@ -19,14 +22,17 @@ function App() {
 
   return (
     <div>
-      <Navbar>Minne mennään?</Navbar>
-      <Container backgroundColor={COLORS.green}>
-        {/* <InstructionView /> */}
-        {/* <Main /> */}
-        <DestinationView 
-          handleClick={handleClick} 
-          destination={destination}/>
-      </Container>
+      <Router>
+        <Navbar /> 
+        <Switch>
+          <Container backgroundColor={COLORS.green}>
+              <Route exact path={ROUTES.home} render={() => <SplashScreen />} />
+              <Route path={ROUTES.instructions} render={() => <InstructionView data={data} />} />
+              <Route path={ROUTES.destination} render={() => <DestinationView destination={DestinationData} handleClick={handleClick}/>}/>
+              <Route path={ROUTES.parking} render={() => <DestinationView destination={DestinationData} handleClick={handleClick}/>}/>
+          </Container>
+        </Switch>
+      </Router>
     </div>
   );
 }
