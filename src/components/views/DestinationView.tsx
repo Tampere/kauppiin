@@ -2,6 +2,7 @@ import React from 'react';
 import { Grid, Card, CardActionArea, CardContent, Box, CardMedia } from '@material-ui/core';
 import { Space } from "../elements/Space";
 import Text from "../elements/Text";
+import { useHistory } from "react-router-dom";
 
 export interface Props {
     handleClick: any,
@@ -9,6 +10,8 @@ export interface Props {
 }
 
 function DestinationView(props: Props ) {
+    const history = useHistory();
+    
     return (
         <Grid 
             container
@@ -39,7 +42,7 @@ function DestinationView(props: Props ) {
                                                 </Grid> 
                                             </Grid>  
                                         </Grid>
-                                       <Grid item style={{width: "30%"}}>
+                                    <Grid item style={{width: "30%"}}>
                                             <Grid container justify="flex-end">
                                                 <Grid item>
                                                     <CardMedia 

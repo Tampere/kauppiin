@@ -2,10 +2,10 @@ import React from 'react';
 import { Box } from '@material-ui/core';
 import { COLORS } from "../../utils/const";
 import AppBar from '@material-ui/core/AppBar';
-import { Space } from "../elements/Space";
 import Text from "../elements/Text";
 import { Btn } from './Button';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
+import { makeStyles } from '@material-ui/core/styles';
 
 export interface Props {
     onClick?: any,
@@ -14,6 +14,12 @@ export interface Props {
     icon?: any,
     fullWidth?: boolean
 }
+
+const useStyles = makeStyles({
+    box: {
+        padding: (props: Props) => props.activePage === 0 ? "30px 0px 30px 35px" : "20px 0px 30px 35px"
+    },
+});
 
 function getContent(props: Props){
    switch (props.activePage) {
@@ -27,15 +33,16 @@ function getContent(props: Props){
 }
 
 export const Navbar = (props: Props) => {
+    const classes = useStyles(props);
+ 
     return (
         <div>  
             <AppBar position="static">
-                <Box bgcolor={COLORS.green} style={{ padding: "10px 30px 20px 30px"}}>
-                    {props.activePage === 1 ? <Space lines={1} /> : ""}
+                <Box bgcolor={COLORS.green} className={classes.box}>      
                     <Btn 
                         onClick={() => alert("moi")} 
                         variant="text"
-                        hidden={props.activePage === 1 ? true : false}
+                        hidden={props.activePage === 0 ? true : false}
                         iconButton={<ArrowBackIcon />}/>
                         <Text 
                             variant="h5" 
@@ -45,7 +52,6 @@ export const Navbar = (props: Props) => {
                         </Text>
                 </Box>
             </AppBar>
-            <Space lines={3} backgroundColor={COLORS.green}/>
         </div>
     )
 }

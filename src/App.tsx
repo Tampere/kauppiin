@@ -1,4 +1,7 @@
 import React, {useEffect, useState, MouseEvent} from 'react';
+import { BrowserRouter as Router, Switch, Route, Redirect } from "react-router-dom";
+
+
 import Container from "./components/elements/Container";
 import InstructionView from './components/views/InstructionView';
 import DestinationView from './components/views/DestinationView';
@@ -6,24 +9,16 @@ import Main from './components/views/Main';
 import { COLORS } from "./utils/const";
 import { InstructionData, DestinationData} from "./utils/data";
 import { Navbar } from "./components/elements/Navbar";
+import SplashScreen from "./components/views/SplashScreen";
 
 function App() {
-  const [data, getData] = useState({});
+  const [data, setData] = useState(InstructionData);
   const [activePage, setActivePage] = useState(0);
 
   useEffect(() => {
-    switch (activePage) {
-      case 0:
-        getData(InstructionData);
-        break;
-      case 1:
-        getData(DestinationData);
-        break;
-      default:
-        setActivePage(0);
-        break;
-    }
-  }, [activePage]);
+     setData(InstructionData)
+  }, []);
+
 
   const handleNextPage = () => {
     setActivePage((prevActivePage) => prevActivePage + 1);
@@ -39,22 +34,18 @@ function App() {
 
   return (
     <div>
-      {
-        activePage === 0 ?     
-          <Container backgroundColor={COLORS.green}>
-            <InstructionView data={data} handleNextPage={handleNextPage}/> 
-          </Container> 
-          : 
-          <div>      
-            <Navbar activePage={activePage} />
+      <Router>
+        <Navbar activePage={activePage}/> 
+        <Switch>
             <Container backgroundColor={COLORS.green}>
-              <DestinationView 
-                handleClick={handleClick} 
-                destination={data}/> 
-            </Container> 
-          </div>
-      }
-    
+                <Route exact path="/" render={() => <SplashScreen />} />
+                <Route path="/instructions" render={() => <InstructionView data={data} handleNextPage={handleNextPage}/>} />
+                <Route path="/directions/destination" render={() => <DestinationView destination={DestinationData} handleClick={handleClick}/>}/>
+                <Route path="/directions/parking" render={() => <DestinationView destination={DestinationData} handleClick={handleClick}/>}/>
+                <Redirect from="/directions" to="/directions/destination" />
+            </Container>
+        </Switch>
+      </Router>
     </div>
   );
 }
