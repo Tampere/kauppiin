@@ -1,57 +1,67 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import { Box } from '@material-ui/core';
-import { COLORS } from "../../utils/const";
+import { COLORS, Routes } from "../../utils/const";
 import AppBar from '@material-ui/core/AppBar';
 import Text from "../elements/Text";
 import { Btn } from './Button';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import { makeStyles } from '@material-ui/core/styles';
-
-export interface Props {
-    onClick?: any,
-    activePage: any,
-    variant?: "text" | "contained",
-    icon?: any,
-    fullWidth?: boolean
-}
+import { useHistory, useLocation } from "react-router-dom";
 
 const useStyles = makeStyles({
     box: {
-        padding: (props: Props) => props.activePage === 0 ? "30px 0px 30px 35px" : "20px 0px 30px 35px"
+        padding: Routes.destination ? "30px 0px 30px 35px" : "20px 0px 30px 35px"
     },
 });
 
-function getContent(props: Props){
-   switch (props.activePage) {
-       case 1:
+function getContent(pathname: string){
+    console.log(pathname)
+   switch (pathname) {
+       case Routes.destination:
            return "Minne ollaan menossa?";
-       case 2:
+       case Routes.parking:
            return "Pysäköinti"
        default:
-           return "moi"
+           return ""
    }
 }
 
-export const Navbar = (props: Props) => {
-    const classes = useStyles(props);
- 
+export const Navbar = () => {
+    const [visible, setVisibility] = useState(false);
+    const classes = useStyles();
+    const history = useHistory();
+    const location = useLocation();
+
+    useEffect(() => {
+        if (location.pathname.includes("directions")) {
+            setVisibility(true);
+        } else {
+            setVisibility(false)
+        }
+    },[location.pathname])
+     
     return (
         <div>  
-            <AppBar position="static">
-                <Box bgcolor={COLORS.green} className={classes.box}>      
-                    <Btn 
-                        onClick={() => alert("moi")} 
-                        variant="text"
-                        hidden={props.activePage === 0 ? true : false}
-                        iconButton={<ArrowBackIcon />}/>
-                        <Text 
-                            variant="h5" 
-                            color={COLORS.white} 
-                            backgroundColor={COLORS.green}>
-                                {getContent(props)}
-                        </Text>
-                </Box>
-            </AppBar>
+            {
+            visible ? 
+                <AppBar position="static">
+                    <Box bgcolor={COLORS.green} className={classes.box}>
+                        <Btn 
+                            onClick={() => alert("moi")}
+                            variant="text"
+                            hidden={Routes.destination ? true : false}
+                            iconButton={<ArrowBackIcon />}/>
+                            <Text 
+                                variant="h5" 
+                                color={COLORS.white} 
+                                backgroundColor={COLORS.green}>
+                                    {getContent(location.pathname)}
+                            </Text>
+                    </Box>
+                </AppBar>
+                :
+                null
+            }
         </div>
     )
 }

@@ -5,16 +5,16 @@ import DotStepper from '../elements/Stepper';
 import { COLORS } from "../../utils/const";
 import { Btn } from "../elements/Button";
 import ArrowForwardIcon from '@material-ui/icons/ArrowForward';
+import { useHistory } from "react-router-dom";
 
 export interface Props {
-  data: any,
-  handleNextPage?: any,
-  setVisibility?: any,
+  data: any
 }
 
 function InstructionView(props: Props) {
     const [activeStep, setActiveStep] = useState(0);
     const [steps, setSteps] = useState(0);
+    const history = useHistory();
 
     useEffect(() => {
         setSteps(props.data.length);
@@ -24,12 +24,12 @@ function InstructionView(props: Props) {
         if(activeStep !== 2) {
           setActiveStep((prevActiveStep) => prevActiveStep + 1);
         } else {
-          props.handleNextPage();
+          history.push("/directions/destination");
         }
       };
     
       const handleSkip = () => {
-        props.handleNextPage();
+        history.push("/directions/destination");
       };
 
     return ( 

@@ -9,3 +9,10 @@ export const COLORS: any = {
 export type BackgroundColorType = "#62d9b7" | "#fcfcfc" | "#a1a1a1"
 
 export type TextColorType = "#62d9b7" | "#fcfcfc" | "black" | "#737373";
+
+export const Routes = {
+    home: "/",
+    instructions: "/instructions",
+    destination: "/directions/destination",
+    parking: "/directions/parking"
+}
