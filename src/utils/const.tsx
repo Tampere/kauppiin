@@ -10,7 +10,7 @@ export type BackgroundColorType = "#62d9b7" | "#fcfcfc" | "#a1a1a1"
 
 export type TextColorType = "#62d9b7" | "#fcfcfc" | "black" | "#737373";
 
-export const Routes = {
+export const ROUTES = {
     home: "/",
     instructions: "/instructions",
     destination: "/directions/destination",

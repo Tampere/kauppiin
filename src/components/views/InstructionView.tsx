@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Grid } from '@material-ui/core';
 import Text from "../elements/Text";
 import DotStepper from '../elements/Stepper';
-import { COLORS } from "../../utils/const";
+import { COLORS, ROUTES } from "../../utils/const";
 import { Btn } from "../elements/Button";
 import ArrowForwardIcon from '@material-ui/icons/ArrowForward';
 import { useHistory } from "react-router-dom";
@@ -24,12 +24,12 @@ function InstructionView(props: Props) {
         if(activeStep !== 2) {
           setActiveStep((prevActiveStep) => prevActiveStep + 1);
         } else {
-          history.push("/directions/destination");
+          history.push(ROUTES.destination);
         }
       };
-    
+      
       const handleSkip = () => {
-        history.push("/directions/destination");
+        history.push(ROUTES.destination);
       };
 
     return ( 

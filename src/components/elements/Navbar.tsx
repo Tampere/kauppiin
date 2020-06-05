@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import { Box } from '@material-ui/core';
-import { COLORS, Routes } from "../../utils/const";
+import { COLORS, ROUTES } from "../../utils/const";
 import AppBar from '@material-ui/core/AppBar';
 import Text from "../elements/Text";
 import { Btn } from './Button';
@@ -10,16 +10,15 @@ import { useHistory, useLocation } from "react-router-dom";
 
 const useStyles = makeStyles({
     box: {
-        padding: Routes.destination ? "30px 0px 30px 35px" : "20px 0px 30px 35px"
+        padding: ROUTES.destination ? "30px 0px 30px 35px" : "20px 0px 30px 35px"
     },
 });
 
 function getContent(pathname: string){
-    console.log(pathname)
    switch (pathname) {
-       case Routes.destination:
+       case ROUTES.destination:
            return "Minne ollaan menossa?";
-       case Routes.parking:
+       case ROUTES.parking:
            return "Pysäköinti"
        default:
            return ""
@@ -49,7 +48,7 @@ export const Navbar = () => {
                         <Btn 
                             onClick={() => alert("moi")}
                             variant="text"
-                            hidden={Routes.destination ? true : false}
+                            hidden={ROUTES.destination ? true : false}
                             iconButton={<ArrowBackIcon />}/>
                             <Text 
                                 variant="h5" 
