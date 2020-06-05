@@ -1,17 +1,32 @@
-import React from 'react';
+import React, { useEffect, useState, MouseEvent } from 'react';
 import { Grid, Card, CardActionArea, CardContent, Box, CardMedia } from '@material-ui/core';
 import { Space } from "../elements/Space";
 import Text from "../elements/Text";
-import { useHistory } from "react-router-dom";
+import { useHistory, useLocation, useParams } from "react-router-dom";
 
 export interface Props {
     handleClick: any,
-    destination: any
+    getData: any
 }
 
-function DestinationView(props: Props ) {
+function DirectionView(props: Props ) {
+    const [data, setData] = useState({});
+    const [activePage, setPage] = useState();
     const history = useHistory();
-    
+    const location = useLocation();
+    const {params} = useParams();
+
+    useEffect(() => {
+        let res = props.getData(params);
+        setData(res);
+    }, [params])
+
+
+    function handleSelect(e: MouseEvent<HTMLButtonElement>, params: string) {
+        props.handleClick(e, params);
+        history.push(`/directions/parking`)
+    }
+
     return (
         <Grid 
             container
@@ -20,14 +35,14 @@ function DestinationView(props: Props ) {
             alignItems="center"
             style={{minHeight: "100vh"}}>
             {
-                props.destination !== null ? 
-                Object.entries(props.destination).map((item: any, index: number) => (
+                data !== undefined ? 
+                Object.entries(data).map((item: any, index: number) => (
                     <Box key={index} width={1}>
                         <Card raised>
-                            <CardActionArea name={item[0]} onClick={props.handleClick}>
+                            <CardActionArea name={item[0]} onClick={(e: MouseEvent<HTMLButtonElement>) => handleSelect(e, params)}>
                                 <CardContent style={{margin: 0, padding: 0}}>
                                     <Grid container direction="row">
-                                        <Grid item style={{width: "70%", padding: "20px 0px 20px 10px"}}>
+                                        <Grid item style={{width: "70%", padding: "20px 10px 20px 10px"}}>
                                             <Grid container direction="column">
                                                 <Grid item>
                                                     <Text variant="subtitle1" color="black">
@@ -36,7 +51,7 @@ function DestinationView(props: Props ) {
                                                 </Grid>
 
                                                 <Grid item>
-                                                    <Text variant="subtitle2" color="black">
+                                                    <Text variant="caption" color="black">
                                                         {item[1].description}
                                                     </Text>
                                                 </Grid> 
@@ -65,4 +80,4 @@ function DestinationView(props: Props ) {
     );
 }
 
-export default DestinationView;
+export default DirectionView;

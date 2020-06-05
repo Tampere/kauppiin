@@ -13,6 +13,7 @@ export type TextColorType = "#62d9b7" | "#fcfcfc" | "black" | "#737373";
 export const ROUTES = {
     home: "/",
     instructions: "/instructions",
+    direction: "/directions",
     destination: "/directions/destination",
     parking: "/directions/parking"
 }

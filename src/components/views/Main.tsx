@@ -11,9 +11,11 @@ function Main() {
           ((navigator.platform.indexOf("iPhone") !== -1) || 
            (navigator.platform.indexOf("iPad") !== -1) || 
            (navigator.platform.indexOf("iPod") !== -1))
-          window.open("maps://maps.google.com/maps?daddr=<lat>,<long>&amp;ll=");
+            window.open("maps://maps.google.com/maps?daddr=<lat>,<long>&amp;ll=");
         else {
-            window.open(browserUrl(input));
+            // window.open(browserUrl(input));
+            let url = `https://www.google.com/maps/search/?api=1&query=${input.from},${input.to}`
+            window.open(url);
         }
       }
 
