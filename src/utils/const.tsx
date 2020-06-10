@@ -15,5 +15,8 @@ export const ROUTES = {
     instructions: "/instructions",
     direction: "/directions",
     destination: "/directions/destination",
-    parking: "/directions/parking"
+    parking: "/directions/parking",
+    main: "/main"
 }
+
+export const DirectionPageList = ["destination", "parking"]

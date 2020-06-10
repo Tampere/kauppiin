@@ -8,10 +8,10 @@ function SplashScreen() {
     const history = useHistory();
     return (
         <Transition 
-                type="fade" 
-                timeout={3000} 
-                autoHide={3000} 
-                onExited={() => history.push("/instructions")}>
+            type="fade" 
+            timeout={3000} 
+            autoHide={3000} 
+            onExited={() => history.push("/instructions")}>
             <Grid 
                 container 
                 justify="center"

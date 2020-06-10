@@ -2,29 +2,38 @@ import React, { useEffect, useState, MouseEvent } from 'react';
 import { Grid, Card, CardActionArea, CardContent, Box, CardMedia } from '@material-ui/core';
 import { Space } from "../elements/Space";
 import Text from "../elements/Text";
-import { useHistory, useLocation, useParams } from "react-router-dom";
+import { useHistory, useParams} from "react-router-dom";
+import { ROUTES, DirectionPageList, COLORS } from '../../utils/const';
 
 export interface Props {
-    handleClick: any,
-    getData: any
-}
+    handleSelect: any,
+    handleGetData: any}
 
 function DirectionView(props: Props ) {
     const [data, setData] = useState({});
-    const [activePage, setPage] = useState();
     const history = useHistory();
-    const location = useLocation();
     const {params} = useParams();
-
+    const [pages] = useState(DirectionPageList);
+    const [activePage, setPage] = useState(1);
+    
     useEffect(() => {
-        let res = props.getData(params);
+        let res = props.handleGetData(params);
+        setPage(pages.indexOf(params));
         setData(res);
-    }, [params])
+    }, [params, pages, props])
 
+    function handleNextPage(){
+        if (pages.length -1 === activePage) {
+            return ROUTES.main;
+        } else {
+            return `${ROUTES.direction}/${pages[activePage + 1]}`;
+        }
+    }
 
-    function handleSelect(e: MouseEvent<HTMLButtonElement>, params: string) {
-        props.handleClick(e, params);
-        history.push(`/directions/parking`)
+    function handleClick(e: MouseEvent<HTMLButtonElement>, params: string) {
+        props.handleSelect(e, params);
+        let url = handleNextPage();
+        history.push(url);
     }
 
     return (
@@ -39,7 +48,7 @@ function DirectionView(props: Props ) {
                 Object.entries(data).map((item: any, index: number) => (
                     <Box key={index} width={1}>
                         <Card raised>
-                            <CardActionArea name={item[0]} onClick={(e: MouseEvent<HTMLButtonElement>) => handleSelect(e, params)}>
+                            <CardActionArea name={item[0]} onClick={(e: MouseEvent<HTMLButtonElement>) => handleClick(e, params)}>
                                 <CardContent style={{margin: 0, padding: 0}}>
                                     <Grid container direction="row">
                                         <Grid item style={{width: "70%", padding: "20px 10px 20px 10px"}}>
@@ -51,9 +60,16 @@ function DirectionView(props: Props ) {
                                                 </Grid>
 
                                                 <Grid item>
-                                                    <Text variant="caption" color="black">
-                                                        {item[1].description}
-                                                    </Text>
+                                                    {
+                                                        item[1].description.map((item: any, index: number) => 
+                                                            <div key={index}>
+                                                                <Text variant="caption" color="black">
+                                                                    {item}
+                                                                </Text>
+                                                                <Space lines={1} backgroundColor={COLORS.white}/> 
+                                                            </div>
+                                                        )
+                                                    }
                                                 </Grid> 
                                             </Grid>  
                                         </Grid>

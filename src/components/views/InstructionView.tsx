@@ -8,21 +8,21 @@ import ArrowForwardIcon from '@material-ui/icons/ArrowForward';
 import { useHistory } from "react-router-dom";
 
 export interface Props {
-  data: any
+  data: any,
 }
 
 function InstructionView(props: Props) {
-    const [activeStep, setActiveStep] = useState(0);
+    const [activeStep, nextStep] = useState(0);
     const [steps, setSteps] = useState(0);
     const history = useHistory();
 
     useEffect(() => {
-        setSteps(props.data.length);
-    }, [props.data.length]);
+      setSteps(props.data.length);
+    }, [props.data]);
   
-    const handleNext = () => {
-        if(activeStep !== 2) {
-          setActiveStep((prevActiveStep) => prevActiveStep + 1);
+    const handleNextStep = () => {
+        if(activeStep !== steps - 1) {
+          nextStep((prevActiveStep) => prevActiveStep + 1);
         } else {
           history.push(ROUTES.destination);
         }
@@ -33,48 +33,50 @@ function InstructionView(props: Props) {
       };
 
     return ( 
-      <Grid 
-        container
-        justify="center"
-        direction="column" 
-        alignItems="center"
-        style={{height: "100vh"}}>
-          <Grid item style={{textAlign:"center", width: "inherit"}}>
-            <Text variant="h6">{props.data[activeStep].header}</Text>
-            <br />
-            {
-              props.data[activeStep].paragraph.map((item: any, index: number) => 
-              <div key={index}>
-                  <Text key={index} variant="subtitle1">{item}</Text> <br/>
-                </div>
-              )
-            }
+      props.data ?
+        <Grid 
+          container
+          justify="center"
+          direction="column" 
+          alignItems="center"
+          style={{height: "100vh"}}>
+            <Grid item style={{textAlign:"center", width: "inherit"}}>
+              <Text variant="h6">{props.data[activeStep].header}</Text>
+              <br />
+              {
+                props.data[activeStep].paragraph.map((item: any, index: number) => 
+                  <div key={index}>
+                    <Text key={index} variant="subtitle1">{item}</Text> <br/>
+                  </div>
+                )
+              }
 
-            <DotStepper 
-              activeStep={activeStep}
-              backgroundColor={COLORS.green}
-              steps={steps} 
-              position="static"
-              nextButton = {
-                <Btn 
-                onClick={handleNext} 
-                fullWidth
-                variant="contained"
-                icon={ activeStep < steps -1 ? <ArrowForwardIcon /> : null}>
-                      {activeStep < steps - 1 ? "Seuraava" : "Aloitetaan"}
-                </Btn>
-              }
-              skipButton = {
-                <Btn 
-                onClick={handleSkip}
-                fullWidth
-                variant="text">
-                    Ohita
-                </Btn> 
-              }
-              />
-          </Grid>
-      </Grid>  
+              <DotStepper 
+                activeStep={activeStep}
+                backgroundColor={COLORS.green}
+                steps={steps} 
+                position="static"
+                nextButton = {
+                  <Btn 
+                    onClick={handleNextStep} 
+                    fullWidth
+                    variant="contained"
+                    icon={ activeStep < steps -1 ? <ArrowForwardIcon /> : null}>
+                          {activeStep < steps - 1 ? "Seuraava" : "Aloitetaan"}
+                  </Btn>
+                }
+                skipButton = {
+                  <Btn 
+                    onClick={handleSkip}
+                    fullWidth
+                    variant="text">
+                      Ohita
+                  </Btn> 
+                }
+                />
+            </Grid>
+        </Grid>
+      : null
     );
 }
 

@@ -34,6 +34,7 @@ export const Btn = (props: ButtonProps) => {
             {
                 props.iconButton ? 
                     <IconButton
+                        onClick={props.onClick}
                         edge="start"
                         className={classes.iconButton} >
                             {props.iconButton}

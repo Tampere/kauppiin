@@ -20,7 +20,7 @@ export const InstructionData = [
 export const DestinationData = {
     TAYS: {
         header: "TAYS Pääovi",
-        description: "Lorem ipsum",
+        description: ["Lorem ipsum"],
         image: "../../images/testImg.jpeg",
         location: {
             lat: 61.505032,
@@ -29,7 +29,7 @@ export const DestinationData = {
     },
     Ensihoito: {
         header: "Ensihoito",
-        description: "Lorem ipsum",
+        description: ["Lorem ipsum"],
         image: "../../images/testImg.jpeg",
         location: {
             lat: 61.504953,
@@ -38,7 +38,7 @@ export const DestinationData = {
     },
     MEDI1: {
         header: "Finmedi 1",
-        description: "Lorem ipsum",
+        description: ["Lorem ipsum"],
         image: "../../images/testImg.jpeg",
         location: {
             lat: 61.506493,
@@ -47,7 +47,7 @@ export const DestinationData = {
     },
     MEDI5: {
         header: "Finmedi 5",
-        description: "Lorem ipsum",
+        description: ["Lorem ipsum"],
         image: "../../images/testImg.jpeg",
         location: {
             lat: 61.506792,
@@ -56,7 +56,7 @@ export const DestinationData = {
     },
     POTILASHOTELLI: {
         header: "Potilashotelli",
-        description: "Lorem ipsum",
+        description: ["Lorem ipsum"],
         image: "../../images/testImg.jpeg",
         location: {
             lat: 61.508182,
@@ -65,7 +65,7 @@ export const DestinationData = {
     },
     ARVO: {
         header: "Arvo (TUNI)",
-        description: "Lorem ipsum",
+        description: ["Lorem ipsum"],
         image: "../../images/testImg.jpeg",
         location: {
             lat: 61.507593,
@@ -74,7 +74,7 @@ export const DestinationData = {
     },
     TAMK: {
         header: "TAMK",
-        description: "Lorem ipsum",
+        description: ["Lorem ipsum"],
         image: "../../images/testImg.jpeg",
         location: {
             lat: 61.504330,
@@ -86,11 +86,10 @@ export const DestinationData = {
 export const ParkingData = {
     NIIHAMA: {
         header: "Niihaman liityntäpysäköinti",
-        description: `
-            Niihaman liityntäpysäköintipaikka sijaitsee Lahdentien ja Niihamankadun risteyksessä. 
-            Parkkialueelle mahtuu 70 henkilöautoa. Läheisellä bussipysäkillä on runsas vuorotarjonta niin aamu- kuin iltaruuhkankin aikaan. 
-            Kaikki pysäkin kautta liikennöivät bussit ajavat yliopistollisen sairaalan ohi. Ruuhka-aikana pysäkiltä liikennöidään muutaman minuutin välein.
-        `,
+        description: [`
+            Loremipsum Loremipsum Loremipsum LoremipsuLoremipsum LoremipsumLoremipsum  Loremipsum Loremipsum Loremipsum Loremipsum Loremipsum 
+            Loremipsum Loremipsum Loremipsum Loremipsum LoremipsumLoremipsumLoremipsum Loremipsum LoremipsumLoremipsum LoremipsumLoremipsumLoremipsum       
+        `],
         image: "../../images/testImg.jpeg",
         location: {
             lat: 61.500488,
@@ -99,11 +98,12 @@ export const ParkingData = {
     },
     TURTOLA: {
         header: "Turtolan K-Citymarketin liityntäpysäköintialue",
-        description: `
-            Turtolaan K-Citymarketin liityntäpysäköintialueella on tilaa 36 autolle. 
-            Liityntäpysäköintiin osoitetut pysäköintipaikat sijaitsevat pysäköintialueen itälaidalla, Martinpojankadun puolella, ja ne on merkitty liityntäpysäköinnistä kertovin opastusmerkein.
-            Liityntäpysäköintipaikan läheisyydessä on useita bussipysäkkejä, joilta on hyvät joukkoliikenneyhteydet keskustan suuntaan. Liityntäpysäköintialue avattiin huhtikuussa 2018.
-        `,
+        description: [`
+            Loremipsum Loremipsum Loremipsum LoremipsuLoremipsum LoremipsumLoremipsum  Loremipsum Loremipsum Loremipsum Loremipsum Loremipsum 
+            Loremipsum Loremipsum Loremipsum Loremipsum LoremipsumLoremipsumLoremipsum Loremipsum LoremipsumLoremipsum LoremipsumLoremipsumLoremipsum 
+            Loremipsum Loremipsum Loremipsum LoremipsuLoremipsum LoremipsumLoremipsum  Loremipsum Loremipsum Loremipsum Loremipsum Loremipsum 
+            Loremipsum Loremipsum Loremipsum Loremipsum LoremipsumLoremipsumLoremipsum Loremipsum LoremipsumLoremipsum LoremipsumLoremipsumLoremipsum   
+        `],
         image: "../../images/testImg.jpeg",
         location: {
             lat: 61.477595,
@@ -112,11 +112,10 @@ export const ParkingData = {
     },
     KOVISTONKYLA: {
         header: "Koivistonkylän Prisman liityntäpysäköintialue",
-        description: `
-            Liityntäpysäköintiä varten on varattu Koivistonkylän Prisman pysäköintialueelta 34 pysäköintiruutua, 
-            jotka ovat arkipäivisin klo 5–18 liityntäpysäköintiä tarvitsevien käytössä. Liityntäpysäköintipaikalta on lyhyt kävelymatka Ekankulman bussipysäkille, 
-            josta liikennöivät keskustan suuntaan bussilinjat 5, 35, 50, 52 ja 53. Prisman liityntäpysäköintialue avautui 1.6.2018.
-        `,
+        description: [`
+            Loremipsum Loremipsum Loremipsum LoremipsuLoremipsum LoremipsumLoremipsum  Loremipsum Loremipsum Loremipsum Loremipsum Loremipsum 
+            Loremipsum Loremipsum Loremipsum Loremipsum LoremipsumLoremipsumLoremipsum Loremipsum LoremipsumLoremipsum LoremipsumLoremipsumLoremipsum  
+        `],
         image: "../../images/testImg.jpeg",
         location: {
             lat: 61.468466,
@@ -125,11 +124,11 @@ export const ParkingData = {
     },
     IKEA: {
         header: "IKEA Tampereen liityntäpysäköintialue",
-        description: `
-            IKEA Tampereen liityntäpysäköintialueella on noin 70 paikkaa, jotka tunnistaa liityntäpysäköintipaikan merkistä. 
-            Paikat on varattu työpäivän mittaiseen pysäköintiin ja niissä on 12h-aikarajoitus. Lähipysäkeiltä kulkevat joukkoliikenteen bussit 5, 11B ja 33. 
-            Liityntäpysäköintialue avattiin 17.9.2018.
-        `,
+        description: [`
+            Loremipsum Loremipsum Loremipsum LoremipsuLoremipsum LoremipsumLoremipsum  Loremipsum Loremipsum Loremipsum Loremipsum Loremipsum 
+            Loremipsum Loremipsum Loremipsum Loremipsum LoremipsumLoremipsumLoremipsum Loremipsum LoremipsumLoremipsum LoremipsumLoremipsumLoremipsum  
+            Loremipsum Loremipsum Loremipsum LoremipsuLoremipsum LoremipsumLoremipsum  Loremipsum Loremipsum Loremipsum Loremipsum Loremipsum 
+        `],
         image: "../../images/testImg.jpeg",
         location: {
             lat: 61.453240,
@@ -138,14 +137,12 @@ export const ParkingData = {
     },
     KAUKAJARVI: {
         header: "Kaukajärven Hyllilänkadun liityntäpysäköintialue",
-        description: `
-            Hankkion Hyllilänkadun liityntäpysäköintialuella on tilaa 96 henkilöautolle, ja se palvelee erityisesti Kangasalan suunasta tulevaa työmatkaliikennettä. 
-            Liityntäpysäköintialue sijaitsee Kangasalantien varressa vastapäätä Kaukajärven soutu- ja melontastadionia. 
-            Läheisiltä bussipysäkeiltä liikennöivät Nysse-linjat 40, 40A, 40B, 40C ja 43 Tampereen keskustan ja Kangasalan suuntiin. 
-            Lähimmät pysäkit ovat Kristilla 4052 (Kangasalan suuntaan) ja Kristilla 4053 (Tampereen suuntaan).
-            
-            Hyllilänkadun liityntäpysäköintialueen rakentamisessa on hyödynnetty kierrätysmateriaalia lähialueiden rakennuskohteista. Liityntäpysäköintialue avattiin 1.11.2019.
-        `,
+        description: [`
+            Loremipsum Loremipsum Loremipsum LoremipsuLoremipsum LoremipsumLoremipsum  Loremipsum Loremipsum Loremipsum Loremipsum Loremipsum 
+            Loremipsum Loremipsum Loremipsum Loremipsum LoremipsumLoremipsumLoremipsum Loremipsum LoremipsumLoremipsum LoremipsumLoremipsumLoremipsum
+            Loremipsum Loremipsum Loremipsum LoremipsuLoremipsum LoremipsumLoremipsum  Loremipsum Loremipsum Loremipsum Loremipsum Loremipsum`,  
+            "Loremipsum Loremipsum Loremipsum Loremipsum LoremipsumLoremipsumLoremipsum Loremipsum LoremipsumLoremipsum LoremipsumLoremipsumLoremipsum"
+        ],
         image: "../../images/testImg.jpeg",
         location: {
             lat: 61.479118,

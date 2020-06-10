@@ -6,7 +6,7 @@ import Text from "../elements/Text";
 import { Btn } from './Button';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import { makeStyles } from '@material-ui/core/styles';
-import { useHistory, useLocation, useParams } from "react-router-dom";
+import { useHistory, useLocation } from "react-router-dom";
 
 const useStyles = makeStyles({
     box: {
@@ -39,6 +39,10 @@ export const Navbar = () => {
         }
     },[location.pathname])
      
+    function handleBack(){
+        history.goBack();
+    }
+
     return (
         <div>  
             {
@@ -46,7 +50,7 @@ export const Navbar = () => {
                 <AppBar position="static">
                     <Box bgcolor={COLORS.green} className={classes.box}>
                         <Btn 
-                            onClick={() => alert("moi")}
+                            onClick={handleBack}
                             variant="text"
                             hidden={location.pathname === ROUTES.destination ? true : false}
                             iconButton={<ArrowBackIcon />}/>
