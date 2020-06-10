@@ -1,27 +1,36 @@
-// TODO: Travelmode
+type RouteObj = {destination: {lat: number, lon: number}, parking: {lat: number, lon: number}};
 
-const parseParams = (paramsStr: string) => {
-    return paramsStr.replace(" ", "+");
+const travelmode = (isIos: boolean) => {
+    return isIos ? "&dirflg=r" : "&travelmode=transit";
 }
 
-const directionUrl = (input: {from: string, to: string}) => {
-    return "dir/?api=1&origin=" + parseParams(input.from) + "&destination=" + parseParams(input.to);
+const parseParams = (routeObj: RouteObj, isIos: boolean) => {
+    let origin: string = "";
+    let destination: string = "";
+    let originParams = `${routeObj.parking.lat},${routeObj.parking.lon}`
+    let destinationParams = `${routeObj.destination.lat},${routeObj.destination.lon}`
+
+    isIos ? origin = "&saddr=" : origin = "&origin=";
+    isIos ? destination = "&daddr=" : destination = `&destination=`;
+
+    return origin + originParams + destination + destinationParams;
 }
 
-const searchUrl =  (input: {from: string, to: string}) => {
-    return "search/?api=1&query=" + parseParams(input.from);
-}
-
-export function browserUrl(input: {from: string, to: string}) 
-{
-    let baseUrl = `${window.location.protocol}//maps.google.com/maps/`;
-    if(input.to !== ""){
-        return baseUrl + directionUrl(input)
+const handlePlatform = (platform: string) => {
+    if (platform === "iPhone" ||
+        platform === "iPod" ||
+        platform === "iPad" || 
+        platform === "MacIntel"
+    ) {
+        return true;
+    } else {
+        return false;
     }
-    else {
-        return baseUrl + searchUrl(input);
-    }
 }
 
-// https://www.google.com/maps/dir/?api=1&origin=Google+Pyrmont+NSW&destination=QVB&destination_place_id=ChIJISz8NjyuEmsRFTQ9Iw7Ear8&travelmode=walking
-
+export function directionUrl(routeObj: RouteObj, platform: string) {
+    let isIos = handlePlatform(platform);
+    let baseUrl = `maps://maps.google.com/maps/dir/?api=1`;
+    let url = baseUrl + parseParams(routeObj, isIos) + travelmode(isIos);
+    return url;
+}

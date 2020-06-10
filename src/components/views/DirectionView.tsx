@@ -3,7 +3,7 @@ import { Grid, Card, CardActionArea, CardContent, Box, CardMedia } from '@materi
 import { Space } from "../elements/Space";
 import Text from "../elements/Text";
 import { useHistory, useParams} from "react-router-dom";
-import { ROUTES, DirectionPageList, COLORS } from '../../utils/const';
+import { ROUTES, DirectionPageList } from '../../utils/const';
 
 export interface Props {
     handleSelect: any,
@@ -24,7 +24,7 @@ function DirectionView(props: Props ) {
 
     function handleNextPage(){
         if (pages.length -1 === activePage) {
-            return ROUTES.main;
+            return ROUTES.navigate;
         } else {
             return `${ROUTES.direction}/${pages[activePage + 1]}`;
         }
@@ -66,7 +66,6 @@ function DirectionView(props: Props ) {
                                                                 <Text variant="caption" color="black">
                                                                     {item}
                                                                 </Text>
-                                                                <Space lines={1} backgroundColor={COLORS.white}/> 
                                                             </div>
                                                         )
                                                     }

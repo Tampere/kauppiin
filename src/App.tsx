@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Container from "./components/elements/Container";
 import InstructionView from './components/views/InstructionView';
 import DirectionView from './components/views/DirectionView';
-import Main from './components/views/Main';
+import Navigate from './components/views/NavigationView';
 import { COLORS, ROUTES } from "./utils/const";
 import { InstructionData, DestinationData, ParkingData} from "./utils/data";
 import { Navbar } from "./components/elements/Navbar";
@@ -14,19 +14,19 @@ interface StringKeyObject {
 }
 
 function App() {
-  const [routeObj, setRoute] = useState({parking: "", destination: "", current: ""});
-  const [data] = useState<StringKeyObject>(() => initPageData());
+  const [routeObj, setRoute] = useState({parking: "", destination: ""});
+  const [directionData] = useState<StringKeyObject>(() => initPageData());
+  const [instructionPageData] = useState(InstructionData);
 
   function initPageData(){
     return {
-      "instructions": InstructionData,
       "destination": DestinationData,
       "parking": ParkingData 
     }
   }
 
   function handleGetData(location: string) {
-      return data[location];
+      return directionData[location];
   }
 
   function handleSelect(e: MouseEvent<HTMLButtonElement>, params: string) {
@@ -39,9 +39,9 @@ function App() {
         <Navbar /> 
         <Switch>
           <Container backgroundColor={COLORS.green}>
-              <Route path={"/main"} render={() => <Main />} />
+              <Route path={ROUTES.navigate} render={() => <Navigate data={directionData} routeObj={routeObj}/>} />
               <Route path={`${ROUTES.direction}/:params`} render={() => <DirectionView handleGetData={handleGetData} handleSelect={handleSelect}/>}/>
-              <Route path={ROUTES.instructions} render={() => <InstructionView data={data["instructions"]} />} />
+              <Route path={ROUTES.instructions} render={() => <InstructionView data={instructionPageData} />} />
               <Route exact path={ROUTES.home} render={() => <SplashScreen />} />
           </Container>
         </Switch>
