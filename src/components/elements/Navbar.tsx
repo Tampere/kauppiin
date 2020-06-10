@@ -39,6 +39,10 @@ export const Navbar = () => {
         }
     },[location.pathname])
      
+    function handleBack(){
+        history.goBack();
+    }
+
     return (
         <div>  
             {
@@ -46,12 +50,12 @@ export const Navbar = () => {
                 <AppBar position="static">
                     <Box bgcolor={COLORS.green} className={classes.box}>
                         <Btn 
-                            onClick={() => alert("moi")}
+                            onClick={handleBack}
                             variant="text"
-                            hidden={ROUTES.destination ? true : false}
+                            hidden={location.pathname === ROUTES.destination ? true : false}
                             iconButton={<ArrowBackIcon />}/>
                             <Text 
-                                variant="h5" 
+                                variant="h6" 
                                 color={COLORS.white} 
                                 backgroundColor={COLORS.green}>
                                     {getContent(location.pathname)}
