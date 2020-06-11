@@ -1,9 +1,11 @@
 import React, { useEffect, useState, MouseEvent } from 'react';
-import { Grid, Card, CardActionArea, CardContent, Box, CardMedia } from '@material-ui/core';
+import { Grid, Box, CardMedia } from '@material-ui/core';
 import { Space } from "../elements/Space";
-import Text from "../elements/Text";
 import { useHistory, useParams} from "react-router-dom";
-import { ROUTES, DirectionPageList } from '../../utils/const';
+import { ROUTES, DirectionPageList, COLORS } from '../../utils/const';
+import CardComponent from "../elements/Card"
+import {IconComponent} from "../elements/Icon";
+import Icon from '@material-ui/core/Icon';
 
 export interface Props {
     handleSelect: any,
@@ -14,13 +16,13 @@ function DirectionView(props: Props ) {
     const history = useHistory();
     const {params} = useParams();
     const [pages] = useState(DirectionPageList);
-    const [activePage, setPage] = useState(1);
-    
+    const [activePage, setPage] = useState(0);
+
     useEffect(() => {
         let res = props.handleGetData(params);
         setPage(pages.indexOf(params));
         setData(res);
-    }, [params, pages, props])
+    }, [params])
 
     function handleNextPage(){
         if (pages.length -1 === activePage) {
@@ -42,55 +44,33 @@ function DirectionView(props: Props ) {
             justify="center"
             direction="column" 
             alignItems="center"
-            style={{minHeight: "100vh"}}>
+            style={{minHeight: "84vh"}}>
             {
-                data !== undefined ? 
-                Object.entries(data).map((item: any, index: number) => (
-                    <Box key={index} width={1}>
-                        <Card raised>
-                            <CardActionArea name={item[0]} onClick={(e: MouseEvent<HTMLButtonElement>) => handleClick(e, params)}>
-                                <CardContent style={{margin: 0, padding: 0}}>
-                                    <Grid container direction="row">
-                                        <Grid item style={{width: "70%", padding: "20px 10px 20px 10px"}}>
-                                            <Grid container direction="column">
-                                                <Grid item>
-                                                    <Text variant="subtitle1" color="black">
-                                                        {item[1].header}
-                                                    </Text>
-                                                </Grid>
-
-                                                <Grid item>
-                                                    {
-                                                        item[1].description.map((item: any, index: number) => 
-                                                            <div key={index}>
-                                                                <Text variant="caption" color="black">
-                                                                    {item}
-                                                                </Text>
-                                                            </div>
-                                                        )
-                                                    }
-                                                </Grid> 
-                                            </Grid>  
-                                        </Grid>
-                                    <Grid item style={{width: "30%"}}>
-                                            <Grid container justify="flex-end">
-                                                <Grid item>
-                                                    <CardMedia 
-                                                        component="img" 
-                                                        alt="testImage" 
-                                                        src={item[1].image} />
-                                                </Grid>
-                                            </Grid>
-                                        </Grid>
-                                    </Grid>
-                                </CardContent>
-                            </CardActionArea>
-                        </Card>
-                        <Space lines={2} />
-                    </Box>
-                    ))
-                    : null
-                }
+                Object.entries(data).map (
+                    (item: any, index: number) => (
+                        <Box key={index} width={1}>
+                            {
+                                params !== "current" ? 
+                                    <CardComponent 
+                                        name={item[0]}
+                                        header={item[1].header}
+                                        description={item[1].description}
+                                        media={ <CardMedia component="img" alt="image" src={item[1].image} />}
+                                        handleSelect={(e: MouseEvent<HTMLButtonElement>) => handleClick(e, params)}
+                                        params={params} />
+                                    :
+                                    <CardComponent 
+                                        name={item[0]}
+                                        header={item[1].header}
+                                        media={<IconComponent icon={index === 0 ? "my_location" : "create"} size="large" />}
+                                        handleSelect={(e: MouseEvent<HTMLButtonElement>) => handleClick(e, params)}
+                                        params={params} />
+                                }
+                            <Space lines={2} />
+                        </Box>
+                    )
+                )
+            }
         </Grid>
     );
 }

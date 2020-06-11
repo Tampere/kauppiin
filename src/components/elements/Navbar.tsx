@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import { Box } from '@material-ui/core';
+import { Box, Toolbar, Grid } from '@material-ui/core';
 import { COLORS, ROUTES } from "../../utils/const";
 import { NavbarContent } from "../../utils/data";
 import AppBar from '@material-ui/core/AppBar';
@@ -10,9 +10,11 @@ import { makeStyles } from '@material-ui/core/styles';
 import { useHistory, useLocation } from "react-router-dom";
 
 const useStyles = makeStyles({
-    box: {
-        padding: ROUTES.destination ? "30px 0px 30px 35px" : "20px 0px 30px 35px"
-    },
+    root: {
+        padding: "3vh 0vh 3vh 2vh",
+        height: "10vh",
+        backgroundColor: COLORS.green
+    }
 });
 
 function getContent(pathname: string){
@@ -26,7 +28,7 @@ export const Navbar = () => {
     const location = useLocation();
 
     useEffect(() => {
-        if (location.pathname.includes("directions")) {
+        if (location.pathname.includes(ROUTES.direction || ROUTES.navigate)) {
             setVisibility(true);
         } else {
             setVisibility(false)
@@ -38,27 +40,21 @@ export const Navbar = () => {
     }
 
     return (
-        <div>  
-            {
-            visible ? 
-                <AppBar position="static">
-                    <Box bgcolor={COLORS.green} className={classes.box}>
-                        <Btn 
-                            onClick={handleBack}
-                            variant="text"
-                            hidden={location.pathname === ROUTES.destination ? true : false}
-                            iconButton={<ArrowBackIcon />}/>
-                            <Text 
-                                variant="h6" 
-                                color={COLORS.white} 
-                                backgroundColor={COLORS.green}>
-                                    {getContent(location.pathname)}
-                            </Text>
-                    </Box>
-                </AppBar>
-                :
-                null
-            }
-        </div>
+        visible ?
+            <div className={classes.root}>
+                <Toolbar>
+                    <Btn 
+                        onClick={handleBack}
+                        variant="text"
+                        hidden={location.pathname === ROUTES.destination ? true : false}
+                        iconButton={<ArrowBackIcon />}/>
+                        <Text 
+                            variant="h6" 
+                            color={COLORS.white} >
+                                {getContent(location.pathname)}
+                        </Text>
+                </Toolbar>
+            </div>
+        : null
     )
 }

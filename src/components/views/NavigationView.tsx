@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, {useEffect} from 'react';
 import { useHistory } from "react-router-dom";
 import { Grid } from '@material-ui/core';
 import { Btn } from '../elements/Button';
@@ -10,10 +10,6 @@ import { directionUrl } from '../../utils/url';
 export interface Props {
     routeObj: any,
     data: any
-}
-
-interface StringKeyObject {
-    [index: string]: object
 }
 
 function Navigate(props: Props) {
@@ -29,7 +25,7 @@ function Navigate(props: Props) {
             let dirUrl = directionUrl(locationObject, navigator.platform);
             window.open(dirUrl);
         }
-    },[props])
+    })
 
     function handleLocationObject(){
         const entries = Object.entries(props.data);
@@ -66,10 +62,10 @@ function Navigate(props: Props) {
             <Grid item>
                 <Grid container direction="row" justify="space-around" style={{width:"inherit"}}>
                     <Grid item xs={5}>
-                        <Btn fullWidth onClick={() => history.push(ROUTES.destination)}>Joo</Btn>
+                        <Btn variant="contained" fullWidth onClick={() => history.push(ROUTES.destination)}>Joo</Btn>
                     </Grid>
                     <Grid item xs={5}>
-                        <Btn fullWidth onClick={() => history.push(ROUTES.home)}>Ei</Btn>
+                        <Btn variant="contained" fullWidth onClick={() => history.push(ROUTES.home)}>Ei</Btn>
                     </Grid>
                 </Grid>
             </Grid>

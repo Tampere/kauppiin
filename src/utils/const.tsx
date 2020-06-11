@@ -1,3 +1,4 @@
+
 export const COLORS: any = {
     green: "#62d9b7",
     white:  "#fcfcfc",
@@ -16,8 +17,8 @@ export const ROUTES = {
     direction: "/directions",
     destination: "/directions/destination",
     parking: "/directions/parking",
-    main: "/main",
-    navigate: "/navigate"
+    current: "/directions/current",
+    navigate: "/navigate",
 }
 
-export const DirectionPageList = ["destination", "parking"]
+export const DirectionPageList = ["destination","current", "parking"]
