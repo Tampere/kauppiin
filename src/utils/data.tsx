@@ -1,3 +1,5 @@
+import { ROUTES } from "./const";
+
 export const InstructionData = [
     {
         header: "Löydä helpoin, nopein ja hiilivapain tapa liikkua Kaupissa.",
@@ -149,4 +151,11 @@ export const ParkingData = {
             lon: 23.897316
         }
     }
+}
+
+
+
+export const NavbarContent = {
+    [ROUTES.destination]: "Minne ollaan menossa?",
+    [ROUTES.parking]: "Valitse haluamasi liityntäpysäköinti"
 }

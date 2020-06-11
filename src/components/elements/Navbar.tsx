@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import { Box } from '@material-ui/core';
 import { COLORS, ROUTES } from "../../utils/const";
+import { NavbarContent } from "../../utils/data";
 import AppBar from '@material-ui/core/AppBar';
 import Text from "../elements/Text";
 import { Btn } from './Button';
@@ -15,14 +16,7 @@ const useStyles = makeStyles({
 });
 
 function getContent(pathname: string){
-   switch (pathname) {
-       case ROUTES.destination:
-           return "Minne ollaan menossa?";
-       case ROUTES.parking:
-           return "Pysäköinti"
-       default:
-           return ""
-   }
+    return NavbarContent[pathname];
 }
 
 export const Navbar = () => {

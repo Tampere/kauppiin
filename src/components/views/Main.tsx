@@ -1,21 +1,22 @@
 import React, {useState, FormEvent, ChangeEvent} from 'react';
 import { Grid, Input } from '@material-ui/core';
 import { Btn } from '../elements/Button';
-import { browserUrl } from "../../utils/url";
+// import { browserUrl } from "../../utils/url";
 
 function Main() {
     const [input, setInput] = useState({from: "", to:""});
 
     function mapsSelector() {
         if 
-          ((navigator.platform.indexOf("iPhone") !== -1) || 
-           (navigator.platform.indexOf("iPad") !== -1) || 
-           (navigator.platform.indexOf("iPod") !== -1))
+            ((navigator.platform.indexOf("iPhone") !== -1) || 
+            (navigator.platform.indexOf("iPad") !== -1) || 
+            (navigator.platform.indexOf("iPod") !== -1)) {
             window.open("maps://maps.google.com/maps?daddr=<lat>,<long>&amp;ll=");
+        }
         else {
-            // window.open(browserUrl(input));
             let url = `https://www.google.com/maps/search/?api=1&query=${input.from},${input.to}`
-            window.open(url);
+            // window.open(browserUrl(input));
+            // window.open(url);
         }
       }
 
@@ -30,7 +31,7 @@ function Main() {
             justify="center"
             direction="column" 
             alignItems="center"
-            style={{height: "100vh" }}
+            style={{height: "100vh"}}
             >
             <Grid item>
                 <Input 
