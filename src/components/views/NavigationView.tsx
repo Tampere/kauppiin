@@ -16,7 +16,6 @@ function Navigate(props: Props) {
     const history = useHistory();
 
     useEffect(() => {
-        // TODO: Error handling for earlier steps
         if ((Object.values(props.routeObj).includes(""))){
             history.push(ROUTES.destination);
         }
@@ -34,9 +33,16 @@ function Navigate(props: Props) {
         entries.map((item: any) => {
             let dataObj = props.data[item[0]];     
             let dataKey = props.routeObj[item[0]];
-            let locationObj = dataObj[dataKey].location;
-
-            tempObj[item[0]] = locationObj;
+            let locationObj = {};
+            if (item[0] === "current"){
+                // TODO: Use correct locations
+                locationObj = {lat: 2.00, lon: 2.00};
+            }
+            else {
+                locationObj = dataObj[dataKey].location;
+            }
+            
+            return tempObj[item[0]] = locationObj;
         })
         return tempObj;
     }

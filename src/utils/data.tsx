@@ -87,7 +87,7 @@ export const DestinationData = {
 
 export const ParkingData = {
     NIIHAMA: {
-        header: "Niihaman liityntäpysäköinti",
+        header: "Niihama",
         description: [`
             Loremipsum Loremipsum Loremipsum LoremipsuLoremipsum LoremipsumLoremipsum      
         `],
@@ -98,7 +98,7 @@ export const ParkingData = {
         }
     },
     TURTOLA: {
-        header: "Turtolan K-Citymarketin liityntäpysäköintialue",
+        header: "Turtolan K-Citymarket",
         description: [`
             Loremipsum Loremipsum Loremipsum Lmiipsum   
         `],
@@ -109,7 +109,7 @@ export const ParkingData = {
         }
     },
     KOVISTONKYLA: {
-        header: "Koivistonkylän Prisman liityntäpysäköintialue",
+        header: "Koivistonkylän Prisma",
         description: [`
             Loremipsum Loremiemipsum  
         `],
@@ -120,7 +120,7 @@ export const ParkingData = {
         }
     },
     IKEA: {
-        header: "IKEA Tampereen liityntäpysäköintialue",
+        header: "IKEA Tampere",
         description: [`
             Loremipsum Loremipsum Loremipsum LoremipsuLoremipsemipsum Loremipsum Loremipsum 
         `],
@@ -131,7 +131,7 @@ export const ParkingData = {
         }
     },
     KAUKAJARVI: {
-        header: "Kaukajärven Hyllilänkadun liityntäpysäköintialue",
+        header: "Kaukajärven Hyllilänkatu",
         description: [`
             Loremipsum Loremipsum`
         ],
@@ -144,13 +144,13 @@ export const ParkingData = {
 }
 
 export const CurrentDestinationData = {
-    current: {
+    CURRENT: {
         header: "Käytä nykyistä lokaatiota",
-        image: null
+        image: "my_location"
     },
-    other: {
+    OTHER: {
         header: "Muu osoite",
-        image: null
+        image: "create"
     }
 }
 

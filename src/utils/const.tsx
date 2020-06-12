@@ -3,7 +3,7 @@ export const COLORS: any = {
     green: "#62d9b7",
     white:  "#fcfcfc",
     black: "black",
-    disabled: "#a1a1a1",
+    disabled: "#abd4c1",
     textDisabled: "#737373"
 }
 

@@ -1,6 +1,8 @@
 import React, { MouseEvent } from 'react';
 import { Grid, Card, CardActionArea, CardContent} from '@material-ui/core';
 import Text from "../elements/Text";
+import { COLORS } from "../../utils/const"
+import { makeStyles } from '@material-ui/core/styles';
 
 export interface Props {
     header: string,
@@ -9,12 +11,21 @@ export interface Props {
     params: string
     description?: string[],
     media?: any,
+    disabled?: boolean
 }
 
+const useStyles = makeStyles({
+    root: {
+        backgroundColor: (props: Props) => props.disabled ? COLORS.disabled : "",
+        color: (props: Props) => props.disabled ? COLORS.textDisabled : "",
+    }
+});
+
 function CardComponent(props: Props ) {
+    const classes = useStyles(props);
     return (    
         <Card raised>
-            <CardActionArea name={props.name} onClick={(e: MouseEvent<HTMLButtonElement>) => props.handleSelect(e, props.params)}>
+            <CardActionArea className={classes.root} disabled={props.disabled} name={props.name} onClick={(e: MouseEvent<HTMLButtonElement>) => props.handleSelect(e, props.params)}>
                 <CardContent style={{margin: 0, padding: 0}}>
                     <Grid container direction="row">
                         <Grid 
@@ -26,7 +37,7 @@ function CardComponent(props: Props ) {
                             }}>
                             <Grid container direction="column">
                                 <Grid item>
-                                    <Text variant="subtitle1" color="black">
+                                    <Text variant="subtitle1" disabled={props.disabled} color="black">
                                         {props.header}
                                     </Text>
                                 </Grid>
@@ -38,7 +49,7 @@ function CardComponent(props: Props ) {
                                         {
                                             props.description.map((item: any, index: number) => 
                                             <div key={"description" + index}>
-                                                    <Text variant="caption" color="black">
+                                                    <Text variant="caption" disabled={props.disabled} color="black">
                                                         {item}
                                                     </Text>
                                                 </div>

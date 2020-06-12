@@ -2,14 +2,16 @@ import React, { useEffect, useState, MouseEvent } from 'react';
 import { Grid, Box, CardMedia } from '@material-ui/core';
 import { Space } from "../elements/Space";
 import { useHistory, useParams} from "react-router-dom";
-import { ROUTES, DirectionPageList, COLORS } from '../../utils/const';
+import { ROUTES, DirectionPageList } from '../../utils/const';
 import CardComponent from "../elements/Card"
 import {IconComponent} from "../elements/Icon";
-import Icon from '@material-ui/core/Icon';
 
 export interface Props {
     handleSelect: any,
-    handleGetData: any}
+    handleGetData: any,
+    routeObj: any,
+    location?: boolean
+}
 
 function DirectionView(props: Props ) {
     const [data, setData] = useState({});
@@ -19,10 +21,15 @@ function DirectionView(props: Props ) {
     const [activePage, setPage] = useState(0);
 
     useEffect(() => {
+        let pageIndex = pages.indexOf(params);
+        if(props.routeObj[pages[pageIndex - 1]] === ""){
+            history.push(ROUTES.destination);
+        }
+        
         let res = props.handleGetData(params);
-        setPage(pages.indexOf(params));
+        setPage(pageIndex);
         setData(res);
-    }, [params])
+    }, [params, history, pages, props])
 
     function handleNextPage(){
         if (pages.length -1 === activePage) {
@@ -38,6 +45,7 @@ function DirectionView(props: Props ) {
         history.push(url);
     }
 
+    if (data === undefined || data === null) return null;
     return (
         <Grid 
             container
@@ -60,9 +68,10 @@ function DirectionView(props: Props ) {
                                         params={params} />
                                     :
                                     <CardComponent 
+                                        disabled={!props.location && item[0] === "CURRENT"}
                                         name={item[0]}
                                         header={item[1].header}
-                                        media={<IconComponent icon={index === 0 ? "my_location" : "create"} size="large" />}
+                                        media={<IconComponent icon={item[1].image} size="large" />}
                                         handleSelect={(e: MouseEvent<HTMLButtonElement>) => handleClick(e, params)}
                                         params={params} />
                                 }

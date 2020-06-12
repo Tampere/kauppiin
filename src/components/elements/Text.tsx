@@ -7,20 +7,25 @@ export interface Props {
     variant: "h3" | "h6" | "subtitle1" | "caption",
     color?: TextColorType
     children: string,
-    backgroundColor?: BackgroundColorType
+    backgroundColor?: BackgroundColorType,
+    disabled?: boolean
 }
 
 const useStyles = makeStyles({
     general: {
         backgroundColor: (props: Props) => props.backgroundColor,
         color: (props: Props) => props.color ? props.color : COLORS.white
+    },
+    disabled: {
+        backgroundColor: COLORS.disabled,
+        color: COLORS.textDisabled
     }
 });
 
 const Text = (props: Props) => {
     const classes = useStyles(props);
     return (
-        <div className={classes.general}>
+        <div className={props.disabled ? classes.disabled : classes.general}>
             <Typography variant={props.variant}>
                 {props.children}
             </Typography>

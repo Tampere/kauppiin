@@ -32,8 +32,8 @@ function InstructionView(props: Props) {
         history.push(ROUTES.destination);
       };
 
+    if (props.data === undefined || props.data === null) return null;
     return ( 
-      props.data ?
         <Grid 
           container
           justify="center"
@@ -76,7 +76,6 @@ function InstructionView(props: Props) {
                 />
             </Grid>
         </Grid>
-      : null
     );
 }
 

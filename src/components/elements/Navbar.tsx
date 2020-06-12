@@ -1,8 +1,7 @@
 import React, {useState, useEffect} from 'react';
-import { Box, Toolbar, Grid } from '@material-ui/core';
+import { Toolbar } from '@material-ui/core';
 import { COLORS, ROUTES } from "../../utils/const";
 import { NavbarContent } from "../../utils/data";
-import AppBar from '@material-ui/core/AppBar';
 import Text from "../elements/Text";
 import { Btn } from './Button';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
