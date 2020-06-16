@@ -6,6 +6,7 @@ import Text from "../elements/Text";
 import { Space } from '../elements/Space';
 import { ROUTES } from '../../utils/const';
 import { directionUrl } from '../../utils/url';
+import { IconComponent } from '../elements/Icon';
 
 export interface Props {
     routeObj: any,
@@ -16,36 +17,9 @@ function Navigate(props: Props) {
     const history = useHistory();
 
     useEffect(() => {
-        if ((Object.values(props.routeObj).includes(""))){
-            history.push(ROUTES.destination);
-        }
-        else {
-            let locationObject = handleLocationObject();
-            let dirUrl = directionUrl(locationObject, navigator.platform);
-            window.open(dirUrl);
-        }
+        let dirUrl = directionUrl(props.routeObj, navigator.platform);
+        window.open(dirUrl); 
     })
-
-    function handleLocationObject(){
-        const entries = Object.entries(props.data);
-        let tempObj = Object.assign({}, props.routeObj);
-
-        entries.map((item: any) => {
-            let dataObj = props.data[item[0]];     
-            let dataKey = props.routeObj[item[0]];
-            let locationObj = {};
-            if (item[0] === "current"){
-                // TODO: Use correct locations
-                locationObj = {lat: 2.00, lon: 2.00};
-            }
-            else {
-                locationObj = dataObj[dataKey].location;
-            }
-            
-            return tempObj[item[0]] = locationObj;
-        })
-        return tempObj;
-    }
 
     return (
         <Grid 
@@ -56,6 +30,27 @@ function Navigate(props: Props) {
             style={{height: "100vh", textAlign: "center"}}
             >
             <Grid item>
+                <Grid container justify="center" direction="column">
+                    <Grid item>
+                        <Text variant="h6">
+                            Näytä matkan ensimmäinen osuus:
+                        </Text>
+                    </Grid>
+                    <Grid item>
+                        <Grid container direction="row">
+                            <Grid item>
+                                <Text variant="subtitle1">
+                                    moi
+                                </Text>
+                            </Grid>
+                            <Grid item>
+                                <IconComponent size="default" icon="arrow_right"/>
+                            </Grid>
+                        </Grid>
+                    </Grid>
+                </Grid>
+            </Grid>
+            {/* <Grid item>
                 <Grid container justify="center">
                     <Grid item>
                         <Text variant="h6">
@@ -74,7 +69,7 @@ function Navigate(props: Props) {
                         <Btn variant="contained" fullWidth onClick={() => history.push(ROUTES.home)}>Ei</Btn>
                     </Grid>
                 </Grid>
-            </Grid>
+            </Grid> */}
         </Grid>
     );
 }

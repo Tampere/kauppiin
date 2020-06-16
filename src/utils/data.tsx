@@ -88,9 +88,7 @@ export const DestinationData = {
 export const ParkingData = {
     NIIHAMA: {
         header: "Niihama",
-        description: [`
-            Loremipsum Loremipsum Loremipsum LoremipsuLoremipsum LoremipsumLoremipsum      
-        `],
+        description: [],
         image: "../../images/testImg.jpeg",
         location: {
             lat: 61.500488,
@@ -99,9 +97,7 @@ export const ParkingData = {
     },
     TURTOLA: {
         header: "Turtolan K-Citymarket",
-        description: [`
-            Loremipsum Loremipsum Loremipsum Lmiipsum   
-        `],
+        description: [],
         image: "../../images/testImg.jpeg",
         location: {
             lat: 61.477595,
@@ -110,9 +106,7 @@ export const ParkingData = {
     },
     KOVISTONKYLA: {
         header: "Koivistonkylän Prisma",
-        description: [`
-            Loremipsum Loremiemipsum  
-        `],
+        description: [],
         image: "../../images/testImg.jpeg",
         location: {
             lat: 61.468466,
@@ -121,9 +115,7 @@ export const ParkingData = {
     },
     IKEA: {
         header: "IKEA Tampere",
-        description: [`
-            Loremipsum Loremipsum Loremipsum LoremipsuLoremipsemipsum Loremipsum Loremipsum 
-        `],
+        description: [],
         image: "../../images/testImg.jpeg",
         location: {
             lat: 61.453240,
@@ -132,9 +124,7 @@ export const ParkingData = {
     },
     KAUKAJARVI: {
         header: "Kaukajärven Hyllilänkatu",
-        description: [`
-            Loremipsum Loremipsum`
-        ],
+        description: [],
         image: "../../images/testImg.jpeg",
         location: {
             lat: 61.479118,

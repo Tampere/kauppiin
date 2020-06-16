@@ -1,4 +1,4 @@
-import React, { useState, MouseEvent, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Container from "./components/elements/Container";
 import InstructionView from './components/views/InstructionView';
@@ -8,22 +8,24 @@ import { COLORS, ROUTES } from "./utils/const";
 import { InstructionData, DestinationData, ParkingData, CurrentDestinationData} from "./utils/data";
 import { Navbar } from "./components/elements/Navbar";
 import SplashScreen from "./components/views/SplashScreen";
+import Main from "./components/views/Main";
+import { AnyType, InstructionDataType, calculateDistance, getStore, setStore } from "./utils/const";
 
-type DirectionDataType = {
-  [index: string]: object 
-}
-
-type InstructionDataType =
-  { 
-    header: string; 
-    paragraph: string[]; 
-  }[];
+// TODO: Fix navigation page
+// TODO: InstructionsShown to instructionPage
+// TODO: Redirect direction first page if state is empty
 
 function App() {
-  const [routeObj, setRoute] = useState({parking: "", destination: "", current: ""});
-  const [directionData, setDirectionData] = useState<DirectionDataType>({});
+  const [directionData, setDirectionData] = useState<AnyType>({});
   const [instructionPageData, setInstructionData] = useState<InstructionDataType>([{header: "", paragraph: []}]);
-  const [locationAllowed, setStatus] = useState(false);
+
+  const initialState = {
+    routeObj: {parking: {}, destination: {}, current: {}},
+    locationAllowed: false, 
+    instructionsShown: false
+  };
+
+  const [state, setState] = useState(initialState);
 
   useEffect(() => {
     const fetchPageData = async () => {
@@ -32,45 +34,63 @@ function App() {
       setDirectionData(pageData.directions);
     };
 
-    const locationStatus = async () => {
-      await handleGetLocationStatus()
-        .then((res: any) => { 
-          let location = {lat: res.coords.latitude, lon: res.coords.longitude};
-          console.log(location)
-          setStatus(true);
-        })
-        .catch(() => setStatus(false));
-    } 
-    //TODO: Get current location on startup and update it later
-    locationStatus();
     fetchPageData();
+    handleSession();
   }, []);
 
   async function getPageData(){
-      const result = {
-        instructions: InstructionData,
-        directions: {
-          destination: DestinationData,
-          parking: ParkingData,
-          current: CurrentDestinationData
-        }
+    const result = {
+      instructions: InstructionData,
+      directions: {
+        destination: DestinationData,
+        parking: ParkingData,
+        current: CurrentDestinationData
       }
+    }
 
     return result;
   }
 
-  function handleGetLocationStatus(){
-    return new Promise((res, rej) => {
-      navigator.geolocation.getCurrentPosition(res, rej);
+  async function handleSession(){
+    let state = getStore("state");
+    if(state === null){
+      await handleCurrentLocation(); 
+    } else {
+      let stateObj = JSON.parse(state);
+      setState(stateObj);
+    }
+  }
+
+  async function handleCurrentLocation(){
+    let currentLocation: any;
+    
+    getPosition().then((res: any) => {
+      currentLocation = {lat: res.coords.latitude, lon: res.coords.longitude};
+      initialState.routeObj["current"] = currentLocation;
+      initialState.locationAllowed = true;
+    }).catch((err) => {
+      initialState.locationAllowed = false;
+      console.error(err.message);
+    }).then(() => {
+      setStore("state", initialState);
+    })
+  }
+
+  const getPosition = function (options?: any) {
+    return new Promise(function (resolve, reject) {
+      navigator.geolocation.getCurrentPosition(resolve, reject, options);
     });
   }
 
-  function handleGetData(location: string) {
-      return directionData[location];
+  function handleCountDistance(location: any){
+    return calculateDistance(location, state.routeObj.current);
   }
 
-  function handleSelect(e: MouseEvent<HTMLButtonElement>, params: string) {
-    setRoute({...routeObj, [params]: e.currentTarget.name});
+  function handleSelect(selection: any, params: string) {
+      let state: any = getStore("state");
+      let tempObj: any = JSON.parse(state);
+      tempObj.routeObj[params] = selection;
+      setStore("state", tempObj);
   }
 
   return (
@@ -79,8 +99,9 @@ function App() {
           <Navbar />
         <Switch>
           <Container backgroundColor={COLORS.green}>
-              <Route path={ROUTES.navigate} render={() => <Navigate data={directionData} routeObj={routeObj}/>} />
-              <Route path={`${ROUTES.direction}/:params`} render={() => <DirectionView location={locationAllowed} routeObj={routeObj} handleGetData={handleGetData} handleSelect={handleSelect}/>} />
+              <Route path={"/main"} render={() => <Main />} />
+              <Route path={ROUTES.navigate} render={() => <Navigate data={directionData} routeObj={state.routeObj}/>} />
+              <Route path={`${ROUTES.direction}/:params`} render={() => <DirectionView handleCountDistance={handleCountDistance} routeObj={state.routeObj} data={directionData} handleSelect={handleSelect}/>} />
               <Route path={ROUTES.instructions} render={() => <InstructionView data={instructionPageData} />} />
               <Route exact path={ROUTES.home} render={() => <SplashScreen />} />
           </Container>

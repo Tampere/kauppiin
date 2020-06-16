@@ -32,5 +32,8 @@ export function directionUrl(routeObj: RouteObj, platform: string) {
     let isIos = handlePlatform(platform);
     let baseUrl = `maps://maps.google.com/maps/dir/?api=1`;
     let url = baseUrl + parseParams(routeObj, isIos) + travelmode(isIos);
+    // This works
+    // TODO: use my location
+    // let url = baseUrl + "&saddr=My+Location&daddr=Helsinki" + travelmode(isIos);
     return encodeURI(url);
 }

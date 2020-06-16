@@ -14,9 +14,12 @@ function Main() {
             window.open("maps://maps.google.com/maps?daddr=<lat>,<long>&amp;ll=");
         }
         else {
-            let url = `https://www.google.com/maps/search/?api=1&query=${input.from},${input.to}`
+            // let url = `https://www.google.com/maps/search/?api=1&query=${input.from},${input.to}`
+            // let url = `https://www.google.com/maps/search/?api=1&query=${input.to}`
+            //This works
+            let url =  "https://maps.google.com/?saddr=My+Location&daddr=53.9187068,27.5862874"
             // window.open(browserUrl(input));
-            // window.open(url);
+            window.open(url);
         }
       }
 
