@@ -34,6 +34,7 @@ function App() {
 
     fetchPageData();
     handleCheckPermission();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   async function getPageData(){
@@ -56,8 +57,7 @@ function App() {
       .then(async function(result) {
         if (result.state === 'granted' ) {
             await handleCurrentLocation(tempObj);
-        } 
-        else if (result.state === 'denied') {
+        } else {
           tempObj.locationAllowed = false;
           handleSaveState(tempObj);
         }
