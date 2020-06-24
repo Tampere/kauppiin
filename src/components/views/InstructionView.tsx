@@ -6,6 +6,8 @@ import { COLORS, ROUTES } from "../../utils/const";
 import { Btn } from "../elements/Button";
 import ArrowForwardIcon from '@material-ui/icons/ArrowForward';
 import { useHistory } from "react-router-dom";
+import { Notification } from "../elements/Notification";
+import {NotificationContent} from "../../utils/data";
 
 export interface Props {
   data: any,
@@ -16,6 +18,7 @@ export interface Props {
 function InstructionView(props: Props) {
     const [activeStep, nextStep] = useState(0);
     const [steps, setSteps] = useState(0);
+    const [visible, setVisibility] = useState(true);
     const history = useHistory();
 
     useEffect(() => {
@@ -40,48 +43,54 @@ function InstructionView(props: Props) {
     if (props.data === undefined || props.data === null) return null;
 
     return ( 
-        <Grid 
-          container
-          justify="center"
-          direction="column" 
-          alignItems="center"
-          style={{height: "100vh"}}>
-            <Grid item style={{textAlign:"center", width: "inherit"}}>
-              <Text variant="h6">{props.data[activeStep].header}</Text>
-              <br />
-              {
-                props.data[activeStep].paragraph.map((item: any, index: number) => 
-                  <div key={index}>
-                    <Text key={index} variant="subtitle1">{item}</Text> <br/>
-                  </div>
-                )
-              }
+      <Grid 
+        container
+        justify="center"
+        direction="column" 
+        alignItems="center"
+        style={{height: "100vh"}}>
+          <Grid item style={{textAlign:"center", width: "inherit"}}>
+            <Text variant="h6">{props.data[activeStep].header}</Text>
+            <br />
+            {
+              props.data[activeStep].paragraph.map((item: any, index: number) => 
+                <div key={index}>
+                  <Text key={index} variant="subtitle1">{item}</Text> <br/>
+                </div>
+              )
+            }
 
-              <DotStepper 
-                activeStep={activeStep}
-                backgroundColor={COLORS.green}
-                steps={steps} 
-                position="static"
-                nextButton = {
-                  <Btn 
-                    onClick={handleNextStep} 
-                    fullWidth
-                    variant="contained"
-                    icon={ activeStep < steps -1 ? <ArrowForwardIcon /> : null}>
-                          {activeStep < steps - 1 ? "Seuraava" : "Aloitetaan"}
-                  </Btn>
-                }
-                skipButton = {
-                  <Btn 
-                    onClick={handleSkip}
-                    fullWidth
-                    variant="text">
-                      Ohita
-                  </Btn> 
-                }
-                />
-            </Grid>
-        </Grid>
+            <DotStepper 
+              activeStep={activeStep}
+              backgroundColor={COLORS.green}
+              steps={steps} 
+              position="static"
+              nextButton = {
+                <Btn 
+                  onClick={handleNextStep} 
+                  fullWidth
+                  variant="contained"
+                  icon={ activeStep < steps -1 ? <ArrowForwardIcon /> : null}>
+                        {activeStep < steps - 1 ? "Seuraava" : "Aloitetaan"}
+                </Btn>
+              }
+              skipButton = {
+                <Btn 
+                  onClick={handleSkip}
+                  fullWidth
+                  variant="text">
+                    Ohita
+                </Btn> 
+              }
+              />
+          </Grid>
+
+          <Notification 
+            action={<Btn variant="contained" onClick={() => setVisibility(false)}>Ok!</Btn>} 
+            open={visible} 
+            message={NotificationContent.Cookies}
+          />
+      </Grid>
     );
 }
 
