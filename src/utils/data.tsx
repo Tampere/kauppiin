@@ -147,5 +147,6 @@ export const CurrentDestinationData = {
 export const NavbarContent = {
     [ROUTES.destination]: "Minne ollaan menossa?",
     [ROUTES.parking]: "Valitse haluamasi liityntäpysäköinti",
-    [ROUTES.current]: "Missä olet nyt?"
+    [ROUTES.current]: "Missä olet nyt?",
+    [ROUTES.navigate]: "Avaa karttasovellus osuudelle:"
 }

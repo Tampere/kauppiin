@@ -27,7 +27,7 @@ export const Navbar = () => {
     const location = useLocation();
 
     useEffect(() => {
-        if (location.pathname.includes(ROUTES.direction || ROUTES.navigate)) {
+        if (location.pathname.includes(ROUTES.direction) || location.pathname === ROUTES.navigate) {
             setVisibility(true);
         } else {
             setVisibility(false)

@@ -6,15 +6,16 @@ import { ROUTES, DirectionPageList } from '../../utils/const';
 import CardComponent from "../elements/Card"
 import {IconComponent} from "../elements/Icon";
 import { AnyType } from "../../utils/const";
+import { Btn } from '../elements/Button';
 
 export interface Props {
     handleSelect: any,
     data: any,
-    routeObj: any,
-    handleCountDistance: any
+    handleCountDistance: any,
+    state: any
 }
 
-function DirectionView(props: Props ) {
+function DirectionView(props: Props) {
     const [data, setData] = useState<AnyType>({});
     const history = useHistory();
     const {params} = useParams();
@@ -22,10 +23,10 @@ function DirectionView(props: Props ) {
     const [activePage, setPage] = useState(0);
 
     useEffect(() => {
+        setData(props.data[params]);
         let pageIndex = pages.indexOf(params);
         setPage(pageIndex);
-        setData(props.data[params]);
-    }, [params, history, pages, props])
+    }, [history, pages, params, props])
 
     function handleNextPage(){
         if (pages.length -1 === activePage) {
@@ -37,8 +38,11 @@ function DirectionView(props: Props ) {
 
     function handleClick(e: MouseEvent<HTMLButtonElement>, params: string) {
         if(params !== "current") {
-            let locationObj: any = data[e.currentTarget.name].location;
-            props.handleSelect(locationObj, params);
+            let locationData: any = data[e.currentTarget.name].location;
+            locationData.name = data[e.currentTarget.name].header;
+            props.handleSelect(locationData, "routeObj", params);
+        } else {
+            handleUseLocation(true);
         }
         let url = handleNextPage();
         history.push(url);
@@ -56,6 +60,7 @@ function DirectionView(props: Props ) {
         for (let i = 0; i < indexList.length; i++) {
             orderedList.push(renderList[indexList[i]]);
         }
+      
         return orderedList;
     }
 
@@ -65,28 +70,28 @@ function DirectionView(props: Props ) {
         let orderingValues: any = [];
         let sortMethod: any = params === "parking" ? (a: any, b: any) => a - b : undefined;
 
-        entries.map (
+        tempArr =  entries.map (
             (item: any, index: number) => {          
                 let media: any = params === "current" ? 
                     <IconComponent icon={item[1].image} size="large" /> : 
                     <CardMedia component="img" alt="image" src={item[1].image} />
 
-                if(params === "parking" && item[1].location) { 
+                if(params === "parking" && item[1].location && props.state.locationAllowed) {  
                     let distance = props.handleCountDistance(item[1].location);
-                    item[1].description = [`Etäisyys kohteeseen noin ${distance}km`]
                     orderingValues.push(distance);
+                    item[1].description = [`Etäisyys kohteeseen noin ${distance}km`]
                 } else {
                     orderingValues.push(item[1].header);
                 }
 
-                tempArr.push ( 
+                return ( 
                     <Box key={index} width={1}>
                         <CardComponent 
                             name={item[0]}
                             header={item[1].header}
                             description={item[1].description ? item[1].description  : null}
                             media={media}
-                            loading={item === undefined ? true : false}
+                            disabled={item[0] === "OTHER" ? true : !props.state.locationAllowed && item[0] === "CURRENT" ? true : false}
                             handleSelect={(e: MouseEvent<HTMLButtonElement>) => handleClick(e, params)}
                             params={params} />            
                         <Space lines={2} />
@@ -98,7 +103,13 @@ function DirectionView(props: Props ) {
         return sortRenderList(orderingValues, tempArr, sortMethod);              
     }
 
-    if (data === undefined || data === null) return null;
+    function handleUseLocation(value: any) {
+        props.handleSelect(value, "useCurrentLocation");
+        let url = handleNextPage();
+        history.push(url);
+    }
+
+    if ( data === undefined || data === null ) return null;
     return (
         <Grid 
             container
@@ -107,6 +118,14 @@ function DirectionView(props: Props ) {
             alignItems="center"
             style={{minHeight: "84vh"}}>
                 {renderPage()}
+                { 
+                    params === "current" ? 
+                        <Btn 
+                            onClick={() => handleUseLocation(false)} 
+                            variant="text">Ohita
+                        </Btn> 
+                    : null
+                }
         </Grid>
     );
 }

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route, Redirect } from "react-router-dom";
 import Container from "./components/elements/Container";
 import InstructionView from './components/views/InstructionView';
 import DirectionView from './components/views/DirectionView';
@@ -8,21 +8,19 @@ import { COLORS, ROUTES } from "./utils/const";
 import { InstructionData, DestinationData, ParkingData, CurrentDestinationData} from "./utils/data";
 import { Navbar } from "./components/elements/Navbar";
 import SplashScreen from "./components/views/SplashScreen";
-import Main from "./components/views/Main";
-import { AnyType, InstructionDataType, calculateDistance, getStore, setStore } from "./utils/const";
-
-// TODO: Fix navigation page
-// TODO: InstructionsShown to instructionPage
-// TODO: Redirect direction first page if state is empty
+import { AnyType, InstructionDataType, calculateDistance } from "./utils/const";
+import { getStore, setStore } from "./utils/session";
 
 function App() {
   const [directionData, setDirectionData] = useState<AnyType>({});
   const [instructionPageData, setInstructionData] = useState<InstructionDataType>([{header: "", paragraph: []}]);
+  const [initialized, setInit] = useState(false);
 
   const initialState = {
     routeObj: {parking: {}, destination: {}, current: {}},
     locationAllowed: false, 
-    instructionsShown: false
+    instructionsShown: false,
+    useCurrentLocation: false
   };
 
   const [state, setState] = useState(initialState);
@@ -35,7 +33,7 @@ function App() {
     };
 
     fetchPageData();
-    handleSession();
+    handleCheckPermission();
   }, []);
 
   async function getPageData(){
@@ -51,34 +49,40 @@ function App() {
     return result;
   }
 
-  async function handleSession(){
-    let state = getStore("state");
-    if(state === null){
-      await handleCurrentLocation(); 
+  function handleCheckPermission() {
+    let sessionState = getStore("state");
+    let tempObj = sessionState === null ? initialState : sessionState;
+    navigator.permissions.query({name:'geolocation'})
+      .then(async function(result) {
+        if (result.state === 'granted' ) {
+            await handleCurrentLocation(tempObj);
+        } 
+        else if (result.state === 'denied') {
+          tempObj.locationAllowed = false;
+          handleSaveState(tempObj);
+        }
+    }).then(() => setInit(true));
+  }
+
+  async function handleCurrentLocation(tempObj: any){
+    if (Object.keys(tempObj.routeObj.current).length === 0) {
+      getPosition().then((res: any) => {
+        tempObj.routeObj.current = {name: "Tämänhetkinen sijainti", lat: res.coords.latitude, lon: res.coords.longitude};
+        tempObj.locationAllowed = true;
+      }).catch((err) => {
+        tempObj.locationAllowed = false;
+        console.error(err.message);
+      }).then(() => {
+        handleSaveState(tempObj);
+      })
     } else {
-      let stateObj = JSON.parse(state);
-      setState(stateObj);
+      handleSaveState(true, "locationAllowed");
     }
   }
 
-  async function handleCurrentLocation(){
-    let currentLocation: any;
-    
-    getPosition().then((res: any) => {
-      currentLocation = {lat: res.coords.latitude, lon: res.coords.longitude};
-      initialState.routeObj["current"] = currentLocation;
-      initialState.locationAllowed = true;
-    }).catch((err) => {
-      initialState.locationAllowed = false;
-      console.error(err.message);
-    }).then(() => {
-      setStore("state", initialState);
-    })
-  }
-
-  const getPosition = function (options?: any) {
+  const getPosition = function () {
     return new Promise(function (resolve, reject) {
-      navigator.geolocation.getCurrentPosition(resolve, reject, options);
+      navigator.geolocation.getCurrentPosition(resolve, reject, {enableHighAccuracy: true});
     });
   }
 
@@ -86,24 +90,33 @@ function App() {
     return calculateDistance(location, state.routeObj.current);
   }
 
-  function handleSelect(selection: any, params: string) {
-      let state: any = getStore("state");
-      let tempObj: any = JSON.parse(state);
-      tempObj.routeObj[params] = selection;
-      setStore("state", tempObj);
+  function handleSaveState(value: any, key?: any, innerKey?: any){
+    let sessionState: any = getStore("state");
+    if (key && !innerKey) {
+      sessionState[key] = value;
+    } else if(key && innerKey){
+      sessionState[key][innerKey] = value;
+    } else {
+      sessionState = value;
+    }
+    setStore("state", sessionState);
+    setState(sessionState);
   }
-
+  
+  if (!initialized) return null;
   return (
     <div>
       <Router>
           <Navbar />
         <Switch>
-          <Container backgroundColor={COLORS.green}>
-              <Route path={"/main"} render={() => <Main />} />
-              <Route path={ROUTES.navigate} render={() => <Navigate data={directionData} routeObj={state.routeObj}/>} />
-              <Route path={`${ROUTES.direction}/:params`} render={() => <DirectionView handleCountDistance={handleCountDistance} routeObj={state.routeObj} data={directionData} handleSelect={handleSelect}/>} />
-              <Route path={ROUTES.instructions} render={() => <InstructionView data={instructionPageData} />} />
-              <Route exact path={ROUTES.home} render={() => <SplashScreen />} />
+            <Container backgroundColor={COLORS.green}>
+              <Route path={ROUTES.navigate} render={() => <Navigate state={state}/>} />
+              <Route path={`${ROUTES.direction}/:params`} render={() => <DirectionView state={state} handleCountDistance={handleCountDistance} data={directionData} handleSelect={handleSaveState}/>} />
+              <Route path={ROUTES.instructions} render={() => <InstructionView seen={state.instructionsShown} handlePageSeen={handleSaveState} data={instructionPageData} />} />
+              <Route exact path={ROUTES.home} render={() => <SplashScreen seen={state.instructionsShown} />} />
+              {
+                !state.instructionsShown ? <Redirect to={ROUTES.home}/> : null
+              }
           </Container>
         </Switch>
       </Router>

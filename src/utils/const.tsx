@@ -18,6 +18,10 @@ export type AnyType = {
   [index: string]: any 
 }
 
+type LatLon = {lat: number, lon: number};
+
+export type RouteObjType = {start: LatLon | null, end: {lat: number, lon: number}};
+
 export type InstructionDataType = { 
     header: string; 
     paragraph: string[]; 
@@ -51,19 +55,4 @@ export function calculateDistance(fLocation: any, sLocation: any) {
 
 function toRad(deg: number) {
   return deg * (Math.PI/180)
-}
-
-export const setStore = (key: string, value: any) => {
-  let data = JSON.stringify(value);
-  sessionStorage.setItem(key, data);
-}
-
-export const getStore = (key: string) => {
-  let data = sessionStorage.getItem(key);
-  if(data === undefined) return null;
-  else return data;
-}
-
-export const clearStore = () => {
-  sessionStorage.clear();
 }

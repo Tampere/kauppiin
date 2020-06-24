@@ -9,6 +9,8 @@ import { useHistory } from "react-router-dom";
 
 export interface Props {
   data: any,
+  handlePageSeen: any,
+  seen: boolean
 }
 
 function InstructionView(props: Props) {
@@ -17,22 +19,26 @@ function InstructionView(props: Props) {
     const history = useHistory();
 
     useEffect(() => {
+      if (props.seen) history.replace(ROUTES.destination);
       setSteps(props.data.length);
-    }, [props.data]);
+    }, [history, props]);
   
     const handleNextStep = () => {
         if(activeStep !== steps - 1) {
           nextStep((prevActiveStep) => prevActiveStep + 1);
         } else {
-          history.push(ROUTES.destination);
+          props.handlePageSeen(true, "instructionsShown");
+          history.replace(ROUTES.destination);
         }
       };
       
-      const handleSkip = () => {
-        history.push(ROUTES.destination);
-      };
+    const handleSkip = () => {
+      props.handlePageSeen(true, "instructionsShown");
+      history.replace(ROUTES.destination);
+    };
 
     if (props.data === undefined || props.data === null) return null;
+
     return ( 
         <Grid 
           container

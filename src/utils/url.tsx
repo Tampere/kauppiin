@@ -1,14 +1,21 @@
-type RouteObj = {destination: {lat: number, lon: number}, parking: {lat: number, lon: number}};
+import {RouteObjType} from "./const";
 
-const travelmode = (isIos: boolean) => {
-    return isIos ? "&dirflg=r" : "&travelmode=transit";
+const travelmode = (isIos: boolean, travelmode: string) => {
+    let mode: string;
+    let url = isIos ? "&dirflg=" : "&travelmode=";
+    if (travelmode === "transit"){
+        mode = isIos ? "r" : "transit";
+    } else {
+        mode = isIos ? "d" : "driving";
+    }
+    return url + mode;
 }
 
-const parseParams = (routeObj: RouteObj, isIos: boolean) => {
+const parseParams = (routeObj: RouteObjType, isIos: boolean) => {
     let origin: string = "";
     let destination: string = "";
-    let originParams = `${routeObj.parking.lat},${routeObj.parking.lon}`
-    let destinationParams = `${routeObj.destination.lat},${routeObj.destination.lon}`
+    let originParams =  routeObj.start === null ? "My+Location" : `${routeObj.start.lat},${routeObj.start.lon}`
+    let destinationParams = `${routeObj.end.lat},${routeObj.end.lon}`
 
     isIos ? origin = "&saddr=" : origin = "&origin=";
     isIos ? destination = "&daddr=" : destination = `&destination=`;
@@ -28,12 +35,9 @@ const handlePlatform = (platform: string) => {
     }
 }
 
-export function directionUrl(routeObj: RouteObj, platform: string) {
+export function directionUrl(routeObj: RouteObjType, platform: string, travelMode: string) {
     let isIos = handlePlatform(platform);
     let baseUrl = `maps://maps.google.com/maps/dir/?api=1`;
-    let url = baseUrl + parseParams(routeObj, isIos) + travelmode(isIos);
-    // This works
-    // TODO: use my location
-    // let url = baseUrl + "&saddr=My+Location&daddr=Helsinki" + travelmode(isIos);
+    let url = baseUrl + parseParams(routeObj, isIos) + travelmode(isIos, travelMode);
     return encodeURI(url);
 }
