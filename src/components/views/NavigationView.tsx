@@ -1,49 +1,60 @@
-import React, {useState, useEffect} from 'react';
+import React, {useEffect, useState, MouseEvent} from 'react';
 import { useHistory } from "react-router-dom";
-import { Grid } from '@material-ui/core';
+import { Grid, CardActionArea, Paper } from '@material-ui/core';
 import { Btn } from '../elements/Button';
 import Text from "../elements/Text";
 import { Space } from '../elements/Space';
-import { ROUTES } from '../../utils/const';
+import { ROUTES, RouteObjType, COLORS } from '../../utils/const';
 import { directionUrl } from '../../utils/url';
+import { IconComponent } from '../elements/Icon';
 
 export interface Props {
-    routeObj: any,
-    data: any
+    state: any,
 }
 
-interface StringKeyObject {
-    [index: string]: object
-}
+type PropType = {
+    [index: string]: {name: string, lat: number, lon: number} 
+  }
 
 function Navigate(props: Props) {
     const history = useHistory();
+    const [routeObj, setRoute] = useState<PropType>();
+    const [useCurrentLocation, setUseCurrentLocation] = useState(false);
+    const [locationAllowed, setAllowedState] = useState(false);
 
     useEffect(() => {
-        // TODO: Error handling for earlier steps
-        if ((Object.values(props.routeObj).includes(""))){
-            history.push(ROUTES.destination);
+        if (Object.keys(props.state.routeObj.destination).length === 0) history.replace(ROUTES.destination);
+        else if (Object.keys(props.state.routeObj.parking).length === 0) history.replace(ROUTES.parking);
+        setRoute(props.state.routeObj);
+        setUseCurrentLocation(props.state.useCurrentLocation);
+        setAllowedState(props.state.locationAllowed);
+    },[history, props.state])
+
+    function handleClick(e: MouseEvent<HTMLButtonElement>){
+        let dirUrl: string = "";
+        let tempObj = Object.assign({}, routeObj);
+        let route: RouteObjType;
+        let travelMode: string;
+
+        if(e.currentTarget.name === "firstRoute") {
+            route = {
+                start: null,
+                end: {lat: tempObj.parking.lat, lon: tempObj.parking.lon}
+            }
+            travelMode = "car";
         }
         else {
-            let locationObject = handleLocationObject();
-            let dirUrl = directionUrl(locationObject, navigator.platform);
-            window.open(dirUrl);
+            route = {
+                start: {lat: tempObj.parking.lat, lon: tempObj.parking.lon},
+                end: {lat: tempObj.destination.lat, lon: tempObj.destination.lon}
+            }
+            travelMode = "transit";
         }
-    },[props])
-
-    function handleLocationObject(){
-        const entries = Object.entries(props.data);
-        let tempObj = Object.assign({}, props.routeObj);
-
-        entries.map((item: any) => {
-            let dataObj = props.data[item[0]];     
-            let dataKey = props.routeObj[item[0]];
-            let locationObj = dataObj[dataKey].location;
-
-            tempObj[item[0]] = locationObj;
-        })
-        return tempObj;
+        dirUrl = directionUrl(route, navigator.platform, travelMode);
+        window.open(dirUrl);
     }
+       
+    if(routeObj === undefined || routeObj === null) return null;
 
     return (
         <Grid 
@@ -51,26 +62,59 @@ function Navigate(props: Props) {
             justify="center"
             direction="column" 
             alignItems="stretch"
-            style={{height: "100vh", textAlign: "center"}}
+            style={{height: "84vh", textAlign: "center"}}
             >
             <Grid item>
-                <Grid container justify="center">
-                    <Grid item>
-                        <Text variant="h6">
-                            Reitti valmis. Navigoidaanko uudestaan? 
-                        </Text>
-                    </Grid>
-                </Grid>
-            </Grid>
-            <Space lines={3}/>
-            <Grid item>
-                <Grid container direction="row" justify="space-around" style={{width:"inherit"}}>
-                    <Grid item xs={5}>
-                        <Btn fullWidth onClick={() => history.push(ROUTES.destination)}>Joo</Btn>
-                    </Grid>
-                    <Grid item xs={5}>
-                        <Btn fullWidth onClick={() => history.push(ROUTES.home)}>Ei</Btn>
-                    </Grid>
+                <Grid container justify="center" direction="column">
+                    {
+                        useCurrentLocation && locationAllowed?
+                            <CardActionArea name={"firstRoute"} onClick={(e: MouseEvent<HTMLButtonElement>) => handleClick(e)}>
+                                <Grid item>
+                                    <Paper style={{backgroundColor: COLORS.white, padding: "5px 0px 5px 0px"}}>                                          
+                                        <Grid container direction="row" justify="center">
+                                            <Grid item>
+                                                <Text color="black" variant="subtitle1"> 
+                                                    {routeObj.current.name}
+                                                </Text>
+                                            </Grid>
+                                            <Grid item>
+                                                <IconComponent size="default" icon="arrow_right"/>
+                                            </Grid>
+                                            <Grid item>
+                                                <Text color="black"  variant="subtitle1">      
+                                                    {routeObj.parking.name}
+                                                </Text>
+                                            </Grid>
+                                        </Grid>
+                                    </Paper>
+                                </Grid>
+                            </CardActionArea>
+                        : null
+                    }
+                    <Space lines={2} />
+                    <CardActionArea name="secondRoute" onClick={(e: MouseEvent<HTMLButtonElement>) => handleClick(e)}>
+                        <Grid item>
+                            <Paper style={{backgroundColor: COLORS.white, padding: "5px 0px 5px 0px"}}>     
+                                <Grid container direction="row" justify="center">
+                                    <Grid item>
+                                        <Text color="black" variant="subtitle1">      
+                                            {routeObj.parking.name}
+                                        </Text>
+                                    </Grid>
+                                    <Grid item>
+                                        <IconComponent size="default" icon="arrow_right"/>
+                                    </Grid>
+                                    <Grid item>
+                                        <Text color="black" variant="subtitle1">      
+                                            {routeObj.destination.name}
+                                        </Text>
+                                    </Grid>
+                                </Grid>
+                            </Paper>
+                        </Grid>
+                    </CardActionArea>
+                    <Space lines={2} />
+                    <Btn variant="text" onClick={() => history.push(ROUTES.home)}>Takaisin alkuun</Btn>
                 </Grid>
             </Grid>
         </Grid>

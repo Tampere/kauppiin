@@ -1,5 +1,6 @@
 import React from 'react';
 import { BackgroundColorType } from "../../utils/const";
+import { makeStyles } from '@material-ui/core/styles';
 
 export interface Props {
     backgroundColor?: BackgroundColorType,
@@ -8,19 +9,20 @@ export interface Props {
     padding?: string,
 }
 
-// TODO: useStyle() instead of this
-
-const getStyle = (props: Props): any => {
-    return {
-        backgroundColor: props.backgroundColor ? props.backgroundColor : "",
-        margin: props.margin ? props.margin : "0",
-        padding: props.padding ? props.padding : "0 30px 0 30px",
+const useStyles = makeStyles({
+    root: {
+        backgroundColor: (props: Props) =>  props.backgroundColor ? props.backgroundColor : "",
+        margin:  "0",
+        padding: "0 30px 0 30px",
+        minHeight: "84vh",
     }
-}
+})
 
 const Container = (props: Props) => {
+    const classes = useStyles(props);
+
     return (
-        <div style={getStyle(props)}>
+        <div className={classes.root}>
             {props.children}
         </div>
     );

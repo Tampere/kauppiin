@@ -3,15 +3,19 @@ import { Grid } from '@material-ui/core';
 import Text from "../elements/Text";
 import Transition from "../elements/Transition";
 import { useHistory } from "react-router-dom";
-  
-function SplashScreen() {
+import { ROUTES } from "../../utils/const";
+
+export interface Props {
+    seen: boolean
+}
+function SplashScreen(props: Props) {
     const history = useHistory();
     return (
         <Transition 
             type="fade" 
             timeout={3000} 
             autoHide={3000} 
-            onExited={() => history.push("/instructions")}>
+            onExited={() => history.replace(ROUTES.instructions)}>
             <Grid 
                 container 
                 justify="center"

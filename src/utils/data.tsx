@@ -87,11 +87,8 @@ export const DestinationData = {
 
 export const ParkingData = {
     NIIHAMA: {
-        header: "Niihaman liityntäpysäköinti",
-        description: [`
-            Loremipsum Loremipsum Loremipsum LoremipsuLoremipsum LoremipsumLoremipsum  Loremipsum Loremipsum Loremipsum Loremipsum Loremipsum 
-            Loremipsum Loremipsum Loremipsum Loremipsum LoremipsumLoremipsumLoremipsum Loremipsum LoremipsumLoremipsum LoremipsumLoremipsumLoremipsum       
-        `],
+        header: "Niihama",
+        description: [],
         image: "../../images/testImg.jpeg",
         location: {
             lat: 61.500488,
@@ -99,13 +96,8 @@ export const ParkingData = {
         }
     },
     TURTOLA: {
-        header: "Turtolan K-Citymarketin liityntäpysäköintialue",
-        description: [`
-            Loremipsum Loremipsum Loremipsum LoremipsuLoremipsum LoremipsumLoremipsum  Loremipsum Loremipsum Loremipsum Loremipsum Loremipsum 
-            Loremipsum Loremipsum Loremipsum Loremipsum LoremipsumLoremipsumLoremipsum Loremipsum LoremipsumLoremipsum LoremipsumLoremipsumLoremipsum 
-            Loremipsum Loremipsum Loremipsum LoremipsuLoremipsum LoremipsumLoremipsum  Loremipsum Loremipsum Loremipsum Loremipsum Loremipsum 
-            Loremipsum Loremipsum Loremipsum Loremipsum LoremipsumLoremipsumLoremipsum Loremipsum LoremipsumLoremipsum LoremipsumLoremipsumLoremipsum   
-        `],
+        header: "Turtolan K-Citymarket",
+        description: [],
         image: "../../images/testImg.jpeg",
         location: {
             lat: 61.477595,
@@ -113,11 +105,8 @@ export const ParkingData = {
         }
     },
     KOVISTONKYLA: {
-        header: "Koivistonkylän Prisman liityntäpysäköintialue",
-        description: [`
-            Loremipsum Loremipsum Loremipsum LoremipsuLoremipsum LoremipsumLoremipsum  Loremipsum Loremipsum Loremipsum Loremipsum Loremipsum 
-            Loremipsum Loremipsum Loremipsum Loremipsum LoremipsumLoremipsumLoremipsum Loremipsum LoremipsumLoremipsum LoremipsumLoremipsumLoremipsum  
-        `],
+        header: "Koivistonkylän Prisma",
+        description: [],
         image: "../../images/testImg.jpeg",
         location: {
             lat: 61.468466,
@@ -125,12 +114,8 @@ export const ParkingData = {
         }
     },
     IKEA: {
-        header: "IKEA Tampereen liityntäpysäköintialue",
-        description: [`
-            Loremipsum Loremipsum Loremipsum LoremipsuLoremipsum LoremipsumLoremipsum  Loremipsum Loremipsum Loremipsum Loremipsum Loremipsum 
-            Loremipsum Loremipsum Loremipsum Loremipsum LoremipsumLoremipsumLoremipsum Loremipsum LoremipsumLoremipsum LoremipsumLoremipsumLoremipsum  
-            Loremipsum Loremipsum Loremipsum LoremipsuLoremipsum LoremipsumLoremipsum  Loremipsum Loremipsum Loremipsum Loremipsum Loremipsum 
-        `],
+        header: "IKEA Tampere",
+        description: [],
         image: "../../images/testImg.jpeg",
         location: {
             lat: 61.453240,
@@ -138,13 +123,8 @@ export const ParkingData = {
         }
     },
     KAUKAJARVI: {
-        header: "Kaukajärven Hyllilänkadun liityntäpysäköintialue",
-        description: [`
-            Loremipsum Loremipsum Loremipsum LoremipsuLoremipsum LoremipsumLoremipsum  Loremipsum Loremipsum Loremipsum Loremipsum Loremipsum 
-            Loremipsum Loremipsum Loremipsum Loremipsum LoremipsumLoremipsumLoremipsum Loremipsum LoremipsumLoremipsum LoremipsumLoremipsumLoremipsum
-            Loremipsum Loremipsum Loremipsum LoremipsuLoremipsum LoremipsumLoremipsum  Loremipsum Loremipsum Loremipsum Loremipsum Loremipsum`,  
-            "Loremipsum Loremipsum Loremipsum Loremipsum LoremipsumLoremipsumLoremipsum Loremipsum LoremipsumLoremipsum LoremipsumLoremipsumLoremipsum"
-        ],
+        header: "Kaukajärven Hyllilänkatu",
+        description: [],
         image: "../../images/testImg.jpeg",
         location: {
             lat: 61.479118,
@@ -153,9 +133,20 @@ export const ParkingData = {
     }
 }
 
-
+export const CurrentDestinationData = {
+    CURRENT: {
+        header: "Käytä nykyistä lokaatiota",
+        image: "my_location"
+    },
+    OTHER: {
+        header: "Muu osoite",
+        image: "create"
+    }
+}
 
 export const NavbarContent = {
     [ROUTES.destination]: "Minne ollaan menossa?",
-    [ROUTES.parking]: "Valitse haluamasi liityntäpysäköinti"
+    [ROUTES.parking]: "Valitse haluamasi liityntäpysäköinti",
+    [ROUTES.current]: "Missä olet nyt?",
+    [ROUTES.navigate]: "Avaa karttasovellus osuudelle:"
 }
