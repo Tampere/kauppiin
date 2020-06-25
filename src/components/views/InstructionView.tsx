@@ -7,7 +7,7 @@ import { Btn } from "../elements/Button";
 import ArrowForwardIcon from '@material-ui/icons/ArrowForward';
 import { useHistory } from "react-router-dom";
 import { Notification } from "../elements/Notification";
-import {NotificationContent} from "../../utils/data";
+import { NotificationContent } from "../../utils/data";
 
 export interface Props {
   data: any,
@@ -86,6 +86,7 @@ function InstructionView(props: Props) {
           </Grid>
 
           <Notification 
+            type="normal"
             action={<Btn variant="contained" onClick={() => setVisibility(false)}>Ok!</Btn>} 
             open={visible} 
             message={NotificationContent.Cookies}

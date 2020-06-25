@@ -4,10 +4,23 @@ import Text from './Text';
 import { COLORS } from '../../utils/const';
 
 export interface Props {
+    type: "warning" | "normal"
     open: boolean,
     message: string,
     action?: any
 }
+
+const style: any = {
+    normal: {
+        backgroundColor: COLORS.white,
+        color: COLORS.black
+    },
+    warning: {
+        backgroundColor: COLORS.warning,
+        color: COLORS.white
+    }
+};
+
 
 export const Notification = (props: Props) => {
     const [visible, setVisibility] = useState(props.open);
@@ -27,17 +40,14 @@ export const Notification = (props: Props) => {
        <div>
             <Snackbar 
                 open={visible} 
-                autoHideDuration={props.action ? null : 6000} 
+                autoHideDuration={props.action ? null : 5000} 
                 onClose={handleSetVisibility}
                 anchorOrigin={{
                     vertical: 'bottom',
                     horizontal: 'center',
                 }} 
-                ContentProps={{
-                    style: {
-                        backgroundColor: COLORS.white
-                    }
-                }}
+                ContentProps={{style: style[props.type]}}
+                message={!props.action ? props.message : null}
                 action={
                     props.action ? 
                         <Grid 
@@ -56,7 +66,7 @@ export const Notification = (props: Props) => {
                             </Grid>
                         </Grid>
                     </Grid>
-                    : null
+                : null
                 }
             />
        </div>
