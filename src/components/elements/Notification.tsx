@@ -1,6 +1,5 @@
 import React, {useState, useEffect} from 'react';
 import { Snackbar, Grid } from '@material-ui/core';
-import { Btn } from './Button';
 import Text from './Text';
 import { COLORS } from '../../utils/const';
 
@@ -17,7 +16,10 @@ export const Notification = (props: Props) => {
         setVisibility(props.open);
     }, [props.open])
 
-    function handleSetVisibility(){
+    function handleSetVisibility(event: React.SyntheticEvent | React.MouseEvent, reason?: string){
+        if (reason === 'clickaway') {
+            return;
+        }
         setVisibility(false);
     }
 
@@ -30,26 +32,31 @@ export const Notification = (props: Props) => {
                 anchorOrigin={{
                     vertical: 'bottom',
                     horizontal: 'center',
-                  }} 
-            >
-               <Grid 
-                container 
-                direction="row" 
-                style={{padding: "10px 10px 10px 10px", backgroundColor: COLORS.white, width: "100vw"}}
-                alignContent="space-between"
-                justify="flex-start"
-                
-                >
-                   <Grid item style={{width: "80%"}}>
+                }} 
+                ContentProps={{
+                    style: {
+                        backgroundColor: COLORS.white
+                    }
+                }}
+                action={
+                    <Grid 
+                        container
+                        direction="row" 
+                        style={{ backgroundColor: COLORS.white, width: "100vw"}}
+                        alignContent="space-between"
+                        justify="flex-start"
+                    >
+                    <Grid item style={{width: "75%"}}>
                         <Text color={COLORS.black} variant={"caption"}>{props.message}</Text>
-                   </Grid>
-                   <Grid container justify="center" alignItems="flex-end" style={{width: "20%"}}>
+                    </Grid>
+                    <Grid container justify="center" alignItems="flex-end" style={{width: "25%", paddingRight: "10px"}}>
                         <Grid item style={{textAlign: "center"}}>
-                                {props.action}
+                            {props.action}
                         </Grid>
-                   </Grid>
-               </Grid>
-            </Snackbar>
+                    </Grid>
+                </Grid>
+                }
+            />
        </div>
     )
 }
