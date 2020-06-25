@@ -39,22 +39,24 @@ export const Notification = (props: Props) => {
                     }
                 }}
                 action={
-                    <Grid 
-                        container
-                        direction="row" 
-                        style={{ backgroundColor: COLORS.white, width: "100vw"}}
-                        alignContent="space-between"
-                        justify="flex-start"
-                    >
-                    <Grid item style={{width: "75%"}}>
-                        <Text color={COLORS.black} variant={"caption"}>{props.message}</Text>
-                    </Grid>
-                    <Grid container justify="center" alignItems="flex-end" style={{width: "25%", paddingRight: "10px"}}>
-                        <Grid item style={{textAlign: "center"}}>
-                            {props.action}
+                    props.action ? 
+                        <Grid 
+                            container
+                            direction="row" 
+                            style={{ backgroundColor: COLORS.white, width: "100vw"}}
+                            alignContent="space-between"
+                            justify="flex-start"
+                        >
+                        <Grid item style={{width: "75%"}}>
+                            <Text color={COLORS.black} variant={"caption"}>{props.message}</Text>
+                        </Grid>
+                        <Grid container justify="center" alignItems="flex-end" style={{width: "25%", paddingRight: "10px"}}>
+                            <Grid item style={{textAlign: "center"}}>
+                                {props.action}
+                            </Grid>
                         </Grid>
                     </Grid>
-                </Grid>
+                    : null
                 }
             />
        </div>
