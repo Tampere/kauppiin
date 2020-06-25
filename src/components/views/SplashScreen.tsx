@@ -5,11 +5,10 @@ import Transition from "../elements/Transition";
 import { useHistory } from "react-router-dom";
 import { ROUTES } from "../../utils/const";
 
-export interface Props {
-    seen: boolean
-}
-function SplashScreen(props: Props) {
+
+function SplashScreen() {
     const history = useHistory();
+    
     return (
         <Transition 
             type="fade" 
