@@ -20,7 +20,8 @@ function App() {
     routeObj: {parking: {}, destination: {}, current: {}},
     locationAllowed: false, 
     instructionsShown: false,
-    useCurrentLocation: false
+    useCurrentLocation: false,
+    loadingLocation: false,
   };
 
   const [state, setState] = useState(initialState);
@@ -53,18 +54,28 @@ function App() {
   function handleCheckPermission() {
     let sessionState = getStore("state");
     let tempObj = sessionState === null ? initialState : sessionState;
+    handleSaveState(tempObj);
+
     navigator.permissions.query({name:'geolocation'})
       .then(async function(result) {
-        if (result.state === 'granted' ) {
+        if (result.state === 'granted') {
             await handleCurrentLocation(tempObj);
+        } else if (result.state === "prompt"){
+            await handleCurrentLocation(tempObj, "prompt");
         } else {
           tempObj.locationAllowed = false;
           handleSaveState(tempObj);
         }
-    }).then(() => setInit(true));
+        result.onchange = function(){
+          handleSaveState(true, "loadingLocation");
+        }
+      }).then(() => {
+        setInit(true);
+        handleSaveState(false, "loadingLocation");
+    });
   }
 
-  async function handleCurrentLocation(tempObj: any){
+  async function handleCurrentLocation(tempObj: any, source?: string){
     if (Object.keys(tempObj.routeObj.current).length === 0) {
       getPosition().then((res: any) => {
         tempObj.routeObj.current = {name: "Tämänhetkinen sijainti", lat: res.coords.latitude, lon: res.coords.longitude};
@@ -73,6 +84,12 @@ function App() {
         tempObj.locationAllowed = false;
         console.error(err.message);
       }).then(() => {
+        if(source === "prompt"){
+            let sessionState = getStore("state");
+            tempObj.routeObj.destination = sessionState.routeObj.destination;
+            tempObj.routeObj.parking = sessionState.routeObj.parking;
+            tempObj.instructionsShown = sessionState.instructionsShown;
+        }
         handleSaveState(tempObj);
       })
     } else {
@@ -115,7 +132,7 @@ function App() {
               <Route path={ROUTES.instructions} render={() => <InstructionView seen={state.instructionsShown} handlePageSeen={handleSaveState} data={instructionPageData} />} />
               <Route exact path={ROUTES.home} render={() => <SplashScreen />} />
               {
-                !state.instructionsShown ? <Redirect to={ROUTES.home}/> : null
+                !state || !state.instructionsShown ? <Redirect to={ROUTES.home}/> : null
               }
           </Container>
         </Switch>

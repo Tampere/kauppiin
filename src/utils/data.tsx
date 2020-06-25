@@ -153,5 +153,5 @@ export const NavbarContent = {
 
 export const NotificationContent = {
     Cookies: "Sivusto käyttää keksejä käyttökokemuksen parantamiseksi. Tietoja ei anneta kolmansille osapuolille. Jatkamalla sivuston käyttöä, hyväksyt keksien käytön.",
-    Location: "Salli selaimen asetuksista sijaintitietojen käyttö käyttääksesi paikannustoi1mintoa"
+    Location: "Salli selaimen asetuksista sijaintitietojen käyttö käyttääksesi paikannustoimintoa"
 }

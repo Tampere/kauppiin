@@ -4,7 +4,8 @@ export const COLORS: any = {
     white:  "#fcfcfc",
     black: "black",
     disabled: "#abd4c1",
-    textDisabled: "#737373"
+    textDisabled: "#737373",
+    warning: "#fc7777"
 }
 
 export type BackgroundColorType = "#62d9b7" | "#fcfcfc" | "#a1a1a1"

@@ -7,12 +7,15 @@ import CardComponent from "../elements/Card"
 import {IconComponent} from "../elements/Icon";
 import { AnyType } from "../../utils/const";
 import { Btn } from '../elements/Button';
+import  SpinnerComponent from '../elements/Spinner';
+import { Notification } from "../elements/Notification";
+import { NotificationContent } from "../../utils/data";
 
 export interface Props {
     handleSelect: any,
     data: any,
     handleCountDistance: any,
-    state: any
+    state: any,
 }
 
 function DirectionView(props: Props) {
@@ -21,6 +24,7 @@ function DirectionView(props: Props) {
     const {params} = useParams();
     const [pages] = useState(DirectionPageList);
     const [activePage, setPage] = useState(0);
+    const [visible] = useState(true);
 
     useEffect(() => {
         setData(props.data[params]);
@@ -70,7 +74,7 @@ function DirectionView(props: Props) {
         let orderingValues: any = [];
         let sortMethod: any = params === "parking" ? (a: any, b: any) => a - b : undefined;
 
-        tempArr =  entries.map (
+        tempArr = entries.map (
             (item: any, index: number) => {          
                 let media: any = params === "current" ? 
                     <IconComponent icon={item[1].image} size="large" /> : 
@@ -91,7 +95,7 @@ function DirectionView(props: Props) {
                             header={item[1].header}
                             description={item[1].description ? item[1].description  : null}
                             media={media}
-                            disabled={item[0] === "OTHER" ? true : !props.state.locationAllowed && item[0] === "CURRENT" ? true : false}
+                            disabled={item[0] === "OTHER" ? true : item[0] === "CURRENT" && !props.state.locationAllowed ? true : false}
                             handleSelect={(e: MouseEvent<HTMLButtonElement>) => handleClick(e, params)}
                             params={params} />            
                         <Space lines={2} />
@@ -110,22 +114,41 @@ function DirectionView(props: Props) {
     }
 
     if ( data === undefined || data === null ) return null;
+
+    if( props.state.loadingLocation && 
+        !props.state.locationAllowed && 
+        params === "current" && 
+        Object.keys(props.state.routeObj.current).length === 0) {
+            return <SpinnerComponent />
+    }
+
     return (
         <Grid 
             container
             justify="center"
             direction="column" 
             alignItems="center"
-            style={{minHeight: "84vh"}}>
-                {renderPage()}
-                { 
-                    params === "current" ? 
-                        <Btn 
-                            onClick={() => handleUseLocation(false)} 
-                            variant="text">Ohita
-                        </Btn> 
-                    : null
-                }
+            style={{minHeight: "84vh"}} >
+
+            {renderPage()}
+
+            { 
+                params === "current" ? 
+                    <Btn 
+                        onClick={() => handleUseLocation(false)} 
+                        variant="text">Ohita
+                    </Btn> 
+                : null
+            }
+            {
+                !props.state.locationAllowed && params === "current" ? 
+                    <Notification 
+                        type="warning"
+                        open={visible} 
+                        message={NotificationContent.Location}
+                    />
+                : null
+            }
         </Grid>
     );
 }
