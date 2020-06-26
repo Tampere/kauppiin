@@ -49,13 +49,13 @@ function InstructionView(props: Props) {
         direction="column" 
         alignItems="center"
         style={{height: "100vh"}}>
-          <Grid item style={{textAlign:"center", width: "inherit"}}>
-            <Text variant="h6">{props.data[activeStep].header}</Text>
+          <Grid item style={{width: "inherit"}}>
+            <Text variant="h4">{props.data[activeStep].header}</Text>
             <br />
             {
               props.data[activeStep].paragraph.map((item: any, index: number) => 
                 <div key={index}>
-                  <Text key={index} variant="subtitle1">{item}</Text> <br/>
+                  <Text key={index} variant="body1">{item}</Text> <br/>
                 </div>
               )
             }

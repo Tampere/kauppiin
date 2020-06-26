@@ -1,8 +1,8 @@
 import React, {useState, useEffect } from 'react';
-import { Fade } from '@material-ui/core';
+import { Fade, Slide } from '@material-ui/core';
 
 export interface Props {
-    type: "fade",
+    type: "fade" | "slide",
     autoHide?: number,
     timeout: number,
     children: any,
@@ -21,14 +21,22 @@ const Transition = (props: Props) => {
         }
     })
 
-    return (
-        <Fade 
-            onExited={props.onExited ? props.onExited : null} 
-            in={visible} 
-            timeout={props.timeout}>
-                <div>{props.children}</div>
-        </Fade>
-       
+    return ( 
+        <div style={{width: "100%"}}>
+            {
+                props.type === "fade" ?
+                    <Fade 
+                        onExited={props.onExited ? props.onExited : null} 
+                        in={visible} 
+                        timeout={props.timeout}>
+                            <div>{props.children}</div>
+                    </Fade>
+                : 
+                <Slide direction="right" in={visible} mountOnEnter unmountOnExit>
+                    <div>{props.children}</div>
+                </Slide>
+            }
+        </div>  
     )
 }
 

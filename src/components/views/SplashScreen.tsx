@@ -23,10 +23,10 @@ function SplashScreen() {
                 style={{height: "100vh" }}
                 >
                 <Grid item>
-                    <Text variant="h3">Kauppiin.fi</Text>
+                    <Text variant="h2">Kauppiin.fi</Text>
                 </Grid>
                 <Grid item>
-                    <Text variant="subtitle1">Kestävän liikkumisen appi</Text> 
+                    <Text variant="body1">Kestävän liikkumisen appi</Text> 
                 </Grid>
             </Grid>
         </Transition>

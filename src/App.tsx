@@ -124,16 +124,16 @@ function App() {
   return (
     <div>
       <Router>
-          <Navbar />
         <Switch>
             <Container backgroundColor={COLORS.green}>
-              <Route path={ROUTES.navigate} render={() => <Navigate state={state}/>} />
-              <Route path={`${ROUTES.direction}/:params`} render={() => <DirectionView state={state} handleCountDistance={handleCountDistance} data={directionData} handleSelect={handleSaveState}/>} />
-              <Route path={ROUTES.instructions} render={() => <InstructionView seen={state.instructionsShown} handlePageSeen={handleSaveState} data={instructionPageData} />} />
-              <Route exact path={ROUTES.home} render={() => <SplashScreen />} />
-              {
-                !state || !state.instructionsShown ? <Redirect to={ROUTES.home}/> : null
-              }
+              <Navbar />
+                <Route path={ROUTES.navigate} render={() => <Navigate state={state}/>} />
+                <Route path={`${ROUTES.direction}/:params`} render={() => <DirectionView state={state} handleCountDistance={handleCountDistance} data={directionData} handleSelect={handleSaveState}/>} />
+                <Route path={ROUTES.instructions} render={() => <InstructionView seen={state.instructionsShown} handlePageSeen={handleSaveState} data={instructionPageData} />} />
+                <Route exact path={ROUTES.home} render={() => <SplashScreen />} />
+                {
+                  !state || !state.instructionsShown ? <Redirect to={ROUTES.home}/> : null
+                }
           </Container>
         </Switch>
       </Router>

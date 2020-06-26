@@ -1,5 +1,5 @@
 import React, { useEffect, useState, MouseEvent } from 'react';
-import { Grid, Box, CardMedia } from '@material-ui/core';
+import { Grid, Box } from '@material-ui/core';
 import { Space } from "../elements/Space";
 import { useHistory, useParams} from "react-router-dom";
 import { ROUTES, DirectionPageList } from '../../utils/const';
@@ -75,11 +75,7 @@ function DirectionView(props: Props) {
         let sortMethod: any = params === "parking" ? (a: any, b: any) => a - b : undefined;
 
         tempArr = entries.map (
-            (item: any, index: number) => {          
-                let media: any = params === "current" ? 
-                    <IconComponent icon={item[1].image} size="large" /> : 
-                    <CardMedia component="img" alt="image" src={item[1].image} />
-
+            (item: any, index: number) => {
                 if(params === "parking" && item[1].location && props.state.locationAllowed) {  
                     let distance = props.handleCountDistance(item[1].location);
                     orderingValues.push(distance);
@@ -94,7 +90,7 @@ function DirectionView(props: Props) {
                             name={item[0]}
                             header={item[1].header}
                             description={item[1].description ? item[1].description  : null}
-                            media={media}
+                            icon={<IconComponent icon="play_circle_filled" size="large"/>}
                             disabled={item[0] === "OTHER" ? true : item[0] === "CURRENT" && !props.state.locationAllowed ? true : false}
                             handleSelect={(e: MouseEvent<HTMLButtonElement>) => handleClick(e, params)}
                             params={params} />            
@@ -104,7 +100,7 @@ function DirectionView(props: Props) {
             }
         )
 
-        return sortRenderList(orderingValues, tempArr, sortMethod);              
+        return sortRenderList(orderingValues, tempArr, sortMethod);
     }
 
     function handleUseLocation(value: any) {
@@ -128,10 +124,9 @@ function DirectionView(props: Props) {
             justify="center"
             direction="column" 
             alignItems="center"
-            style={{minHeight: "84vh"}} >
-
-            {renderPage()}
-
+            style={{paddingTop: "40px"}}
+            >  
+                {renderPage()}
             { 
                 params === "current" ? 
                     <Btn 

@@ -13,8 +13,8 @@ const useStyles = makeStyles({
     root: {
         backgroundColor: (props: Props) =>  props.backgroundColor ? props.backgroundColor : "",
         margin:  "0",
-        padding: "0 30px 0 30px",
-        minHeight: "84vh",
+        padding: "0 20px 0 20px",
+        minHeight: "100vh",
     }
 })
 

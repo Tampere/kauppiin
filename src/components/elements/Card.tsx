@@ -11,7 +11,7 @@ export interface Props {
     handleSelect: any,
     params: string
     description?: string[],
-    media?: any,
+    icon?: any,
     disabled?: boolean,
     loading?: boolean
 }
@@ -37,13 +37,13 @@ function CardComponent(props: Props ) {
                             <Grid 
                                 item 
                                 style={{
-                                    width: props.media ? "70%" : "100%",
-                                    textAlign: props.media ? "start" : "center",
+                                    width: props.icon ? "80%" : "100%",
+                                    textAlign: props.icon ? "start" : "center",
                                     padding: "20px 10px 20px 10px"
                                 }}>
                                 <Grid container direction="column">
                                     <Grid item>
-                                        <Text variant="subtitle1" disabled={props.disabled} color="black">
+                                        <Text variant="body1" disabled={props.disabled} color="black" >
                                             {props.header}
                                         </Text>
                                     </Grid>
@@ -53,7 +53,7 @@ function CardComponent(props: Props ) {
                                                 {
                                                     props.description.map((item: any, index: number) => 
                                                         <div key={"description" + index}>
-                                                            <Text variant="caption" disabled={props.disabled} color="black">
+                                                            <Text variant="subtitle2" disabled={props.disabled} color="black">
                                                                 {item}
                                                             </Text>
                                                         </div>
@@ -65,11 +65,11 @@ function CardComponent(props: Props ) {
                                 </Grid>  
                             </Grid>
                             {
-                                props.media ?
-                                    <Grid item style={{width: "30%"}}>
+                                props.icon ?
+                                    <Grid item style={{width: "20%"}}>
                                         <Grid container justify="flex-end" style={{height: "100%", width: "100%"}}>
                                             <Grid item style={{height: "inherit", width: "inherit", maxWidth:"100px"}}>
-                                                {props.media}
+                                                {props.icon}
                                             </Grid>
                                         </Grid>
                                     </Grid>

@@ -58,7 +58,7 @@ export const Notification = (props: Props) => {
                             justify="flex-start"
                         >
                         <Grid item style={{width: "75%"}}>
-                            <Text color={COLORS.black} variant={"caption"}>{props.message}</Text>
+                            <Text color={COLORS.black} variant={"subtitle2"}>{props.message}</Text>
                         </Grid>
                         <Grid container justify="center" alignItems="flex-end" style={{width: "25%", paddingRight: "10px"}}>
                             <Grid item style={{textAlign: "center"}}>

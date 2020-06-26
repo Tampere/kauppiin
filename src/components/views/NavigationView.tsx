@@ -62,7 +62,7 @@ function Navigate(props: Props) {
             justify="center"
             direction="column" 
             alignItems="stretch"
-            style={{height: "84vh", textAlign: "center"}}
+            style={{padding: "40px 0 0 0", textAlign: "center"}}
             >
             <Grid item>
                 <Grid container justify="center" direction="column">
@@ -73,7 +73,7 @@ function Navigate(props: Props) {
                                     <Paper style={{backgroundColor: COLORS.white, padding: "5px 0px 5px 0px"}}>                                          
                                         <Grid container direction="row" justify="center">
                                             <Grid item>
-                                                <Text color="black" variant="subtitle1"> 
+                                                <Text color="black" variant="body1"> 
                                                     {routeObj.current.name}
                                                 </Text>
                                             </Grid>
@@ -81,7 +81,7 @@ function Navigate(props: Props) {
                                                 <IconComponent size="default" icon="arrow_right"/>
                                             </Grid>
                                             <Grid item>
-                                                <Text color="black"  variant="subtitle1">      
+                                                <Text color="black"  variant="body1">      
                                                     {routeObj.parking.name}
                                                 </Text>
                                             </Grid>
@@ -97,7 +97,7 @@ function Navigate(props: Props) {
                             <Paper style={{backgroundColor: COLORS.white, padding: "5px 0px 5px 0px"}}>     
                                 <Grid container direction="row" justify="center">
                                     <Grid item>
-                                        <Text color="black" variant="subtitle1">      
+                                        <Text color="black" variant="body1">      
                                             {routeObj.parking.name}
                                         </Text>
                                     </Grid>
@@ -105,7 +105,7 @@ function Navigate(props: Props) {
                                         <IconComponent size="default" icon="arrow_right"/>
                                     </Grid>
                                     <Grid item>
-                                        <Text color="black" variant="subtitle1">      
+                                        <Text color="black" variant="body1">      
                                             {routeObj.destination.name}
                                         </Text>
                                     </Grid>
@@ -114,7 +114,7 @@ function Navigate(props: Props) {
                         </Grid>
                     </CardActionArea>
                     <Space lines={2} />
-                    <Btn variant="text" onClick={() => history.push(ROUTES.home)}>Takaisin alkuun</Btn>
+                    <Btn variant="text" onClick={() => history.push(ROUTES.home)}>Navigoi uudelleen</Btn>
                 </Grid>
             </Grid>
         </Grid>
