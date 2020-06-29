@@ -1,18 +1,18 @@
-import React, { useState, useEffect } from 'react';
 import { Grid } from '@material-ui/core';
-import Text from "../elements/Text";
-import DotStepper from '../elements/Stepper';
-import { COLORS, ROUTES } from "../../utils/const";
-import { Btn } from "../elements/Button";
-import ArrowForwardIcon from '@material-ui/icons/ArrowForward';
+import React, { useEffect, useState } from 'react';
 import { useHistory } from "react-router-dom";
-import { Notification } from "../elements/Notification";
+import { ROUTES } from "../../utils/const";
 import { NotificationContent } from "../../utils/data";
+import { Btn } from "../elements/Button";
+import { Notification } from "../elements/Notification";
+import DotStepper from '../elements/Stepper';
+import Text from "../elements/Text";
+import { COLORS } from "../../styles/styles"
 
 export interface Props {
   data: any,
   handlePageSeen: any,
-  seen: boolean
+  seen: boolean,
 }
 
 function InstructionView(props: Props) {
@@ -45,52 +45,51 @@ function InstructionView(props: Props) {
     return ( 
       <Grid 
         container
-        justify="center"
+        justify="space-between"
         direction="column" 
-        alignItems="center"
-        style={{height: "100vh"}}>
-          <Grid item style={{textAlign:"center", width: "inherit"}}>
-            <Text variant="h6">{props.data[activeStep].header}</Text>
+        style={{padding: "10vh 0vh 10vh 0vh", height: "100vh"}}>
+          <Grid item>
+            <Text variant="h4" color={COLORS.green}>{props.data[activeStep].header}</Text>
             <br />
             {
               props.data[activeStep].paragraph.map((item: any, index: number) => 
                 <div key={index}>
-                  <Text key={index} variant="subtitle1">{item}</Text> <br/>
+                  <Text key={index} color={COLORS.black} variant="body1">{item}</Text> <br/>
                 </div>
               )
             }
-
-            <DotStepper 
-              activeStep={activeStep}
-              backgroundColor={COLORS.green}
-              steps={steps} 
-              position="static"
-              nextButton = {
-                <Btn 
-                  onClick={handleNextStep} 
-                  fullWidth
-                  variant="contained"
-                  icon={ activeStep < steps -1 ? <ArrowForwardIcon /> : null}>
-                        {activeStep < steps - 1 ? "Seuraava" : "Aloitetaan"}
-                </Btn>
-              }
-              skipButton = {
-                <Btn 
-                  onClick={handleSkip}
-                  fullWidth
-                  variant="text">
-                    Ohita
-                </Btn> 
-              }
+            </Grid>
+            <Grid item>
+              <DotStepper 
+                activeStep={activeStep}
+                backgroundColor={"rgba(52, 52, 52, 0)"}
+                steps={steps} 
+                position="static"
+                nextButton = {
+                  <Btn 
+                    onClick={handleNextStep} 
+                    fullWidth
+                    variant="contained">
+                      {activeStep < steps - 1 ? "Eteenpäin" : "Matkaan"}
+                  </Btn>
+                }
+                skipButton = {
+                  <Btn 
+                    onClick={handleSkip}
+                    fullWidth
+                    variant="text">
+                      Ohita
+                  </Btn> 
+                }
+                />
+              <Notification 
+                type="normal"
+                action={<Btn variant="contained" onClick={() => setVisibility(false)}>Selvä</Btn>} 
+                open={visible} 
+                message={NotificationContent.Cookies}
+                link={<a href="">Evästekäytäntö</a>}
               />
           </Grid>
-
-          <Notification 
-            type="normal"
-            action={<Btn variant="contained" onClick={() => setVisibility(false)}>Ok!</Btn>} 
-            open={visible} 
-            message={NotificationContent.Cookies}
-          />
       </Grid>
     );
 }

@@ -1,5 +1,5 @@
 import React, { useEffect, useState, MouseEvent } from 'react';
-import { Grid, Box, CardMedia } from '@material-ui/core';
+import { Grid, Box } from '@material-ui/core';
 import { Space } from "../elements/Space";
 import { useHistory, useParams} from "react-router-dom";
 import { ROUTES, DirectionPageList } from '../../utils/const';
@@ -72,21 +72,19 @@ function DirectionView(props: Props) {
         let tempArr: any = [];
         let entries = Object.entries(data);
         let orderingValues: any = [];
-        let sortMethod: any = params === "parking" ? (a: any, b: any) => a - b : undefined;
+        let sortMethod: any = params === "parking" ? (a: any, b: any) => a - b :  (a: any, b: any) => -(a > b) ;
 
         tempArr = entries.map (
-            (item: any, index: number) => {          
-                let media: any = params === "current" ? 
-                    <IconComponent icon={item[1].image} size="large" /> : 
-                    <CardMedia component="img" alt="image" src={item[1].image} />
-
-                if(params === "parking" && item[1].location && props.state.locationAllowed) {  
+            (item: any, index: number) => {
+                if(params === "parking" && item[1].location && props.state.useCurrentLocation) {  
                     let distance = props.handleCountDistance(item[1].location);
                     orderingValues.push(distance);
-                    item[1].description = [`Etäisyys kohteeseen noin ${distance}km`]
+                    item[1].description = [`Etäisyys kohteeseen noin ${distance}km`];
                 } else {
                     orderingValues.push(item[1].header);
                 }
+
+                let disabled: boolean = item[0] === "OTHER" ? true : item[0] === "CURRENT" && !props.state.locationAllowed ? true : false;
 
                 return ( 
                     <Box key={index} width={1}>
@@ -94,8 +92,8 @@ function DirectionView(props: Props) {
                             name={item[0]}
                             header={item[1].header}
                             description={item[1].description ? item[1].description  : null}
-                            media={media}
-                            disabled={item[0] === "OTHER" ? true : item[0] === "CURRENT" && !props.state.locationAllowed ? true : false}
+                            icon={<IconComponent icon="play_circle_filled" disabled={disabled} size="large"/>}
+                            disabled={disabled}
                             handleSelect={(e: MouseEvent<HTMLButtonElement>) => handleClick(e, params)}
                             params={params} />            
                         <Space lines={2} />
@@ -104,7 +102,7 @@ function DirectionView(props: Props) {
             }
         )
 
-        return sortRenderList(orderingValues, tempArr, sortMethod);              
+        return sortRenderList(orderingValues, tempArr, sortMethod);
     }
 
     function handleUseLocation(value: any) {
@@ -128,10 +126,9 @@ function DirectionView(props: Props) {
             justify="center"
             direction="column" 
             alignItems="center"
-            style={{minHeight: "84vh"}} >
-
-            {renderPage()}
-
+            style={{paddingTop: "40px"}}
+            >  
+                {renderPage()}
             { 
                 params === "current" ? 
                     <Btn 

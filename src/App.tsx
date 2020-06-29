@@ -4,18 +4,20 @@ import Container from "./components/elements/Container";
 import InstructionView from './components/views/InstructionView';
 import DirectionView from './components/views/DirectionView';
 import Navigate from './components/views/NavigationView';
-import { COLORS, ROUTES } from "./utils/const";
+import { ROUTES } from "./utils/const";
 import { InstructionData, DestinationData, ParkingData, CurrentDestinationData} from "./utils/data";
 import { Navbar } from "./components/elements/Navbar";
 import SplashScreen from "./components/views/SplashScreen";
 import { AnyType, InstructionDataType, calculateDistance } from "./utils/const";
 import { getStore, setStore } from "./utils/session";
+import { ThemeProvider } from '@material-ui/core/styles';
+import { THEME } from "./styles/styles";
 
 function App() {
   const [directionData, setDirectionData] = useState<AnyType>({});
   const [instructionPageData, setInstructionData] = useState<InstructionDataType>([{header: "", paragraph: []}]);
   const [initialized, setInit] = useState(false);
-
+  
   const initialState = {
     routeObj: {parking: {}, destination: {}, current: {}},
     locationAllowed: false, 
@@ -78,7 +80,7 @@ function App() {
   async function handleCurrentLocation(tempObj: any, source?: string){
     if (Object.keys(tempObj.routeObj.current).length === 0) {
       getPosition().then((res: any) => {
-        tempObj.routeObj.current = {name: "Tämänhetkinen sijainti", lat: res.coords.latitude, lon: res.coords.longitude};
+        tempObj.routeObj.current = {name: "Lähtöpaikka", lat: res.coords.latitude, lon: res.coords.longitude};
         tempObj.locationAllowed = true;
       }).catch((err) => {
         tempObj.locationAllowed = false;
@@ -123,20 +125,22 @@ function App() {
   if (!initialized) return null;
   return (
     <div>
-      <Router>
-          <Navbar />
-        <Switch>
-            <Container backgroundColor={COLORS.green}>
-              <Route path={ROUTES.navigate} render={() => <Navigate state={state}/>} />
-              <Route path={`${ROUTES.direction}/:params`} render={() => <DirectionView state={state} handleCountDistance={handleCountDistance} data={directionData} handleSelect={handleSaveState}/>} />
-              <Route path={ROUTES.instructions} render={() => <InstructionView seen={state.instructionsShown} handlePageSeen={handleSaveState} data={instructionPageData} />} />
-              <Route exact path={ROUTES.home} render={() => <SplashScreen />} />
-              {
-                !state || !state.instructionsShown ? <Redirect to={ROUTES.home}/> : null
-              }
-          </Container>
-        </Switch>
-      </Router>
+      <ThemeProvider theme={THEME}>
+        <Router>
+          <Switch>
+              <Container>
+                <Navbar routeObj={state.routeObj} useCurrentLocation={state.useCurrentLocation}/>
+                  <Route path={ROUTES.navigate} render={() => <Navigate state={state}/>} />
+                  <Route path={`${ROUTES.direction}/:params`} render={() => <DirectionView state={state} handleCountDistance={handleCountDistance} data={directionData} handleSelect={handleSaveState}/>} />
+                  <Route path={ROUTES.instructions} render={() => <InstructionView seen={state.instructionsShown} handlePageSeen={handleSaveState} data={instructionPageData} />} />
+                  <Route exact path={ROUTES.home} render={() => <SplashScreen />} />
+                  {
+                    !state || !state.instructionsShown ? <Redirect to={ROUTES.home}/> : null
+                  }
+            </Container>
+          </Switch>
+        </Router>
+      </ThemeProvider>
     </div>
   );
 }

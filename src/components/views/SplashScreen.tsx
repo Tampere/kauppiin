@@ -4,6 +4,7 @@ import Text from "../elements/Text";
 import Transition from "../elements/Transition";
 import { useHistory } from "react-router-dom";
 import { ROUTES } from "../../utils/const";
+import { COLORS } from "../../styles/styles";
 
 
 function SplashScreen() {
@@ -23,10 +24,10 @@ function SplashScreen() {
                 style={{height: "100vh" }}
                 >
                 <Grid item>
-                    <Text variant="h3">Kauppiin.fi</Text>
+                    <Text variant="body1" color={COLORS.black}>Kestävän liikkumisen appi</Text> 
                 </Grid>
                 <Grid item>
-                    <Text variant="subtitle1">Kestävän liikkumisen appi</Text> 
+                    <Text variant="h2" color={COLORS.green}>Matkaan</Text>
                 </Grid>
             </Grid>
         </Transition>

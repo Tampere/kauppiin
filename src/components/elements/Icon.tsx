@@ -1,10 +1,13 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Icon from '@material-ui/core/Icon';
+import { COLORS } from '../../styles/styles';
 
 export interface Props {
     size: "large" | "default",
-    icon: string
+    icon: string,
+    color?: string
+    disabled?: boolean
 }
 
 const useStyles = makeStyles({
@@ -14,7 +17,8 @@ const useStyles = makeStyles({
         justifyContent: "center",
         alignItems: "center",
         textAlign: "center",
-        display: "flex"
+        display: "flex",
+        color: (props: Props) => props.disabled ? COLORS.textDisabled : props.color ? props.color : COLORS.green,
     }
 });
 

@@ -1,5 +1,5 @@
 import React from 'react';
-import { COLORS } from "../../utils/const";
+import { COLORS } from "../../styles/styles";
 import { makeStyles } from '@material-ui/core/styles';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import Text from "../elements/Text";
@@ -22,7 +22,7 @@ const SpinnerComponent = (props: Props) => {
         <div className={classes.root}>
             {
                 props.loadingText ?
-                    <Text color={COLORS.black} variant="subtitle1">{props.loadingText}</Text>
+                    <Text color={COLORS.black} variant="body1">{props.loadingText}</Text>
                     : null
             }
            <CircularProgress size={20} color="inherit" />

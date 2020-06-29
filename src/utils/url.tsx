@@ -37,7 +37,7 @@ const handlePlatform = (platform: string) => {
 
 export function directionUrl(routeObj: RouteObjType, platform: string, travelMode: string) {
     let isIos = handlePlatform(platform);
-    let baseUrl = `maps://maps.google.com/maps/dir/?api=1`;
+    let baseUrl = isIos ? "maps://maps.google.com/maps/dir/?api=1" : "https://www.google.com/maps/dir/?api=1";
     let url = baseUrl + parseParams(routeObj, isIos) + travelmode(isIos, travelMode);
     return encodeURI(url);
 }

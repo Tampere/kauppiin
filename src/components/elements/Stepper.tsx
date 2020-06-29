@@ -2,7 +2,7 @@ import React from 'react';
 import { Stepper, Step, StepIconProps, StepLabel } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import clsx from 'clsx';
-import { COLORS } from '../../utils/const';
+import { COLORS } from "../../styles/styles";
 
 export interface Props {
     nextButton: any,
@@ -21,13 +21,13 @@ const useStyles = makeStyles({
 
 const useStepStyles = makeStyles({
     root: {
-      color: COLORS.disabled,
+      color: COLORS.white,
       display: "flex",
       height: 22,
       alignItems: "center"
     },
     active: {
-      color: COLORS.white
+      color: COLORS.green
     },
     circle: {
       width: 8,

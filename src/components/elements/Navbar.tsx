@@ -1,28 +1,21 @@
 import React, {useState, useEffect} from 'react';
-import { Toolbar } from '@material-ui/core';
-import { COLORS, ROUTES } from "../../utils/const";
+import { Grid } from '@material-ui/core';
+import { ROUTES } from "../../utils/const";
+import { COLORS } from "../../styles/styles";
 import { NavbarContent } from "../../utils/data";
 import Text from "../elements/Text";
 import { Btn } from './Button';
-import ArrowBackIcon from '@material-ui/icons/ArrowBack';
-import { makeStyles } from '@material-ui/core/styles';
 import { useHistory, useLocation } from "react-router-dom";
+import {IconComponent } from "../elements/Icon";
+import { Space } from './Space';
 
-const useStyles = makeStyles({
-    root: {
-        padding: "3vh 0vh 3vh 2vh",
-        height: "10vh",
-        backgroundColor: COLORS.green
-    }
-});
-
-function getContent(pathname: string){
-    return NavbarContent[pathname];
+export interface Props {
+    routeObj: any,
+    useCurrentLocation: boolean
 }
 
-export const Navbar = () => {
+export const Navbar = (props: Props) => {
     const [visible, setVisibility] = useState(false);
-    const classes = useStyles();
     const history = useHistory();
     const location = useLocation();
 
@@ -38,22 +31,57 @@ export const Navbar = () => {
         history.goBack();
     }
 
+    function getContent(pathname: string){
+        return NavbarContent[pathname];
+    }
+
+    function handleShowSelection() {
+        if(props.routeObj.destination.name && props.routeObj.parking.name  && props.useCurrentLocation ){
+            return `Menossa liityntäparkin kautta kohteeseen ${props.routeObj.destination.name}`;
+        } 
+        if (props.routeObj.destination.name){
+            return `Menossa kohteeseen ${props.routeObj.destination.name}`;
+        }
+        else return "";
+    }
+
     return (
         visible ?
-            <div className={classes.root}>
-                <Toolbar>
+            <Grid 
+                container
+                justify="center"
+                alignItems="flex-start"
+                direction="column"
+                style={{
+                    textAlign:"left", 
+                    color: COLORS.black, 
+                    minHeight: "15vh",
+                    padding: "4vh 0 4vh 0"
+                }}>
+                <Grid item>
                     <Btn 
                         onClick={handleBack}
                         variant="text"
                         hidden={location.pathname === ROUTES.destination ? true : false}
-                        iconButton={<ArrowBackIcon />}/>
-                        <Text 
-                            variant="h6" 
-                            color={COLORS.white} >
-                                {getContent(location.pathname)}
-                        </Text>
-                </Toolbar>
-            </div>
+                        iconButton={<IconComponent size="large" icon="arrow_back"/>}/>
+                </Grid>
+                {
+                    props.routeObj.destination.name !== "" ?
+                        <Grid item>
+                            <Text color={COLORS.black} variant="subtitle2">{handleShowSelection()}</Text>
+                        </Grid>
+                    : null
+                }
+                <Space lines={1}/>
+                <Grid item>
+                    <Text 
+                        variant="h4" 
+                        color={COLORS.black} 
+                        >
+                            {getContent(location.pathname)}
+                    </Text>
+                </Grid>
+            </Grid>
         : null
     )
 }

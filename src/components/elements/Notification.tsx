@@ -1,21 +1,24 @@
 import React, {useState, useEffect} from 'react';
 import { Snackbar, Grid } from '@material-ui/core';
 import Text from './Text';
-import { COLORS } from '../../utils/const';
+import { COLORS } from "../../styles/styles";
 
 export interface Props {
     type: "warning" | "normal"
     open: boolean,
     message: string,
-    action?: any
+    action?: any,
+    link?: any
 }
 
 const style: any = {
     normal: {
+        padding: "5px",
         backgroundColor: COLORS.white,
         color: COLORS.black
     },
     warning: {
+        padding: "5px",
         backgroundColor: COLORS.warning,
         color: COLORS.white
     }
@@ -51,19 +54,23 @@ export const Notification = (props: Props) => {
                 action={
                     props.action ? 
                         <Grid 
-                            container
-                            direction="row" 
-                            style={{ backgroundColor: COLORS.white, width: "100vw"}}
-                            alignContent="space-between"
-                            justify="flex-start"
+                            container 
+                            spacing={2}
+                            style={{ backgroundColor: COLORS.white, padding: 0}}
+                            alignContent="center"
+                            justify="center"
                         >
-                        <Grid item style={{width: "75%"}}>
-                            <Text color={COLORS.black} variant={"caption"}>{props.message}</Text>
+                        <Grid item>
+                            <Text 
+                                color={COLORS.black} 
+                                variant={"subtitle2"}>
+                                    {props.message}
+                                    {props.link ? props.link : null}
+                            </Text>
                         </Grid>
-                        <Grid container justify="center" alignItems="flex-end" style={{width: "25%", paddingRight: "10px"}}>
-                            <Grid item style={{textAlign: "center"}}>
-                                {props.action}
-                            </Grid>
+
+                        <Grid item>
+                            {props.action}
                         </Grid>
                     </Grid>
                 : null
