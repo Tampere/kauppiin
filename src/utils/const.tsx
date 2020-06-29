@@ -1,16 +1,4 @@
 
-export const COLORS: any = {
-    green: "#62d9b7",
-    white:  "#fcfcfc",
-    black: "black",
-    disabled: "#abd4c1",
-    textDisabled: "#737373",
-    warning: "#fc7777"
-}
-
-export type BackgroundColorType = "#62d9b7" | "#fcfcfc" | "#a1a1a1"
-
-export type TextColorType = "#62d9b7" | "#fcfcfc" | "black" | "#737373";
 
 export type DirectionDataType = {
   [index: string]: object 

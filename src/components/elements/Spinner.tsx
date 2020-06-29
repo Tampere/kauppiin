@@ -1,5 +1,5 @@
 import React from 'react';
-import { COLORS } from "../../utils/const";
+import { COLORS } from "../../styles/styles";
 import { makeStyles } from '@material-ui/core/styles';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import Text from "../elements/Text";

@@ -2,11 +2,11 @@ import { ROUTES } from "./const";
 
 export const InstructionData = [
     {
-        header: "Löydä helpoin, nopein ja hiilineutraalein tapa liikkua kaupungissa.",
-        paragraph: [ "Me autamme sinua siirtymään liityntäpysäköintiin ja sieltä määränpäähän" ]
+        header: "Hiilineutraalimpi tapa liikkua.",
+        paragraph: [ "Tänään me autamme sinua siirtymään liityntäpysäköintiin ja sieltä määränpäähän." ]
     },
     {
-        header: "Työmatkalla tai menossa liikkumaan, tämä on sinua varten.",
+        header: "Matkalla? Tämä on sinua varten.",
         paragraph: [ 
             "Etkö ole koskaan käyttänyt liityntäpysäköintejä? Tai onko reitti vaikea navigoida liityntäpysäköinnin kautta?", 
             "Ei hätää, me teemme siitä helpompaa." 
@@ -16,7 +16,7 @@ export const InstructionData = [
         header: "Tämä on hyväksi ympäristölle",
         paragraph: 
             [
-                "Vaihtoehtojen miettiminen tarkoittaa, että olet oikealla polulla Matkiksen kanssa.",
+                "Vaihtoehtojen miettiminen tarkoittaa, että olet oikealla polulla.",
                 "Autamme sinua vähentämään hiilipäästöjä valitsemalla sopivimman liityntäparkin.",
             ],
     }
@@ -25,55 +25,55 @@ export const InstructionData = [
 export const DestinationData = {
     TAYS: {
         header: "TAYS Pääovi",
-        description: ["Tampereen yliopistollinen sairaala"],
+        description: ["Elämänaukio, Kuntokatu 2, 33520 Tampere"],
         location: {
             lat: 61.505032,
             lon: 23.814340
         }
     },
     Ensihoito: {
-        header: "Ensihoito",
-        // description: ["Lorem ipsum"],
+        header: "TAYS Ensiapu Acuta",
+        description: ["Teiskonotie 35, 33520 Tampere"],
         location: {
             lat: 61.504953,
             lon: 23.813660
         }
     },
     MEDI1: {
-        header: "Finmedi 1",
-        description: ["Ravintola FINN-MEDI"],
+        header: "Finn-Medi 1",
+        description: ["Biokatu 6, 33520 Tampere"],
         location: {
             lat: 61.506493,
             lon: 23.812425
         }
     },
     MEDI5: {
-        header: "Finmedi 5",
-        description: ["FINN-MEDI 5 Auditorio"],
+        header: "Finn-Medi 5",
+        description: ["Biokatu 12, 33520 Tampere"],
         location: {
             lat: 61.506792,
             lon: 23.814942
         }
     },
     POTILASHOTELLI: {
-        header: "Potilashotelli",
-        description: ["Hotelliyöpyminen potilaalle"],
+        header: "Potilashotelli Norlandia Tampere",
+        description: ["Biokatu 14, 33520 Tampere"],
         location: {
             lat: 61.508182,
             lon: 23.814202
         }
     },
     ARVO: {
-        header: "Arvo (TUNI)",
-        description: ["Info, ravintola, kirjasto ja luentosalit"],
+        header: "Arvo BioMediTech",
+        description: ["Medisiinarinkatu 3, 33520 Tampere"],
         location: {
             lat: 61.507593,
             lon: 23.823047
         }
     },
     TAMK: {
-        header: "TAMK",
-        description: ["Tampereen ammattikorkeakoulu"],
+        header: "Tampereen ammattikorkeakoulu (TAMK)",
+        description: ["Kuntokatu 3, 33520 Tampere"],
         location: {
             lat: 61.504330,
             lon: 23.809335
@@ -131,11 +131,11 @@ export const ParkingData = {
 
 export const CurrentDestinationData = {
     CURRENT: {
-        header: "Käytä nykyistä lokaatiota",
+        header: "Tämänhetkinen sijainti",
         icon: "my_location"
     },
     OTHER: {
-        header: "Muu osoite",
+        header: "Jokin toinen paikka",
         icon: "create"
     }
 }
@@ -148,6 +148,6 @@ export const NavbarContent = {
 }
 
 export const NotificationContent = {
-    Cookies: "Sivusto käyttää keksejä käyttökokemuksen parantamiseksi. Tietoja ei anneta kolmansille osapuolille. Jatkamalla sivuston käyttöä, hyväksyt keksien käytön.",
-    Location: "Salli selaimen asetuksista sijaintitietojen käyttö käyttääksesi paikannustoimintoa"
+    Cookies: "Käytämme evästeitä käyttökokemuksen parantamiseksi. ",
+    Location: "Tarkista asetuksista, että olet antanut selaimelle luvan käyttää puhelimesi sijaintitietoja."
 }

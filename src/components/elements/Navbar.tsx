@@ -1,17 +1,20 @@
 import React, {useState, useEffect} from 'react';
-import { Toolbar, Grid } from '@material-ui/core';
-import { COLORS, ROUTES } from "../../utils/const";
+import { Grid } from '@material-ui/core';
+import { ROUTES } from "../../utils/const";
+import { COLORS } from "../../styles/styles";
 import { NavbarContent } from "../../utils/data";
 import Text from "../elements/Text";
 import { Btn } from './Button';
-import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import { useHistory, useLocation } from "react-router-dom";
+import {IconComponent } from "../elements/Icon";
+import { Space } from './Space';
 
-function getContent(pathname: string){
-    return NavbarContent[pathname];
+export interface Props {
+    routeObj: any,
+    useCurrentLocation: boolean
 }
 
-export const Navbar = () => {
+export const Navbar = (props: Props) => {
     const [visible, setVisibility] = useState(false);
     const history = useHistory();
     const location = useLocation();
@@ -28,6 +31,20 @@ export const Navbar = () => {
         history.goBack();
     }
 
+    function getContent(pathname: string){
+        return NavbarContent[pathname];
+    }
+
+    function handleShowSelection() {
+        if(props.routeObj.destination.name && props.routeObj.parking.name  && props.useCurrentLocation ){
+            return `Menossa liityntäparkin kautta kohteeseen ${props.routeObj.destination.name}`;
+        } 
+        if (props.routeObj.destination.name){
+            return `Menossa kohteeseen ${props.routeObj.destination.name}`;
+        }
+        else return "";
+    }
+
     return (
         visible ?
             <Grid 
@@ -37,7 +54,7 @@ export const Navbar = () => {
                 direction="column"
                 style={{
                     textAlign:"left", 
-                    backgroundColor: COLORS.green, 
+                    color: COLORS.black, 
                     minHeight: "15vh",
                     padding: "4vh 0 4vh 0"
                 }}>
@@ -46,12 +63,21 @@ export const Navbar = () => {
                         onClick={handleBack}
                         variant="text"
                         hidden={location.pathname === ROUTES.destination ? true : false}
-                        iconButton={<ArrowBackIcon />}/>
+                        iconButton={<IconComponent size="large" icon="arrow_back"/>}/>
                 </Grid>
+                {
+                    props.routeObj.destination.name !== "" ?
+                        <Grid item>
+                            <Text color={COLORS.black} variant="subtitle2">{handleShowSelection()}</Text>
+                        </Grid>
+                    : null
+                }
+                <Space lines={1}/>
                 <Grid item>
                     <Text 
                         variant="h4" 
-                        color={COLORS.white} >
+                        color={COLORS.black} 
+                        >
                             {getContent(location.pathname)}
                     </Text>
                 </Grid>

@@ -72,17 +72,19 @@ function DirectionView(props: Props) {
         let tempArr: any = [];
         let entries = Object.entries(data);
         let orderingValues: any = [];
-        let sortMethod: any = params === "parking" ? (a: any, b: any) => a - b : undefined;
+        let sortMethod: any = params === "parking" ? (a: any, b: any) => a - b :  (a: any, b: any) => -(a > b) ;
 
         tempArr = entries.map (
             (item: any, index: number) => {
-                if(params === "parking" && item[1].location && props.state.locationAllowed) {  
+                if(params === "parking" && item[1].location && props.state.useCurrentLocation) {  
                     let distance = props.handleCountDistance(item[1].location);
                     orderingValues.push(distance);
-                    item[1].description = [`Etäisyys kohteeseen noin ${distance}km`]
+                    item[1].description = [`Etäisyys kohteeseen noin ${distance}km`];
                 } else {
                     orderingValues.push(item[1].header);
                 }
+
+                let disabled: boolean = item[0] === "OTHER" ? true : item[0] === "CURRENT" && !props.state.locationAllowed ? true : false;
 
                 return ( 
                     <Box key={index} width={1}>
@@ -90,8 +92,8 @@ function DirectionView(props: Props) {
                             name={item[0]}
                             header={item[1].header}
                             description={item[1].description ? item[1].description  : null}
-                            icon={<IconComponent icon="play_circle_filled" size="large"/>}
-                            disabled={item[0] === "OTHER" ? true : item[0] === "CURRENT" && !props.state.locationAllowed ? true : false}
+                            icon={<IconComponent icon="play_circle_filled" disabled={disabled} size="large"/>}
+                            disabled={disabled}
                             handleSelect={(e: MouseEvent<HTMLButtonElement>) => handleClick(e, params)}
                             params={params} />            
                         <Space lines={2} />

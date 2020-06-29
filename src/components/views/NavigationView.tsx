@@ -1,12 +1,12 @@
 import React, {useEffect, useState, MouseEvent} from 'react';
 import { useHistory } from "react-router-dom";
-import { Grid, CardActionArea, Paper } from '@material-ui/core';
+import { Grid } from '@material-ui/core';
 import { Btn } from '../elements/Button';
-import Text from "../elements/Text";
 import { Space } from '../elements/Space';
-import { ROUTES, RouteObjType, COLORS } from '../../utils/const';
+import { ROUTES, RouteObjType } from '../../utils/const';
 import { directionUrl } from '../../utils/url';
 import { IconComponent } from '../elements/Icon';
+import CardComponent from '../elements/Card';
 
 export interface Props {
     state: any,
@@ -67,54 +67,30 @@ function Navigate(props: Props) {
             <Grid item>
                 <Grid container justify="center" direction="column">
                     {
-                        useCurrentLocation && locationAllowed?
-                            <CardActionArea name={"firstRoute"} onClick={(e: MouseEvent<HTMLButtonElement>) => handleClick(e)}>
-                                <Grid item>
-                                    <Paper style={{backgroundColor: COLORS.white, padding: "5px 0px 5px 0px"}}>                                          
-                                        <Grid container direction="row" justify="center">
-                                            <Grid item>
-                                                <Text color="black" variant="body1"> 
-                                                    {routeObj.current.name}
-                                                </Text>
-                                            </Grid>
-                                            <Grid item>
-                                                <IconComponent size="default" icon="arrow_right"/>
-                                            </Grid>
-                                            <Grid item>
-                                                <Text color="black"  variant="body1">      
-                                                    {routeObj.parking.name}
-                                                </Text>
-                                            </Grid>
-                                        </Grid>
-                                    </Paper>
-                                </Grid>
-                            </CardActionArea>
+                        useCurrentLocation && locationAllowed ?
+                            <Grid item>
+                                <CardComponent 
+                                    header={`${routeObj.current.name} - ${routeObj.parking.name}` } 
+                                    name="firstRoute" 
+                                    handleSelect={(e: MouseEvent<HTMLButtonElement>) => handleClick(e)}
+                                    params={"navigate"}
+                                    icon={<IconComponent size="large" icon="drive_eta"/>}
+                                /> 
+                            </Grid>
                         : null
                     }
                     <Space lines={2} />
-                    <CardActionArea name="secondRoute" onClick={(e: MouseEvent<HTMLButtonElement>) => handleClick(e)}>
-                        <Grid item>
-                            <Paper style={{backgroundColor: COLORS.white, padding: "5px 0px 5px 0px"}}>     
-                                <Grid container direction="row" justify="center">
-                                    <Grid item>
-                                        <Text color="black" variant="body1">      
-                                            {routeObj.parking.name}
-                                        </Text>
-                                    </Grid>
-                                    <Grid item>
-                                        <IconComponent size="default" icon="arrow_right"/>
-                                    </Grid>
-                                    <Grid item>
-                                        <Text color="black" variant="body1">      
-                                            {routeObj.destination.name}
-                                        </Text>
-                                    </Grid>
-                                </Grid>
-                            </Paper>
-                        </Grid>
-                    </CardActionArea>
+                    <Grid item>
+                        <CardComponent 
+                            header={`${routeObj.parking.name} - ${routeObj.destination.name}` } 
+                            name="secondRoute" 
+                            handleSelect={(e: MouseEvent<HTMLButtonElement>) => handleClick(e)}
+                            params={"navigate"}
+                            icon={<IconComponent size="large" icon="directions_bus"/>}
+                        /> 
+                    </Grid>
                     <Space lines={2} />
-                    <Btn variant="text" onClick={() => history.push(ROUTES.home)}>Navigoi uudelleen</Btn>
+                    <Btn variant="text" onClick={() => history.push(ROUTES.destination)}>Navigoi uudelleen</Btn>
                 </Grid>
             </Grid>
         </Grid>
