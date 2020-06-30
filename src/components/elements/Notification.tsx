@@ -6,9 +6,8 @@ import { COLORS } from "../../styles/styles";
 export interface Props {
     type: "warning" | "normal"
     open: boolean,
-    message: string,
-    action?: any,
-    link?: any
+    message: any,
+    action?: any
 }
 
 const style: any = {
@@ -65,7 +64,6 @@ export const Notification = (props: Props) => {
                                 color={COLORS.black} 
                                 variant={"subtitle2"}>
                                     {props.message}
-                                    {props.link ? props.link : null}
                             </Text>
                         </Grid>
 

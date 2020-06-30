@@ -1,7 +1,7 @@
 import { Grid } from '@material-ui/core';
 import React, { useEffect, useState } from 'react';
 import { useHistory } from "react-router-dom";
-import { ROUTES } from "../../utils/const";
+import { ROUTES, PrivacyPolicy } from "../../utils/const";
 import { NotificationContent } from "../../utils/data";
 import { Btn } from "../elements/Button";
 import { Notification } from "../elements/Notification";
@@ -86,8 +86,7 @@ function InstructionView(props: Props) {
                 type="normal"
                 action={<Btn variant="contained" onClick={() => setVisibility(false)}>Selvä</Btn>} 
                 open={visible} 
-                message={NotificationContent.Cookies}
-                link={<a href="">Evästekäytäntö</a>}
+                message={<div>{NotificationContent.Cookies} <a href={PrivacyPolicy}>Evästekäytäntö</a></div>}
               />
           </Grid>
       </Grid>

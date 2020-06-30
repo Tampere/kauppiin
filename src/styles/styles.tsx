@@ -2,20 +2,20 @@ import {ROUTES} from "../utils/const";
 import { createMuiTheme } from '@material-ui/core/styles';
 
 export const THEME = createMuiTheme({
-    typography: {
-      h2: {
-        fontFamily: `Merriweather', bold;`,
-      },
-      h4: {
-        fontFamily: `Merriweather', serif;`,
-      },
-      body1: {
-        fontFamily: `'Lato', sans-serif;`,
-      },
-      subtitle2: {
-        fontFamily: `'Lato', sans-serif;`,
-      }
+  typography: {
+    h2: {
+      fontFamily: `Merriweather', bold;`,
+    },
+    h4: {
+      fontFamily: `Merriweather', serif;`,
+    },
+    body1: {
+      fontFamily: `'Lato', sans-serif;`,
+    },
+    subtitle2: {
+      fontFamily: `'Lato', sans-serif;`,
     }
+  }
 });
 
 export const COLORS: any = {

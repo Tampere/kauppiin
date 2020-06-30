@@ -28,6 +28,7 @@ export const ROUTES = {
 
 export const DirectionPageList = ["destination","current", "parking"]
 
+export const PrivacyPolicy = "https://www.eficode.com/privacy-policy"
 
 // Haversine formula for counting distance between two points
 export function calculateDistance(fLocation: any, sLocation: any) {

@@ -19,7 +19,7 @@ const useStyles = makeStyles({
     },
     buttonStyle: {
         backgroundColor: (props: ButtonProps) => props.variant === "contained" ? COLORS.green : "rgba(52, 52, 52, 0)",
-        color: (props: ButtonProps) => props.variant === "contained" ? COLORS.white : COLORS.black,
+        color: (props: ButtonProps) => props.variant === "contained" ? COLORS.white : COLORS.green,
         "&:focus": {
             backgroundColor: (props: ButtonProps) => props.variant === "contained" ? COLORS.green : COLORS.lightBrown,
             color: (props: ButtonProps) => props.variant === "contained" ? COLORS.white : COLORS.black,

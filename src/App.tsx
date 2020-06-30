@@ -101,7 +101,7 @@ function App() {
 
   const getPosition = function () {
     return new Promise(function (resolve, reject) {
-      navigator.geolocation.getCurrentPosition(resolve, reject, {enableHighAccuracy: true});
+      navigator.geolocation.getCurrentPosition(resolve, reject, {enableHighAccuracy: true, timeout: 10000});
     });
   }
 

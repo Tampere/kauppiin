@@ -14,10 +14,18 @@ const travelmode = (isIos: boolean, travelmode: string) => {
 const parseParams = (routeObj: RouteObjType, isIos: boolean) => {
     let origin: string = "";
     let destination: string = "";
-    let originParams =  routeObj.start === null ? "My+Location" : `${routeObj.start.lat},${routeObj.start.lon}`
-    let destinationParams = `${routeObj.end.lat},${routeObj.end.lon}`
+    let originParams: string = "";
+    let destinationParams: string = "";
 
-    isIos ? origin = "&saddr=" : origin = "&origin=";
+    if (routeObj.start === null) {
+        origin = isIos ? "&saddr=" : "";
+        originParams = isIos ? "My+Location" : "";
+    } else {
+        origin = isIos ? "&saddr=" : "&origin=";
+        originParams = `${routeObj.start.lat},${routeObj.start.lon}`;
+    }
+    destinationParams = `${routeObj.end.lat},${routeObj.end.lon}`;
+
     isIos ? destination = "&daddr=" : destination = `&destination=`;
 
     return origin + originParams + destination + destinationParams;
