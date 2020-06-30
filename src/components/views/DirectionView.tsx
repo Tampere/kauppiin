@@ -79,7 +79,7 @@ function DirectionView(props: Props) {
                 if(params === "parking" && item[1].location && props.state.useCurrentLocation) {  
                     let distance = props.handleCountDistance(item[1].location);
                     orderingValues.push(distance);
-                    item[1].description = [`Etäisyys kohteeseen noin ${distance}km`];
+                    item[1].description[0] = [`Etäisyys kohteeseen noin ${distance}km`];
                 } else {
                     orderingValues.push(item[1].header);
                 }
@@ -133,7 +133,9 @@ function DirectionView(props: Props) {
                 params === "current" ? 
                     <Btn 
                         onClick={() => handleUseLocation(false)} 
-                        variant="text">Ohita
+                        variant="text"
+                        >
+                            Ohita
                     </Btn> 
                 : null
             }

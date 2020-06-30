@@ -4,17 +4,21 @@ import { createMuiTheme } from '@material-ui/core/styles';
 export const THEME = createMuiTheme({
   typography: {
     h2: {
-      fontFamily: `Merriweather', bold;`,
+      fontFamily: `'Merriweather', bold;`,
     },
     h4: {
-      fontFamily: `Merriweather', serif;`,
+      fontFamily: `'Merriweather', serif;`,
+      fontSize: "5vh"
     },
     body1: {
       fontFamily: `'Lato', sans-serif;`,
     },
     subtitle2: {
       fontFamily: `'Lato', sans-serif;`,
-    }
+    },
+    button: {
+      fontFamily: `'Lato', sans-serif;`,
+    },
   }
 });
 

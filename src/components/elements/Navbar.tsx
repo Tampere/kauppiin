@@ -69,6 +69,7 @@ export const Navbar = (props: Props) => {
                     props.routeObj.destination.name !== "" ?
                         <Grid item>
                             <Text color={COLORS.black} variant="subtitle2">{handleShowSelection()}</Text>
+                            <Space lines={1}/>
                         </Grid>
                     : null
                 }

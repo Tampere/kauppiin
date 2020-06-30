@@ -84,7 +84,7 @@ function InstructionView(props: Props) {
                 />
               <Notification 
                 type="normal"
-                action={<Btn variant="contained" onClick={() => setVisibility(false)}>Selvä</Btn>} 
+                action={<Btn variant="text" onClick={() => setVisibility(false)}>Selvä</Btn>} 
                 open={visible} 
                 message={<div>{NotificationContent.Cookies} <a href={PrivacyPolicy}>Evästekäytäntö</a></div>}
               />

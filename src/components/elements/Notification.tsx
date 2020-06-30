@@ -2,6 +2,7 @@ import React, {useState, useEffect} from 'react';
 import { Snackbar, Grid } from '@material-ui/core';
 import Text from './Text';
 import { COLORS } from "../../styles/styles";
+import { Space } from './Space';
 
 export interface Props {
     type: "warning" | "normal"
@@ -49,31 +50,17 @@ export const Notification = (props: Props) => {
                     horizontal: 'center',
                 }} 
                 ContentProps={{style: style[props.type]}}
-                message={!props.action ? props.message : null}
-                action={
-                    props.action ? 
-                        <Grid 
-                            container 
-                            spacing={2}
-                            style={{ backgroundColor: COLORS.white, padding: 0}}
-                            alignContent="center"
-                            justify="center"
-                        >
+                message={
+                    <Grid container justify="center" alignItems="center" style={{padding: "5px"}}>
                         <Grid item>
-                            <Text 
-                                color={COLORS.black} 
-                                variant={"subtitle2"}>
-                                    {props.message}
-                            </Text>
+                            <Text variant="subtitle2" color={COLORS.black}>{props.message}</Text>
                         </Grid>
-
                         <Grid item>
                             {props.action}
                         </Grid>
                     </Grid>
-                : null
-                }
-            />
+                } 
+                />
        </div>
     )
 }

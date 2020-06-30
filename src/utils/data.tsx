@@ -84,7 +84,13 @@ export const DestinationData = {
 export const ParkingData = {
     NIIHAMA: {
         header: "Niihama",
-        description: ["Niihamankatu 6, Tampere"],
+        description: [
+            "",
+            "Niihamankatu 6, Tampere",
+            "Pysäköintipaikkoja: 70",
+            "Matka-arvio bussilla: 20min",
+            "CO2 säästö g CO2 per suunta(arvio): 517.72"
+        ],
         icon: "../../icons/testImg.jpeg",
         location: {
             lat: 61.500488,
@@ -93,7 +99,13 @@ export const ParkingData = {
     },
     TURTOLA: {
         header: "Turtola",
-        description: ["Turtolan kauppakeskus, Tampere"],
+        description: [
+            "",
+            "Turtolan kauppakeskus, Tampere",
+            "Pysäköintipaikkoja: 36",
+            "Matka-arvio bussilla: 36min",
+            "CO2 säästö g CO2 per suunta(arvio): 565.88"
+        ],
         icon: "../../icons/testImg.jpeg",
         location: {
             lat: 61.477595,
@@ -102,7 +114,13 @@ export const ParkingData = {
     },
     KOVISTONKYLA: {
         header: "Koivistonkylä",
-        description: ["Prisma Koivistonkylä"],
+        description: [
+            "",
+            "Prisma Koivistonkylä",
+            "Pysäköintipaikkoja: 34",
+            "Matka-arvio bussilla: 50min",
+            "CO2 säästö g CO2 per suunta(arvio): 1083.6"
+        ],
         icon: "../../icons/testImg.jpeg",
         location: {
             lat: 61.468466,
@@ -111,7 +129,13 @@ export const ParkingData = {
     },
     IKEA: {
         header: "IKEA",
-        description: ["Ikea, Tampere"],
+        description: [
+            "",
+            "Ikea, Tampere",
+            "Pysäköintipaikkoja: 70",
+            "Matka-arvio bussilla: 45min",
+            "CO2 säästö g CO2 per suunta(arvio): 794.64"
+        ],
         icon: "../../icons/testImg.jpeg",
         location: {
             lat: 61.453240,
@@ -120,7 +144,13 @@ export const ParkingData = {
     },
     KAUKAJARVI: {
         header: "Kaukajärvi",
-        description: ["Hyllilänkatu, Tampere"],
+        description: [
+            "",
+            "Hyllilänkatu, Tampere",
+            "Pysäköintipaikkoja: 96",
+            "Matka-arvio bussilla: 30min",
+            "CO2 säästö g CO2 per suunta(arvio): 794,64"
+        ],
         icon: "../../icons/testImg.jpeg",
         location: {
             lat: 61.479118,
