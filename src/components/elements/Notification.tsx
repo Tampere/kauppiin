@@ -1,8 +1,8 @@
 import React, {useState, useEffect} from 'react';
-import { Snackbar, Grid } from '@material-ui/core';
+import { Snackbar } from '@material-ui/core';
 import Text from './Text';
 import { COLORS } from "../../styles/styles";
-import { Space } from './Space';
+import { makeStyles } from '@material-ui/core/styles';
 
 export interface Props {
     type: "warning" | "normal"
@@ -11,22 +11,20 @@ export interface Props {
     action?: any
 }
 
-const style: any = {
-    normal: {
+const useStyles = makeStyles({
+    root: {
+        backgroundColor: (props: Props) => props.type === "warning" ? COLORS.warning : COLORS.white,
+        color: COLORS.black,
         padding: "5px",
-        backgroundColor: COLORS.white,
-        color: COLORS.black
-    },
-    warning: {
-        padding: "5px",
-        backgroundColor: COLORS.warning,
-        color: COLORS.white
+        borderRadius: "4px",
+        textAlign: "center"
     }
-};
+});
 
 
 export const Notification = (props: Props) => {
     const [visible, setVisibility] = useState(props.open);
+    const classes = useStyles(props);
 
     useEffect(() => {
         setVisibility(props.open);
@@ -48,19 +46,12 @@ export const Notification = (props: Props) => {
                 anchorOrigin={{
                     vertical: 'bottom',
                     horizontal: 'center',
-                }} 
-                ContentProps={{style: style[props.type]}}
-                message={
-                    <Grid container justify="center" alignItems="center" style={{padding: "5px"}}>
-                        <Grid item>
-                            <Text variant="subtitle2" color={COLORS.black}>{props.message}</Text>
-                        </Grid>
-                        <Grid item>
-                            {props.action}
-                        </Grid>
-                    </Grid>
-                } 
-                />
+                }} >
+                    <span className={classes.root}>
+                        <Text variant="subtitle2" color={COLORS.black}>{props.message}</Text>                     
+                        {props.action}
+                    </span>       
+                </Snackbar>
        </div>
     )
 }
