@@ -4,6 +4,7 @@ import Text from "../elements/Text";
 import { COLORS } from "../../styles/styles";
 import { makeStyles } from '@material-ui/core/styles';
 import SpinnerComponent from "../elements/Spinner";
+import { Space } from './Space';
 
 export interface Props {
     header: string,
@@ -56,6 +57,7 @@ function CardComponent(props: Props ) {
                                                             <Text variant="subtitle2" disabled={props.disabled} color="black">
                                                                 {item}
                                                             </Text>
+                                                            <Space lines={1} />
                                                         </div>
                                                     )
                                                 }

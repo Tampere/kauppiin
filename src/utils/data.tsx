@@ -88,10 +88,9 @@ export const ParkingData = {
             "",
             "Niihamankatu 6, Tampere",
             "Pysäköintipaikkoja: 70",
-            "Matka-arvio bussilla: 20min",
-            "CO2 säästö g CO2 per suunta(arvio): 517.72"
+            "Bussimatka: 20min",
+            "CO2 säästö: 517.72g"
         ],
-        icon: "../../icons/testImg.jpeg",
         location: {
             lat: 61.500488,
             lon: 23.877928
@@ -103,10 +102,9 @@ export const ParkingData = {
             "",
             "Turtolan kauppakeskus, Tampere",
             "Pysäköintipaikkoja: 36",
-            "Matka-arvio bussilla: 36min",
-            "CO2 säästö g CO2 per suunta(arvio): 565.88"
+            "Bussimatka: 36min",
+            "CO2 säästö: 565.88g"
         ],
-        icon: "../../icons/testImg.jpeg",
         location: {
             lat: 61.477595,
             lon: 23.841099
@@ -118,10 +116,9 @@ export const ParkingData = {
             "",
             "Prisma Koivistonkylä",
             "Pysäköintipaikkoja: 34",
-            "Matka-arvio bussilla: 50min",
-            "CO2 säästö g CO2 per suunta(arvio): 1083.6"
+            "Bussimatka: 50min",
+            "CO2 säästö: 1083.6g"
         ],
-        icon: "../../icons/testImg.jpeg",
         location: {
             lat: 61.468466,
             lon: 23.777729
@@ -133,10 +130,9 @@ export const ParkingData = {
             "",
             "Ikea, Tampere",
             "Pysäköintipaikkoja: 70",
-            "Matka-arvio bussilla: 45min",
-            "CO2 säästö g CO2 per suunta(arvio): 794.64"
+            "Bussimatka: 45min",
+            "CO2 säästö: 794.64g"
         ],
-        icon: "../../icons/testImg.jpeg",
         location: {
             lat: 61.453240,
             lon: 23.770681
@@ -148,10 +144,9 @@ export const ParkingData = {
             "",
             "Hyllilänkatu, Tampere",
             "Pysäköintipaikkoja: 96",
-            "Matka-arvio bussilla: 30min",
-            "CO2 säästö g CO2 per suunta(arvio): 794,64"
+            "Bussimatka: 30min",
+            "CO2 säästö: 794,64g"
         ],
-        icon: "../../icons/testImg.jpeg",
         location: {
             lat: 61.479118,
             lon: 23.897316
