@@ -5,19 +5,23 @@ export const THEME = createMuiTheme({
   typography: {
     h2: {
       fontFamily: `'Merriweather', bold;`,
+      fontSize: "8vh"
     },
     h4: {
       fontFamily: `'Merriweather', serif;`,
-      fontSize: "5vh"
+      fontSize: "3.5vh"
     },
     body1: {
       fontFamily: `'Lato', sans-serif;`,
+      fontSize: "2.2vh"
     },
     subtitle2: {
       fontFamily: `'Lato', sans-serif;`,
+      fontSize: "2vh"
     },
     button: {
       fontFamily: `'Lato', sans-serif;`,
+      fontSize: "2vh"
     },
   }
 });
@@ -29,7 +33,8 @@ export const COLORS: any = {
     black: "black",
     disabled: "#CCCED3",
     textDisabled: "#919099",
-    warning: "#fc7777"
+    warning: "#FFE874",
+    info: "#007FB9"
 }
 
 export type BackgroundColorType = "#62d9b7" | "#fcfcfc" | "#a1a1a1"
@@ -38,14 +43,15 @@ export type TextColorType = "#62d9b7" | "#fcfcfc" | "black" | "#737373";
 
 export const BackgroundStyles: any = {
     [ROUTES.home]: {
-       backgroundImage: "url(/images/background_splash.png)",
+       backgroundImage: "url(/images/background_splash.jpg)",
+       backgroundPosition: "center"
     },
     [ROUTES.instructions]: {
         backgroundColor: COLORS.lightBrown,
         backgroundImage: "url(/images/background_instruction1.png)",
         overflow: 'hidden',
         backgroundRepeat  : 'no-repeat',
-        backgroundPosition: "center bottom"
+        backgroundPosition: "center"
     },
     [ROUTES.destination]: {
         backgroundColor: COLORS.lightBrown,
@@ -66,7 +72,7 @@ export const BackgroundStyles: any = {
         backgroundImage: "url(/images/background_parking.png)",
         overflow: 'hidden',
         backgroundRepeat  : 'no-repeat',
-        backgroundPosition: "center bottom"
+        backgroundPosition: "center"
     },
     [ROUTES.navigate]: {
         backgroundColor: COLORS.lightBrown,

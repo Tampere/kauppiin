@@ -58,6 +58,11 @@ function App() {
     let tempObj = sessionState === null ? initialState : sessionState;
     handleSaveState(tempObj);
 
+      // tempObj.locationAllowed = false;
+      // tempObj.safari = true;
+      // handleSaveState(tempObj);
+      // setInit(true);
+
     navigator.permissions.query({name:'geolocation'})
       .then(async function(result) {
         if (result.state === 'granted') {

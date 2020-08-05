@@ -7,6 +7,8 @@ import { ROUTES, RouteObjType } from '../../utils/const';
 import { directionUrl } from '../../utils/url';
 import { IconComponent } from '../elements/Icon';
 import CardComponent from '../elements/Card';
+import Text from '../elements/Text';
+import { COLORS } from '../../styles/styles';
 
 export interface Props {
     state: any,
@@ -62,8 +64,11 @@ function Navigate(props: Props) {
             justify="center"
             direction="column" 
             alignItems="stretch"
-            style={{padding: "40px 0 0 0", textAlign: "center"}}
+            style={{padding: "40px 0 0 0", textAlign: "start"}}
             >
+            <Text variant="body1" color={COLORS.black}>Avaa karttasovellus osuudelle:</Text>
+            <Space lines={1} />
+            
             <Grid item>
                 <Grid container justify="center" direction="column">
                     {
@@ -90,7 +95,9 @@ function Navigate(props: Props) {
                         /> 
                     </Grid>
                     <Space lines={2} />
-                    <Btn variant="text" onClick={() => history.push(ROUTES.destination)}>Navigoi uudelleen</Btn>
+                    <Grid item style={{textAlign: "center"}}>
+                        <Btn variant="text" onClick={() => history.push(ROUTES.destination)}>Navigoi uudelleen</Btn>
+                    </Grid>
                 </Grid>
             </Grid>
         </Grid>

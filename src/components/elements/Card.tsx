@@ -21,13 +21,14 @@ const useStyles = makeStyles({
     root: {
         backgroundColor: (props: Props) => props.disabled ? COLORS.disabled : "",
         color: (props: Props) => props.disabled ? COLORS.textDisabled : "",
+        minHeight: "inherit"
     }
 });
 
 function CardComponent(props: Props ) {
     const classes = useStyles(props);
     return (
-        <Card style={{ backgroundColor: "rgba(253, 251, 249, 0.7)"}}>
+        <Card style={{ backgroundColor: "rgba(253, 251, 249, 0.7)", minHeight: "12vh"}}>
             <CardActionArea className={classes.root} disabled={props.disabled} name={props.name} onClick={(e: MouseEvent<HTMLButtonElement>) => props.handleSelect(e, props.params)}>
                 <CardContent style={{margin: 0, padding: 0}}>
                 {
@@ -57,7 +58,11 @@ function CardComponent(props: Props ) {
                                                             <Text variant="subtitle2" disabled={props.disabled} color="black">
                                                                 {item}
                                                             </Text>
-                                                            <Space lines={1} />
+                                                            {
+                                                                props.description && props.description.length > 1 ?
+                                                                    <Space lines={1} />
+                                                                : null
+                                                            }                                                                                                   
                                                         </div>
                                                     )
                                                 }
