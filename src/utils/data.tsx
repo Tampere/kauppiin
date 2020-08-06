@@ -159,10 +159,10 @@ export const CurrentDestinationData = {
         header: "Tämänhetkinen sijainti",
         icon: "my_location"
     },
-    OTHER: {
-        header: "Jokin toinen paikka",
-        icon: "create"
-    }
+    // OTHER: {
+    //     header: "Jokin toinen paikka",
+    //     icon: "create"
+    // }
 }
 
 export const NavbarContent = {
@@ -174,5 +174,6 @@ export const NavbarContent = {
 
 export const NotificationContent = {
     Cookies: "Käytämme evästeitä käyttökokemuksen parantamiseksi. ",
-    Location: "Tarkista asetuksista, että olet antanut selaimelle luvan käyttää puhelimesi sijaintitietoja."
+    Location: "Tarkista asetuksista, että olet antanut selaimelle luvan käyttää puhelimesi sijaintitietoja.",
+    Safari: "Sovellus ei tue toistaiseksi käytetyn selaimen paikannusta"
 }

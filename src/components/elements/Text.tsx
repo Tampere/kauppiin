@@ -4,7 +4,7 @@ import { COLORS, TextColorType, BackgroundColorType } from "../../styles/styles"
 import { makeStyles } from '@material-ui/core/styles';
 
 export interface Props {
-    variant: "h2" | "h4" | "body1" | "subtitle2",
+    variant: "h2" | "h5" | "h4" | "body1" | "subtitle2",
     color?: TextColorType
     children: any,
     backgroundColor?: BackgroundColorType,

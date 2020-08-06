@@ -10,6 +10,7 @@ import { Btn } from '../elements/Button';
 import  SpinnerComponent from '../elements/Spinner';
 import { Notification } from "../elements/Notification";
 import { NotificationContent } from "../../utils/data";
+import { COLORS } from '../../styles/styles';
 
 export interface Props {
     handleSelect: any,
@@ -81,6 +82,9 @@ function DirectionView(props: Props) {
                     orderingValues.push(distance);
                     item[1].description[0] = [`Etäisyys kohteeseen noin ${distance}km`];
                 } else {
+                    if (item[1].description){
+                        item[1].description[0] = [""];
+                    }
                     orderingValues.push(item[1].header);
                 }
 
@@ -126,7 +130,7 @@ function DirectionView(props: Props) {
             justify="center"
             direction="column" 
             alignItems="center"
-            style={{paddingTop: "40px"}}
+            style={{paddingTop: "30px"}}
             >  
                 {renderPage()}
             { 
@@ -142,9 +146,11 @@ function DirectionView(props: Props) {
             {
                 !props.state.locationAllowed && params === "current" ? 
                     <Notification 
-                        type="warning"
+                        type={props.state.safari ? "warning" : "normal"}
+                        icon="room_outlined"
+                        iconColor={COLORS.info}
                         open={visible} 
-                        message={NotificationContent.Location}
+                        message={props.state.safari ? NotificationContent.Safari : NotificationContent.Location}
                     />
                 : null
             }
