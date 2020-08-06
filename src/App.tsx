@@ -58,28 +58,31 @@ function App() {
     let tempObj = sessionState === null ? initialState : sessionState;
     handleSaveState(tempObj);
 
-      // tempObj.locationAllowed = false;
-      // tempObj.safari = true;
-      // handleSaveState(tempObj);
-      // setInit(true);
-
-    navigator.permissions.query({name:'geolocation'})
-      .then(async function(result) {
-        if (result.state === 'granted') {
-            await handleCurrentLocation(tempObj);
-        } else if (result.state === "prompt"){
-            await handleCurrentLocation(tempObj, "prompt");
-        } else {
-          tempObj.locationAllowed = false;
-          handleSaveState(tempObj);
-        }
-        result.onchange = function(){
-          handleSaveState(true, "loadingLocation");
-        }
-      }).then(() => {
-        setInit(true);
-        handleSaveState(false, "loadingLocation");
-    });
+    if(!navigator.permissions){
+      tempObj.locationAllowed = false;
+      tempObj.safari = true;
+      handleSaveState(tempObj);
+      setInit(true);
+    }
+    else {
+      navigator.permissions.query({name:'geolocation'})
+        .then(async function(result) {
+          if (result.state === 'granted') {
+              await handleCurrentLocation(tempObj);
+          } else if (result.state === "prompt"){
+              await handleCurrentLocation(tempObj, "prompt");
+          } else {
+            tempObj.locationAllowed = false;
+            handleSaveState(tempObj);
+          }
+          result.onchange = function(){
+            handleSaveState(true, "loadingLocation");
+          }
+        }).then(() => {
+          setInit(true);
+          handleSaveState(false, "loadingLocation");
+      });
+    }
   }
 
   async function handleCurrentLocation(tempObj: any, source?: string){

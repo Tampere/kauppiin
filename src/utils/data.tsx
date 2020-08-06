@@ -175,5 +175,5 @@ export const NavbarContent = {
 export const NotificationContent = {
     Cookies: "Käytämme evästeitä käyttökokemuksen parantamiseksi. ",
     Location: "Tarkista asetuksista, että olet antanut selaimelle luvan käyttää puhelimesi sijaintitietoja.",
-    Safari: "Sovellus ei tue toistaiseksi Safari -selaimen paikannusta"
+    Safari: "Sovellus ei tue toistaiseksi käytetyn selaimen paikannusta"
 }
