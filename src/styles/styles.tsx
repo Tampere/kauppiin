@@ -37,9 +37,9 @@ export const COLORS: any = {
     info: "#007FB9"
 }
 
-export type BackgroundColorType = "#62d9b7" | "#fcfcfc" | "#a1a1a1"
+export type BackgroundColorType = "#005265"| "#fcfcfc" | "#a1a1a1"
 
-export type TextColorType = "#62d9b7" | "#fcfcfc" | "black" | "#737373";
+export type TextColorType = "#005265"| "#fcfcfc" | "black" | "#737373";
 
 export const BackgroundStyles: any = {
     [ROUTES.home]: {
