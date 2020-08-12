@@ -30,6 +30,8 @@ export const DirectionPageList = ["destination","current", "parking"]
 
 export const PrivacyPolicy = "https://www.eficode.com/privacy-policy"
 
+export const FeedbackUrl = "https://docs.google.com/forms/d/e/1FAIpQLSe68goJlzIeZRLeu4YjA9NPiKmH22ITtxcHwCtItiKpDPhUOg/viewform?usp=sf_link"
+
 // Haversine formula for counting distance between two points
 export function calculateDistance(fLocation: any, sLocation: any) {
   var R = 6371; 

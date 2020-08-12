@@ -1,9 +1,9 @@
 import React, {useEffect, useState, MouseEvent} from 'react';
 import { useHistory } from "react-router-dom";
-import { Grid } from '@material-ui/core';
+import { Grid, Link } from '@material-ui/core';
 import { Btn } from '../elements/Button';
 import { Space } from '../elements/Space';
-import { ROUTES, RouteObjType } from '../../utils/const';
+import { ROUTES, RouteObjType, FeedbackUrl } from '../../utils/const';
 import { directionUrl } from '../../utils/url';
 import { IconComponent } from '../elements/Icon';
 import CardComponent from '../elements/Card';
@@ -61,15 +61,15 @@ function Navigate(props: Props) {
     return (
         <Grid 
             container 
-            justify="center"
+            justify="space-between"
             direction="column" 
             alignItems="stretch"
-            style={{padding: "40px 0 0 0", textAlign: "start"}}
+            style={{padding: "40px 0 0 0", textAlign: "start", minHeight: "68vh"}}
             >
-            <Text variant="body1" color={COLORS.black}>Avaa karttasovellus osuudelle:</Text>
-            <Space lines={1} />
-            
+
             <Grid item>
+                <Text variant="body1" color={COLORS.black}>Avaa karttasovellus osuudelle:</Text>
+                <Space lines={2} />
                 <Grid container justify="center" direction="column">
                     {
                         useCurrentLocation && locationAllowed ?
@@ -97,6 +97,20 @@ function Navigate(props: Props) {
                     <Space lines={2} />
                     <Grid item style={{textAlign: "center"}}>
                         <Btn variant="text" onClick={() => history.push(ROUTES.destination)}>Navigoi uudelleen</Btn>
+                    </Grid>
+                </Grid>
+            </Grid>
+            <Grid item>
+                <Grid container justify="center" direction="column" style={{padding: "10px 0px 10px 0px"}}>
+                    <Grid item style={{textAlign: "center"}}>
+                        <Link 
+                            underline="always"
+                            onClick={() => { 
+                                window.open(FeedbackUrl, "_blank")
+                            }}>
+                            <Text color="#005265" variant="body1">ANNA PALAUTETTA</Text>
+                        </Link>
+                        <Space lines={1} />
                     </Grid>
                 </Grid>
             </Grid>
