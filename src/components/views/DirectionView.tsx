@@ -73,7 +73,7 @@ function DirectionView(props: Props) {
         let tempArr: any = [];
         let entries = Object.entries(data);
         let orderingValues: any = [];
-        let sortMethod: any = params === "parking" ? (a: any, b: any) => a - b :  (a: any, b: any) => -(a > b) ;
+        let sortMethod: any =  (a: any, b: any) => -(a < b);
 
         tempArr = entries.map (
             (item: any, index: number) => {
@@ -85,7 +85,7 @@ function DirectionView(props: Props) {
                     if (item[1].description){
                         item[1].description[0] = [""];
                     }
-                    orderingValues.push(item[1].header);
+                    orderingValues.push(item[1].header.toLowerCase());
                 }
 
                 let disabled: boolean = item[0] === "OTHER" ? true : item[0] === "CURRENT" && !props.state.locationAllowed ? true : false;
