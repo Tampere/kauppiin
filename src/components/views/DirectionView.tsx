@@ -19,10 +19,14 @@ export interface Props {
     state: any,
 }
 
+interface ParamTypes {
+    params: string;
+}
+
 function DirectionView(props: Props) {
     const [data, setData] = useState<AnyType>({});
     const history = useHistory();
-    const {params} = useParams();
+    const {params} = useParams<ParamTypes>();
     const [pages] = useState(DirectionPageList);
     const [activePage, setPage] = useState(0);
     const [visible] = useState(true);
@@ -69,6 +73,20 @@ function DirectionView(props: Props) {
         return orderedList;
     }
 
+    function getLastItem(item: any, length: number){
+        return (
+            <Box key={length} width={1} style={{borderTop: "solid", borderColor: COLORS.green, paddingTop: "20px"}}>
+                <CardComponent 
+                    name="KESKUSTORI"
+                    header={item.header}
+                    icon={<IconComponent icon="play_circle_filled" size="large"/>}
+                    handleSelect={(e: MouseEvent<HTMLButtonElement>) => handleClick(e, params)}
+                    params={params} />            
+                <Space lines={2} />
+            </Box>
+        )
+    }
+
     function renderPage(){
         let tempArr: any = [];
         let entries = Object.entries(data);
@@ -90,6 +108,7 @@ function DirectionView(props: Props) {
 
                 let disabled: boolean = item[0] === "OTHER" ? true : item[0] === "CURRENT" && !props.state.locationAllowed ? true : false;
 
+                if(item[1].header === "Keskustori") return null;
                 return ( 
                     <Box key={index} width={1}>
                         <CardComponent 
@@ -105,8 +124,15 @@ function DirectionView(props: Props) {
                 )
             }
         )
+        
+        let retArr = sortRenderList(orderingValues, tempArr, sortMethod);
 
-        return sortRenderList(orderingValues, tempArr, sortMethod);
+        if(params === "destination"){
+            retArr.push(
+                getLastItem(props.data.destination["KESKUSTORI"], props.data.destination.length +1)
+            );
+        }
+        return retArr;
     }
 
     function handleUseLocation(value: any) {

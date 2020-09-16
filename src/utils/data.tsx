@@ -23,6 +23,14 @@ export const InstructionData = [
 ]
 
 export const DestinationData = {
+    KESKUSTORI: {
+        header: "Keskustori",
+        description: ["Keskustori 1, 33100 Tampere"],
+        location: {
+            lat: 61.498193,
+            lon: 23.760841
+        }
+    },
     TAYS: {
         header: "TAYS Pääovi",
         description: ["Elämänaukio, Kuntokatu 2, 33520 Tampere"],
@@ -82,6 +90,20 @@ export const DestinationData = {
 }
 
 export const ParkingData = {
+    SAAKSJARVI:{
+        header: "Sääksjärvi",
+        description: [
+            "",
+            "Pitkäahteentie 12, Lempäälä",
+            "Pysäköintipaikkoja: 60",
+            "Bussimatka: 41min",
+            "CO2 säästö: 1420.72g"
+        ],
+        location: {
+            lat: 61.418374,
+            lon: 23.758208
+        }
+    },
     NIIHAMA: {
         header: "Niihama",
         description: [
@@ -102,7 +124,7 @@ export const ParkingData = {
             "",
             "Turtolan kauppakeskus, Tampere",
             "Pysäköintipaikkoja: 36",
-            "Bussimatka: 36min",
+            "Bussimatka: 20min",
             "CO2 säästö: 565.88g"
         ],
         location: {
@@ -117,7 +139,7 @@ export const ParkingData = {
             "Prisma Koivistonkylä",
             "Pysäköintipaikkoja: 34",
             "Bussimatka: 50min",
-            "CO2 säästö: 1083.6g"
+            "CO2 säästö: 794.64g"
         ],
         location: {
             lat: 61.468466,
@@ -131,7 +153,7 @@ export const ParkingData = {
             "Ikea, Tampere",
             "Pysäköintipaikkoja: 70",
             "Bussimatka: 45min",
-            "CO2 säästö: 794.64g"
+            "CO2 säästö: 1179.92g"
         ],
         location: {
             lat: 61.453240,
@@ -145,7 +167,7 @@ export const ParkingData = {
             "Hyllilänkatu, Tampere",
             "Pysäköintipaikkoja: 96",
             "Bussimatka: 30min",
-            "CO2 säästö: 794,64g"
+            "CO2 säästö: 1083.6g"
         ],
         location: {
             lat: 61.479118,
